@@ -7,7 +7,7 @@ import Homepage from './components/Homepage';
 import Cryptocurrencies from './components/Cryptocurrencies';
 import News from './components/News';
 import CryptoDetails from './components/CryptoDetails';
-import './App.css'
+import './App.css';
 
 const App = () => {
   return (
