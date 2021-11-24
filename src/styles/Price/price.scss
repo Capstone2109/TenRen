@@ -6,7 +6,7 @@
 }
 
 .price {
-  @include flex(column, space-around, flex-start);
+  @include flex(column, space-around);
   border: 3px solid;
   width: max-content;
   padding: 2em;

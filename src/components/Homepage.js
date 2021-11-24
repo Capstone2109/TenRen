@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import Cryptocurrencies from "./Cryptocurrencies";
 import News from "./News";
+import Price from "./UserProfile/Price";
 import UserProfileLineChart from "./UserProfile/UserProfileLineChart";
 
 const { Title } = Typography;
@@ -15,51 +16,52 @@ const Homepage = () => {
 
   if (isFetching) return "Loading...";
 
-  // const dummyData = {
-  //   totalChange: 1.41,
-  //   totalAsset: 507.05,
-  //   history: [
-  //     {
-  //       timeStamp: 1637197200000,
-  //       asset: "500",
-  //       portfolio: [
-  //         {
-  //           name: "Bitcoin",
-  //           timestamp: "Yesterday",
-  //           asset: "300",
-  //           percentChange: "1.0235", // 300 * 1.0235 = 300.235
-  //         },
-  //         {
-  //           name: "Cash",
-  //           timestamp: "Yesterday",
-  //           asset: "200",
-  //           percentChange: "1",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       timeStamp: 1637200800000,
-  //       asset: "507.05",
-  //       portfolio: [
-  //         {
-  //           name: "Bitcoin",
-  //           timestamp: 1637200800000,
-  //           asset: "207.05", // 300 * 1.0235 = 307.05 - 100 because user sold $100 worth of btc today
-  //           percentChange: "0.9765",
-  //         },
-  //         {
-  //           name: "Cash",
-  //           timestamp: 1637200800000,
-  //           asset: "300", // 200 + 100
-  //           percentChange: "1",
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // };
+  const dummyData = {
+    totalChange: 1.41,
+    totalAsset: 507.05,
+    history: [
+      {
+        timeStamp: 1637190000000,
+        asset: "500",
+        portfolio: [
+          {
+            name: "Bitcoin",
+            timestamp: "Yesterday",
+            asset: "300",
+            percentChange: "1.0235", // 300 * 1.0235 = 307.235
+          },
+          {
+            name: "Cash",
+            timestamp: "Yesterday",
+            asset: "200",
+            percentChange: "1",
+          },
+        ],
+      },
+      {
+        timeStamp: 1637258400000,
+        asset: "507.05",
+        portfolio: [
+          {
+            name: "Bitcoin",
+            timestamp: "Today",
+            asset: "207.05", // 300 * 1.0235 = 307.05 - 100 because user sold $100 worth of btc today
+            percentChange: "0.9765",
+          },
+          {
+            name: "Cash",
+            timestamp: "Today",
+            asset: "300", // 200 + 100
+            percentChange: "1",
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <>
+      {/* <Price dollarAmount={"$500"} dollarGainLoss={"$14"} pChange={"+14%"}  /> */}
       {/* <UserProfileLineChart userProfileData={dummyData} /> */}
 
       <Title level={2} className="heading">
