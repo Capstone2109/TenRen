@@ -1,0 +1,19 @@
+@mixin flex($direction, $justify, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+.price {
+  @include flex(column, space-around, flex-start);
+  border: 3px solid;
+  width: max-content;
+  padding: 2em;
+  font-size: 1.25rem;
+  &__dollar {
+    h1 {
+      margin: 0;
+    }
+  }
+}
