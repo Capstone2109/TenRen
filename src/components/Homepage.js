@@ -18,12 +18,13 @@ const Homepage = () => {
 
   return (
     <>
-      <Price
+      {/* <Price
         dollarAmount="$454.43"
         dollarGainLoss="+4.43"
         pChange="+2.95%"
         stockTicker="AMD"
-      />
+      /> */}
+      
       <Title level={2} className="heading">
         Global Crypto Stats
       </Title>
