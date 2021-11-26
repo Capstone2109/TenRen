@@ -18,7 +18,7 @@ const UserProfileLineChart = ({ userProfileData }) => {
     labels: timestamp,
     datasets: [
       {
-        label: "User Portfolio",
+        label: "Asset",
         data: asset,
         fill: false,
         backgroundColor: "#0071bd",
@@ -42,17 +42,17 @@ const UserProfileLineChart = ({ userProfileData }) => {
   return (
     <>
       <Row className="chart-header">
+        <Col>
+          <Title level={5} className="current-price">
+            ${userProfileData?.totalAsset}
+          </Title>
+          <Title level={5} className="price-change">
+            {userProfileData?.dollarGainLoss} {userProfileData?.percentChange}
+          </Title>
+        </Col>
         <Title level={2} className="chart-title">
           UserProfile
         </Title>
-        <Col className="price-container">
-          <Title level={5} className="price-change">
-            Change: {userProfileData?.totalChange}%
-          </Title>
-          <Title level={5} className="current-price">
-            Current Portfolio: $ {userProfileData?.totalAsset}
-          </Title>
-        </Col>
       </Row>
       <Line data={data} options={options} />
     </>
