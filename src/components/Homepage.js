@@ -21,7 +21,7 @@ const Homepage = () => {
     totalAsset: 507.05,
     history: [
       {
-        timeStamp: 1637190000000,
+        timestamp: 1637190000000,
         asset: "500",
         portfolio: [
           {
@@ -39,7 +39,7 @@ const Homepage = () => {
         ],
       },
       {
-        timeStamp: 1637258400000,
+        timestamp: 1637258400000,
         asset: "507.05",
         portfolio: [
           {
@@ -61,8 +61,8 @@ const Homepage = () => {
 
   return (
     <>
-      {/* <Price dollarAmount={"$500"} dollarGainLoss={"$14"} pChange={"+14%"}  /> */}
-      {/* <UserProfileLineChart userProfileData={dummyData} /> */}
+      <Price dollarAmount={"$500"} dollarGainLoss={"$14"} pChange={"+14%"} />
+      <UserProfileLineChart userProfileData={dummyData} />
 
       <Title level={2} className="heading">
         Global Crypto Stats
