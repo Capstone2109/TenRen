@@ -323,27 +323,4 @@ a:hover {
   display: flex;
   flex-direction: column;
   padding: 20px;
-<<<<<<< HEAD
-  align-items: center;
-}
-
-.green-border:focus{
-  outline: none;
-  border: 2px solid green;
-}
-
-.red-border:focus{
-  outline: none;
-  border: 2px solid red;
-}
-
-.green-color{
-  color: green;
-}
-
-.red-color{
-  color: red;
-}
-=======
   align-items: center; }
->>>>>>> 8b2555cf13dd89d4ebdfb310df94c47311612621
