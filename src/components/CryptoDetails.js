@@ -41,6 +41,9 @@ const CryptoDetails = () => {
 
   return (
     <Col className="coin-detail-container">
+    {
+      console.log(coinHistory)
+    }
       <Col className="coin-heading-container">
         <Title level={2} className="coin-name">
           {data?.data?.coin.name} ({data?.data?.coin.slug}) Price
