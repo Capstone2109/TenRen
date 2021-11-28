@@ -82,6 +82,8 @@ const Trade = (props) => {
         let dollarValue = amount * dummyCrypto.pricePer
         let previousDollarWorth = dummyOwnedOfThisCrypto.dollarValue
 
+        console.log("passing through",{ ...dummyOwnedOfThisCrypto, amount, dollarValue, previousDollarWorth})
+
         dispatch(purchaseCrypto({ ...dummyOwnedOfThisCrypto, amount, dollarValue, previousDollarWorth}))
         setCryptoToBuy({ ...cryptoToBuy, dollarValue: 0 })
 
@@ -106,16 +108,23 @@ const Trade = (props) => {
         dispatch(changeDummyCryptoWorth({...dummyCrypto, pricePer}))
 
         let dollarValue = dummyOwnedOfThisCrypto.amount * pricePer;
-        let previousDollarWorth = dummyOwnedOfThisCrypto.dollarValue
-        dispatch(setCryptoWorth({...dummyOwnedOfThisCrypto, dollarValue, previousDollarWorth}))
+        console.log("Current Owned Crypto",dummyOwnedOfThisCrypto)
+        let previousDollarValue = dummyOwnedOfThisCrypto.dollarValue
+        dispatch(setCryptoWorth({...dummyOwnedOfThisCrypto, dollarValue, previousDollarValue}))
         setDay(day+1)
     }
+
+    //This value is in decimal form (<1 for loss, >1 for gain)
+    let percentChange = dummyOwnedOfThisCrypto?.dollarValue / dummyOwnedOfThisCrypto?.previousDollarValue
     return (
+        
         <div>
+            {console.log("Owned:",dummyOwnedOfThisCrypto)}
             <div>
                 <h1>Day: {day}</h1>
                 <h3>Crypto: {dummyOwnedOfThisCrypto?.name}</h3>
-                <h3>Owned: {`$${dummyOwnedOfThisCrypto?.dollarValue.toFixed(2)} (${(( (dummyOwnedOfThisCrypto?.dollarValue / dummyOwnedOfThisCrypto?.previousDollarValue)-1)*100).toFixed(2)} %)`}</h3>
+                <h3>Owned: {`$${dummyOwnedOfThisCrypto?.dollarValue.toFixed(2)}`} 
+                <span className={percentChange>=1?"green-color":"red-color"}>{`(${((percentChange-1)*100).toFixed(2)} %)`}</span> </h3>
                 <h3>Price of Crypto: {`$${dummyCrypto.pricePer}`}</h3>
                 {/* <h3>Worth: {dummyOwnedOfThisCrypto?.amount}</h3> */}
             </div>

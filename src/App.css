@@ -386,3 +386,11 @@ width: 70%;
   outline: none;
   border: 2px solid red;
 }
+
+.green-color{
+  color: green;
+}
+
+.red-color{
+  color: red;
+}
