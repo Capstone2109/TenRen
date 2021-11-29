@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDummyCryptoWorth, purchaseCrypto, saveUserPastData, sellCrypto, setCryptoWorth, setDollarOwned, userInfo } from "../../app/trade";
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import UserProfileLineChart from "./UserProfileLineChart";
+import CryptoTransaction from "./CryptoTransaction";
+
+
+export const dollarFormat = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: 'USD'
+})
 
 const Trade = (props) => {
 
@@ -52,7 +59,7 @@ const Trade = (props) => {
         }))
     }, [])
 
-    //get crypto worth from set
+    //get crypto worth from state
     let dummyCrypto = useSelector((state) => state.cryptoWorth)
 
     //Get how much money we have left to spend from the state
@@ -70,7 +77,7 @@ const Trade = (props) => {
         if(dummyOwnedOfThisCrypto)
             saveDataToGraph()
             
-    },[dummyOwnedOfThisCrypto])
+    },[day])
 
     //State of Crypto we are buying, or selling
     const [cryptoToBuy, setCryptoToBuy] = useState({ name: dummyCrypto.name, dollarValue: 0, mode })
@@ -151,9 +158,8 @@ const Trade = (props) => {
 
     //Save Data To Graph
     function saveDataToGraph(){
-        console.log("Reg Info",dummyUserInfo)
         let newUserInfo = JSON.parse(JSON.stringify(dummyUserInfo))
-        console.log("Copied Info", newUserInfo)
+
         let percentChange = dummyOwnedOfThisCrypto?.dollarValue / dummyOwnedOfThisCrypto?.previousDollarValue
         let info ={
             get timestamp() {
@@ -179,7 +185,6 @@ const Trade = (props) => {
                 }
             ]
         }
-        console.log("Info",newUserInfo)
         newUserInfo.history.push(info)
 
         dispatch(saveUserPastData(newUserInfo))
@@ -188,10 +193,6 @@ const Trade = (props) => {
     //This value is in decimal form (<1 for loss, >1 for gain)
     let percentChange = dummyOwnedOfThisCrypto?.dollarValue / dummyOwnedOfThisCrypto?.previousDollarValue
     let percentChangeString = `${((Math.abs(percentChange - 1)) * 100).toFixed(2)} %`
-    let dollarFormat = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: 'USD'
-    })
     return (
 
         <div className="profile-trade">
@@ -199,7 +200,7 @@ const Trade = (props) => {
             <div>
                 <h1>Day: {day}</h1>
                 <h3>Crypto: {dummyOwnedOfThisCrypto?.name}</h3>
-                <h3>Owned: {dollarFormat.format(dummyOwnedOfThisCrypto?.dollarValue)}
+                <h3>Invested: <span id="dollar-invested">{dollarFormat.format(dummyOwnedOfThisCrypto?.dollarValue)}</span>
                     (<span className={percentChange >= 1 ? "green-color" : "red-color"}>
                         {percentChange >= 1 ? <CaretUpOutlined /> : <CaretDownOutlined />}
                         {percentChangeString}
@@ -207,16 +208,21 @@ const Trade = (props) => {
                 <h3>Price of Crypto: {dollarFormat.format(dummyCrypto.pricePer)}</h3>
                 {/* <h3>Worth: {dummyOwnedOfThisCrypto?.amount}</h3> */}
             </div>
-            <h2>Dollar Available: {dollarFormat.format(dollarAvailable)}</h2>
-            <UserProfileLineChart userProfileData={dummyUserInfo} />
-            <div className="profile-trade-buttons">
-                $<input className="profile-input" type="text" name="buyAmount" value={cryptoToBuy?.dollarValue} onChange={handleBuyValue} />
-                <button className="profile-button" onClick={handleBuy}>Buy</button>
-                <hr />
-                $<input className="profile-input" type="text" name="sellAmount" value={cryptoToSell?.dollarValue} onChange={handleSellValue} />
-                <button className="profile-button" onClick={handleSell}>Sell</button>
-                <button className="profile-button" onClick={goToNextDay}>Next Day!</button>
+            <h3>Dollar Available: {dollarFormat.format(dollarAvailable)}</h3>
+            <h2>Assest: {dollarFormat.format(dollarAvailable + dummyOwnedOfThisCrypto?.dollarValue)}</h2>
+            <div className="trading-visuals">
+                <div className="graph-section">
+                    <UserProfileLineChart userProfileData={dummyUserInfo} />
+                </div>
+                <div className="tools">
+                    <CryptoTransaction />
+                    <div className="transaction-section">
+                        <button className="profile-button big" onClick={goToNextDay}>Next Day!</button>
+                    </div>
+                </div>
             </div>
+            
+            
         </div>
     )
 }

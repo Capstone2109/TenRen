@@ -40,7 +40,7 @@ const UserProfileLineChart = ({ userProfileData }) => {
   };
 
   return (
-    <>
+    <div className="userprofile-graph">
       <Row className="chart-header">
         <Col>
           <Title level={5} className="current-price">
@@ -55,7 +55,7 @@ const UserProfileLineChart = ({ userProfileData }) => {
         </Title>
       </Row>
       <Line data={data} options={options} />
-    </>
+    </div>
   );
 };
 

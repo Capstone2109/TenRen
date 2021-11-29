@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { cryptoApi } from '../services/cryptoApi';
 import { cryptoNewsApi } from '../services/cryptoNewsApi';
 import tradeReducer, { dummyCryptoWorth, dollarOwned, userInfo } from './trade';
+import recentTransactions from './transactions';
 
 export default configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export default configureStore({
     ownedCrypto: tradeReducer,
     dollarOwned: dollarOwned,
     cryptoWorth: dummyCryptoWorth,
-    userInfo
+    userInfo,
+    recentTransactions,
   },
 })
