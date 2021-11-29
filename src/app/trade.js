@@ -80,7 +80,28 @@ export function dummyCryptoWorth(crypto={name:'TestCoin',pricePer:60},action){
     }
 }
 
+//TEST FUNCTION SAVE PAST CRYPTO GAINS/LOSS TO STATE
+const SAVE_PAST_INFO = 'SAVE_PAST_INFO';
+const setUserPastInfo = (info) => ({type: SAVE_PAST_INFO, info})
 
+export const saveUserPastData = (info) => dispatch => {
+
+    try {
+        dispatch(setUserPastInfo(info))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export function userInfo(defaultInfo={ history:[]},action){
+    switch(action.type){
+        case SAVE_PAST_INFO:
+            return action.info
+        default:
+            return defaultInfo
+    }
+}
+//ACTUAL REDUCER FOR CCRYPTO OWN (THIS IS NOT DUMMY DATA)
 export default function tradeReducer(ownedCryptos=[], action){
 
     switch (action.type) {

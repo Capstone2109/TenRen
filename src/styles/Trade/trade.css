@@ -1,0 +1,40 @@
+.green-color {
+  color: green;
+}
+
+.red-color {
+  color: red;
+}
+
+.profile-trade {
+  width: 80%;
+  align-items: center;
+}
+
+.profile-trade-buttons {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.profile-button {
+  border: none;
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #001529;
+  color: white;
+  font-size: large;
+  width: 200px;
+}
+.profile-button:hover {
+  cursor: pointer;
+  background-color: #1890ff;
+}
+
+.profile-input {
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=trade.css.map */

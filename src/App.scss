@@ -1,4 +1,5 @@
 @import "./styles/Price/price.scss";
+@import "./styles/Trade/trade.scss";
 
 :root {
   --text-primary: #000;
@@ -376,13 +377,4 @@ a:hover {
   flex-direction: column;
   padding: 20px;
   align-items: center;
-}
-
-.green-color{
-  color: green;
-  background-color: green;
-}
-
-.red-color{
-  color: red;
 }

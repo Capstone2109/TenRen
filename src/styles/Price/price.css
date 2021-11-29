@@ -4,7 +4,10 @@
   justify-content: space-around;
   align-items: center;
   width: max-content;
-  font-size: 1.25rem; }
-
+  font-size: 1.25rem;
+}
 .price__dollar h1 {
-  margin: 0; }
+  margin: 0;
+}
+
+/*# sourceMappingURL=price.css.map */
