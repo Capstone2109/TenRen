@@ -1,23 +1,31 @@
-.routes {
-  background-color: black;
-  color: white !important;
-}
+$dark: rgb(43, 38, 38);
 
-.ant-typography {
-  color: white !important;
-}
-.ant-statistic > * {
-  color: white !important;
-}
+.dark {
+  .ant-typography {
+    color: white !important;
+  }
+  .routes {
+    background-color: $dark;
+    color: white !important;
+  }
 
-.ant-card-head-title {
-  color: white !important;
-}
+  .ant-typography {
+    color: white !important;
+  }
 
-.ant-card {
-  background-color: black !important;
-}
+  .ant-statistic > * {
+    color: white !important;
+  }
 
-p {
-  color: white !important;
+  .ant-card-head-title {
+    color: white !important;
+  }
+
+  .ant-card {
+    background-color: $dark !important;
+  }
+
+  p {
+    color: white !important;
+  }
 }

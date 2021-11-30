@@ -1,3 +1,25 @@
+.dark .ant-typography {
+  color: white !important; }
+
+.dark .routes {
+  background-color: #2b2626;
+  color: white !important; }
+
+.dark .ant-typography {
+  color: white !important; }
+
+.dark .ant-statistic > * {
+  color: white !important; }
+
+.dark .ant-card-head-title {
+  color: white !important; }
+
+.dark .ant-card {
+  background-color: #2b2626 !important; }
+
+.dark p {
+  color: white !important; }
+
 :root {
   --text-primary: #000;
   --bgPrimary: #fff;

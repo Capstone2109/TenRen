@@ -5,12 +5,13 @@ import { Provider } from "react-redux";
 import App from "./App";
 import store from "./app/store.js";
 import "antd/dist/antd.css";
-import "./styles/Dark/dark.css";
 
 ReactDOM.render(
   <Router>
     <Provider store={store}>
-      <App />
+      <div className="dark">
+        <App />
+      </div>
     </Provider>
   </Router>,
   document.getElementById("root")
