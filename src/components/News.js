@@ -16,7 +16,7 @@ const News = ({ simplified }) => {
 
   if (!cryptoNews?.value) return 'Loading...';
   return (
-    <Row gutter={[24, 24]}>
+    <Row gutter={[24, 24]} style={{ padding: '20px'}}>
     {!simplified && (
       <Col span={24}>
         <Select
