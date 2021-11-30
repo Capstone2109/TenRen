@@ -2,7 +2,7 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 
-  const CryptoLogin = () => {
+const CryptoLogin = () => {
     const onFinish = (values) => {
       console.log('Success:', values);
     };
