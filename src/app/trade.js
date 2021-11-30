@@ -31,7 +31,6 @@ export const sellCrypto = (crypto) => dispatch => {
 //DUMMY CRYPTO VALUE CHANGES
 export const setCryptoWorth = (crypto) => dispatch =>{
     try {
-        console.log("Setting Crypto To",crypto)
         dispatch(setCrypto(crypto))
     } catch (error) {
         console.log(error)

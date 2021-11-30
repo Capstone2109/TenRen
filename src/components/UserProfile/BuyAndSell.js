@@ -58,12 +58,6 @@ const BuyAndSell = (props) => {
         dispatch(purchaseCrypto({ ...dummyOwnedOfThisCrypto, amount, dollarValue, previousDollarValue }))
         setCryptoToTrade({ ...cryptoToTrade, dollarValue: 0 })
 
-        document.getElementById("dollar-invested").classList.add("dollar-increase")
-        setTimeout(() => {
-            document.getElementById("dollar-invested").classList.remove("dollar-increase")
-        }, 3000);
-
-        
     }
 
     //Processes and sends the new amount of crypto we have now after selling
@@ -73,6 +67,7 @@ const BuyAndSell = (props) => {
             setErrorMessage("Not Enough Money In This Stock!")
             return
         }
+        dispatch(addNewTransaction({type:"Sold", crypto: cryptoToTrade.name, amount: cryptoToTrade.dollarValue, date: Date.now() }))
         let dollarLeft = dollarAvailable + cryptoToTrade.dollarValue
         dispatch(setDollarOwned(dollarLeft))
 

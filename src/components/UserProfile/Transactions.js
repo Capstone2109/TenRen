@@ -12,7 +12,7 @@ const Transactions = () =>{
                
                 <div key={index}> 
                     {console.log("Date Type", typeof transaction.date)}
-                    <div className="timestamp">{new Date(transaction.date).toLocaleDateString()}</div>
+                    <div className="timestamp">{new Date(transaction.date).toLocaleString()}</div>
                     {`${transaction.type} ${dollarFormat.format( transaction.amount )} in ${transaction.crypto}`}
                 </div>
             ))}

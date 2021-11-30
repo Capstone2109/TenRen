@@ -16,7 +16,7 @@ export default function recentTransactions(transactions=[],action){
 
     switch(action.type){
         case ADD_TRANSACTION:
-            return [...transactions, action.transaction]
+            return [action.transaction, ...transactions]
         default:
             return transactions;
     }

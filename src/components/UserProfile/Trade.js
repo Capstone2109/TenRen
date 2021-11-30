@@ -19,6 +19,21 @@ const Trade = (props) => {
 
     const mode = "PAST";
 
+    //get crypto worth from state
+    let dummyCrypto = useSelector((state) => state.cryptoWorth)
+
+    //Get how much money we have left to spend from the state
+    let dollarAvailable = useSelector((state) => state.dollarOwned);
+
+    //Get the list of all the crytos we own from the state
+    let dummyAllOwnedCrypto = useSelector((state) => state.ownedCrypto)
+
+    //Filter out the crypto for the one we are currently interacting with
+    let dummyOwnedOfThisCrypto = dummyAllOwnedCrypto.filter(crypto => crypto.name = dummyCrypto.name)[0]
+    
+    //Get the userinfo for graph in state
+    let dummyUserInfo = useSelector((state) => state.userInfo)
+
     //DUMMY DATA, PRETEND WE HAVE SOME ALREADY AND WE HAVE 1000 DOLLARS
     useEffect(() => {
         dispatch(purchaseCrypto({
@@ -57,91 +72,17 @@ const Trade = (props) => {
                     }
                 ]
         }))
+
+        //Raise Money to current dummy Asset
+        animateAsset(1060)
     }, [])
 
-    //get crypto worth from state
-    let dummyCrypto = useSelector((state) => state.cryptoWorth)
 
-    //Get how much money we have left to spend from the state
-    let dollarAvailable = useSelector((state) => state.dollarOwned);
-
-    //Get the list of all the crytos we own from the state
-    let dummyAllOwnedCrypto = useSelector((state) => state.ownedCrypto)
-
-    //Filter out the crypto for the one we are currently interacting with
-    let dummyOwnedOfThisCrypto = dummyAllOwnedCrypto.filter(crypto => crypto.name = dummyCrypto.name)[0]
-    
-    //Get the userinfo for graph in state
-    let dummyUserInfo = useSelector((state) => state.userInfo)
     useEffect(()=>{
         if(dummyOwnedOfThisCrypto)
             saveDataToGraph()
             
     },[day])
-
-    //State of Crypto we are buying, or selling
-    const [cryptoToBuy, setCryptoToBuy] = useState({ name: dummyCrypto.name, dollarValue: 0, mode })
-    const [cryptoToSell, setCryptoToSell] = useState({ ...dummyOwnedOfThisCrypto, dollarValue: 0 })
-
-    //Update State values of the crypto we are trying to buy
-    function handleBuyValue(evt) {
-
-        let amount = Number(evt.target.value);
-        if (amount <= dollarAvailable) {
-
-            setCryptoToBuy({
-                ...cryptoToBuy,
-                dollarValue: amount
-            })
-            evt.target.className = "green-border"
-        } else {
-            evt.target.className = "red-border"
-        }
-    }
-
-    //Update State values of the crypto we are trying to sell
-    function handleSellValue(evt) {
-        let amount = Number(evt.target.value);
-
-        if (amount <= dummyOwnedOfThisCrypto.dollarValue) {
-            setCryptoToSell({
-                ...cryptoToSell,
-                dollarValue: amount,
-            })
-            evt.target.className = "green-border"
-        } else {
-            evt.target.className = "red-border"
-        }
-    }
-
-    //Processes and sends the new amount of crypto we have now after purchasing
-    function handleBuy() {
-        let dollarLeft = dollarAvailable - cryptoToBuy.dollarValue
-        dispatch(setDollarOwned(dollarLeft))
-
-
-        let amount = dummyOwnedOfThisCrypto.amount + (cryptoToBuy.dollarValue / dummyCrypto.pricePer)
-        let dollarValue = amount * dummyCrypto.pricePer
-        let previousDollarValue = dummyOwnedOfThisCrypto.dollarValue
-
-
-        dispatch(purchaseCrypto({ ...dummyOwnedOfThisCrypto, amount, dollarValue, previousDollarValue }))
-        setCryptoToBuy({ ...cryptoToBuy, dollarValue: 0 })
-
-    }
-
-    //Processes and sends the new amount of crypto we have now after selling
-    function handleSell() {
-        let dollarLeft = dollarAvailable + cryptoToSell.dollarValue
-        dispatch(setDollarOwned(dollarLeft))
-
-        let amount = dummyOwnedOfThisCrypto.amount - (cryptoToSell.dollarValue / dummyCrypto.pricePer)
-        let dollarValue = amount * dummyCrypto.pricePer
-        let previousDollarValue = dummyOwnedOfThisCrypto.dollarValue
-        //let newAmountOwned = dummyOwnedOfThisCrypto.dollarValue - cryptoToSell.dollarValue
-        dispatch(sellCrypto({ ...dummyOwnedOfThisCrypto, amount, dollarValue, previousDollarValue }))
-        setCryptoToSell({ ...cryptoToSell, dollarValue: 0 })
-    }
 
     //Moves on to Next Day
     function goToNextDay() {
@@ -154,6 +95,16 @@ const Trade = (props) => {
         let previousDollarValue = dummyOwnedOfThisCrypto.dollarValue
         dispatch(setCryptoWorth({ ...dummyOwnedOfThisCrypto, dollarValue, previousDollarValue }))
         setDay(day + 1)
+        colorAnimateAssest((dollarValue>previousDollarValue))
+    }
+
+    function colorAnimateAssest(increase=true){
+        let classToAdd = increase?"dollar-increase":"dollar-decrease"
+
+        document.getElementById("total-asset").classList.add(classToAdd)
+        setTimeout(() => {
+            document.getElementById("total-asset").classList.remove(classToAdd)
+        }, 3000);
     }
 
     //Save Data To Graph
@@ -188,11 +139,30 @@ const Trade = (props) => {
         newUserInfo.history.push(info)
 
         dispatch(saveUserPastData(newUserInfo))
+        animateAsset(dummyOwnedOfThisCrypto?.dollarValue+dollarAvailable,dollarAvailable)
     }
 
     //This value is in decimal form (<1 for loss, >1 for gain)
     let percentChange = dummyOwnedOfThisCrypto?.dollarValue / dummyOwnedOfThisCrypto?.previousDollarValue
     let percentChangeString = `${((Math.abs(percentChange - 1)) * 100).toFixed(2)} %`
+
+    function animateAsset(newAmount,currentAmount=0){
+        let element = document.getElementById("total-asset")
+        if(!element) return
+        let speed = 10
+
+        let step = (newAmount - currentAmount)/speed
+        let difference = newAmount - currentAmount
+
+        if(Math.abs(difference)>10){
+                element.innerHTML = dollarFormat.format(currentAmount + step)
+                console.log("Set innerhtml to", (currentAmount + step))
+                setTimeout(animateAsset, 10, newAmount, (currentAmount + step));
+        }else{
+            element.innerHTML = dollarFormat.format(newAmount)
+        }
+
+    }
     return (
 
         <div className="profile-trade">
@@ -200,16 +170,16 @@ const Trade = (props) => {
             <div>
                 <h1>Day: {day}</h1>
                 <h3>Crypto: {dummyOwnedOfThisCrypto?.name}</h3>
-                <h3>Invested: <span id="dollar-invested">{dollarFormat.format(dummyOwnedOfThisCrypto?.dollarValue)}</span>
+                <h3>Invested: {dollarFormat.format(dummyOwnedOfThisCrypto?.dollarValue)}
                     (<span className={percentChange >= 1 ? "green-color" : "red-color"}>
                         {percentChange >= 1 ? <CaretUpOutlined /> : <CaretDownOutlined />}
                         {percentChangeString}
                     </span>) </h3>
                 <h3>Price of Crypto: {dollarFormat.format(dummyCrypto.pricePer)}</h3>
-                {/* <h3>Worth: {dummyOwnedOfThisCrypto?.amount}</h3> */}
+                
             </div>
             <h3>Dollar Available: {dollarFormat.format(dollarAvailable)}</h3>
-            <h2>Assest: {dollarFormat.format(dollarAvailable + dummyOwnedOfThisCrypto?.dollarValue)}</h2>
+            <h2>Assest: {<span id="total-asset">{0}</span>}</h2>
             <div className="trading-visuals">
                 <div className="graph-section">
                     <UserProfileLineChart userProfileData={dummyUserInfo} />
