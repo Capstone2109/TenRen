@@ -7,6 +7,7 @@ import Homepage from './components/Homepage';
 import Cryptocurrencies from './components/Cryptocurrencies';
 import News from './components/News';
 import CryptoDetails from './components/CryptoDetails';
+import CryptoLogin from './components/LogIn';
 import './App.css';
 
 const App = () => {
@@ -33,6 +34,9 @@ const App = () => {
               </Route>
               <Route exact path='/news'>
                 <News />
+              </Route>
+              <Route exact path='/login'>
+                <CryptoLogin />
               </Route>
             </Switch>
           </div>
