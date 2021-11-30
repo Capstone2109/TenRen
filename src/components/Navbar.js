@@ -49,7 +49,7 @@ const Navbar = () => {
           <Link to="/news">News</Link>
         </Menu.Item>
         <Menu.Item icon={<LoginOutlined />}>
-          <Link to="/news">Log In</Link>
+          <Link to="/login">Log In</Link>
         </Menu.Item>
       </Menu>
       )}
