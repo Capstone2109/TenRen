@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDummyCryptoWorth, purchaseCrypto, saveUserPastData, sellCrypto, setCryptoWorth, setDollarOwned, userInfo } from "../../app/trade";
-import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import UserProfileLineChart from "./UserProfileLineChart";
 import CryptoTransaction from "./CryptoTransaction";
+import PercentChangeIcon from "./PercentChangeIcon"
 
 
 export const dollarFormat = new Intl.NumberFormat("en-US", {
@@ -11,13 +11,15 @@ export const dollarFormat = new Intl.NumberFormat("en-US", {
     currency: 'USD'
 })
 
-const Trade = (props) => {
+const PastTrading = (props) => {
 
     const dispatch = useDispatch();
     //State for the Day
     const [day, setDay] = useState(1);
 
-    const mode = "PAST";
+
+    //get game settings
+    let gameSetting = useSelector(state => state.tradeGames?.past)
 
     //get crypto worth from state
     let dummyCrypto = useSelector((state) => state.cryptoWorth)
@@ -30,63 +32,31 @@ const Trade = (props) => {
 
     //Filter out the crypto for the one we are currently interacting with
     let dummyOwnedOfThisCrypto = dummyAllOwnedCrypto.filter(crypto => crypto.name = dummyCrypto.name)[0]
-    
+
     //Get the userinfo for graph in state
     let dummyUserInfo = useSelector((state) => state.userInfo)
 
     //DUMMY DATA, PRETEND WE HAVE SOME ALREADY AND WE HAVE 1000 DOLLARS
     useEffect(() => {
-        dispatch(purchaseCrypto({
-            name: "TestCoin",
-            amount: 1,
-            dollarValue: 60,
-            previousDollarValue: 60,
-            mode: 'PAST'
-        }))
-        dispatch(setDollarOwned(1000))
-        dispatch(saveUserPastData({
-            history: [
-                 {
-                    get timestamp() {
-                        return this.portfolio[0].timestamp;
-                      },
-                      get asset() {
-                        return this.portfolio.reduce((acc, curr) => {
-                          return acc + curr.asset;
-                        }, 0);
-                      },
-                     portfolio:[
-                                {
-                                    name: "TestCoin",
-                                    asset: 60,
-                                    percentChange: 1,
-                                    timestamp: Date.now()
-                                },
-                                {
-                                    name: "Cash",
-                                    asset: 1000,
-                                    percentChange: 1,
-                                    timestamp: Date.now()
-                                }
-                            ]
-                    }
-                ]
-        }))
 
         //Raise Money to current dummy Asset
-        animateAsset(1060)
+        animateAsset(dollarAvailable || 0)
     }, [])
 
 
-    useEffect(()=>{
-        if(dummyOwnedOfThisCrypto)
+    useEffect(() => {
+        if (dummyOwnedOfThisCrypto) {
             saveDataToGraph()
-            
-    },[day])
+        }
+
+    }, [day])
 
     //Moves on to Next Day
     function goToNextDay() {
-
+        if (!dummyOwnedOfThisCrypto.dollarValue) {
+            window.alert("Please Make An Investment To Proceed")
+            return
+        }
         let valueChange = ((Math.random() * 50) * (Math.random() < .5 ? 1 : -1))
         let pricePer = Math.max(1, 60 + valueChange).toFixed(2)
         dispatch(changeDummyCryptoWorth({ ...dummyCrypto, pricePer }))
@@ -95,11 +65,11 @@ const Trade = (props) => {
         let previousDollarValue = dummyOwnedOfThisCrypto.dollarValue
         dispatch(setCryptoWorth({ ...dummyOwnedOfThisCrypto, dollarValue, previousDollarValue }))
         setDay(day + 1)
-        colorAnimateAssest((dollarValue>previousDollarValue))
+        colorAnimateAssest((dollarValue > previousDollarValue))
     }
 
-    function colorAnimateAssest(increase=true){
-        let classToAdd = increase?"dollar-increase":"dollar-decrease"
+    function colorAnimateAssest(increase = true) {
+        let classToAdd = increase ? "dollar-increase" : "dollar-decrease"
 
         document.getElementById("total-asset").classList.add(classToAdd)
         setTimeout(() => {
@@ -108,23 +78,23 @@ const Trade = (props) => {
     }
 
     //Save Data To Graph
-    function saveDataToGraph(){
+    function saveDataToGraph() {
         let newUserInfo = JSON.parse(JSON.stringify(dummyUserInfo))
 
         let percentChange = dummyOwnedOfThisCrypto?.dollarValue / dummyOwnedOfThisCrypto?.previousDollarValue
-        let info ={
+        let info = {
             get timestamp() {
                 return this.portfolio[0].timestamp;
             },
             get asset() {
                 return this.portfolio.reduce((acc, curr) => {
-                return acc + curr.asset;
+                    return acc + curr.asset;
                 }, 0);
             },
             portfolio: [
                 {
-                    name:   dummyOwnedOfThisCrypto.name,
-                    asset:  dummyOwnedOfThisCrypto.dollarValue,
+                    name: dummyOwnedOfThisCrypto.name,
+                    asset: dummyOwnedOfThisCrypto.dollarValue,
                     percentChange,
                     timestamp: Date.now()
                 },
@@ -139,26 +109,25 @@ const Trade = (props) => {
         newUserInfo.history.push(info)
 
         dispatch(saveUserPastData(newUserInfo))
-        animateAsset(dummyOwnedOfThisCrypto?.dollarValue+dollarAvailable,dollarAvailable)
+        animateAsset(dummyOwnedOfThisCrypto?.dollarValue + dollarAvailable, dollarAvailable)
     }
 
     //This value is in decimal form (<1 for loss, >1 for gain)
     let percentChange = dummyOwnedOfThisCrypto?.dollarValue / dummyOwnedOfThisCrypto?.previousDollarValue
     let percentChangeString = `${((Math.abs(percentChange - 1)) * 100).toFixed(2)} %`
 
-    function animateAsset(newAmount,currentAmount=0){
+    function animateAsset(newAmount, currentAmount = 0) {
         let element = document.getElementById("total-asset")
-        if(!element) return
+        if (!element) return
         let speed = 10
 
-        let step = (newAmount - currentAmount)/speed
+        let step = (newAmount - currentAmount) / speed
         let difference = newAmount - currentAmount
 
-        if(Math.abs(difference)>10){
-                element.innerHTML = dollarFormat.format(currentAmount + step)
-                console.log("Set innerhtml to", (currentAmount + step))
-                setTimeout(animateAsset, 10, newAmount, (currentAmount + step));
-        }else{
+        if (Math.abs(difference) > 10) {
+            element.innerHTML = dollarFormat.format(currentAmount + step)
+            setTimeout(animateAsset, 10, newAmount, (currentAmount + step));
+        } else {
             element.innerHTML = dollarFormat.format(newAmount)
         }
 
@@ -166,17 +135,15 @@ const Trade = (props) => {
     return (
 
         <div className="profile-trade">
-            
+
             <div>
                 <h1>Day: {day}</h1>
                 <h3>Crypto: {dummyOwnedOfThisCrypto?.name}</h3>
                 <h3>Invested: {dollarFormat.format(dummyOwnedOfThisCrypto?.dollarValue)}
-                    (<span className={percentChange >= 1 ? "green-color" : "red-color"}>
-                        {percentChange >= 1 ? <CaretUpOutlined /> : <CaretDownOutlined />}
-                        {percentChangeString}
-                    </span>) </h3>
+                    {!isNaN(percentChange) && percentChange !== Infinity ? <PercentChangeIcon percentChange={percentChange} percentChangeString={percentChangeString} /> : ''}
+                </h3>
                 <h3>Price of Crypto: {dollarFormat.format(dummyCrypto.pricePer)}</h3>
-                
+
             </div>
             <h3>Dollar Available: {dollarFormat.format(dollarAvailable)}</h3>
             <h2>Assest: {<span id="total-asset">{0}</span>}</h2>
@@ -187,14 +154,16 @@ const Trade = (props) => {
                 <div className="tools">
                     <CryptoTransaction />
                     <div className="transaction-section">
-                        <button className="profile-button big" onClick={goToNextDay}>Next Day!</button>
+                        {day < Number(gameSetting?.duration) ?
+                            <button className="profile-button big" onClick={goToNextDay}>Next Day!</button> :
+                            <button className="profile-button big">End Game</button>}
                     </div>
                 </div>
             </div>
-            
-            
+
+
         </div>
     )
 }
 
-export default Trade;
+export default PastTrading;

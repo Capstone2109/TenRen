@@ -149,4 +149,30 @@ hr {
   text-align: right;
 }
 
+.option-screen {
+  border: 2px solid #001529;
+  margin: 0 auto;
+  display: flex;
+  width: 50vw;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.option-screen h2 {
+  width: 100%;
+}
+.option-screen .option-div {
+  width: 30%;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2%;
+}
+.option-screen .option-div select {
+  width: 55%;
+  height: 35px;
+  margin: 10px auto;
+}
+.option-screen .option-div select option {
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=trade.css.map */

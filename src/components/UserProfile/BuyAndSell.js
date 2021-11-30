@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeDummyCryptoWorth, purchaseCrypto, saveUserPastData, sellCrypto, setCryptoWorth, setDollarOwned, userInfo } from "../../app/trade";
+import { purchaseCrypto, saveUserPastData, sellCrypto, setDollarOwned } from "../../app/trade";
 import { CloseCircleFilled } from "@ant-design/icons";
-import { dollarFormat } from "./Trade";
+import { dollarFormat } from "./PastTrading";
 import { addNewTransaction } from "../../app/transactions";
 
 const BuyAndSell = (props) => {

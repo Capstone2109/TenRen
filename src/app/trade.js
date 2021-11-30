@@ -6,7 +6,6 @@ const setCrypto = (crypto) => ({ type: SET_CRYPTO, crypto })
 export const purchaseCrypto = (crypto) => dispatch => {
 
     try {
-            console.log("Buying",crypto)
         //Make Axios calls to DB to save info here
         dispatch(setCrypto(crypto))
 
@@ -19,7 +18,6 @@ export const sellCrypto = (crypto) => dispatch => {
 
     try {
 
-        //console.log("se")
         //Make Axios calls to DB to save info here
         dispatch(setCrypto(crypto))
 
@@ -70,7 +68,7 @@ export const changeDummyCryptoWorth= (crypto) => dispatch =>{
     }
 }
 
-export function dummyCryptoWorth(crypto={name:'TestCoin',pricePer:60},action){
+export function dummyCryptoWorth(crypto={name:'Test Coin',pricePer:60},action){
     switch(action.type){
         case SET_DUMMY_CRYPTO_WORTH:
             return action.crypto
