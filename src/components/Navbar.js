@@ -48,8 +48,8 @@ const Navbar = () => {
         <Menu.Item icon={<BulbOutlined />}>
           <Link to="/news">News</Link>
         </Menu.Item>
-        <Menu.Item icon={<LogoutOutlined />}>
-          <Link to="/news">News</Link>
+        <Menu.Item icon={<LoginOutlined />}>
+          <Link to="/news">Log In</Link>
         </Menu.Item>
       </Menu>
       )}
