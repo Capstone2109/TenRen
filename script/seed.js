@@ -14,6 +14,81 @@ async function seed() {
     await db.sync({ force: true }); // clears db and matches models to tables
     console.log("db synced!");
     
+// Creating Users
+  const users = await Promise.all([
+    User.create({
+      username: "cody@gmail.com",
+      password: "123",
+      isAdmin: true,
+      userimageURL: "https://randomuser.me/api/portraits/men/75.jpg",
+    }),
+    User.create({
+      username: "murphy@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/men/50.jpg",
+    }),
+    User.create({
+      username: "Mathilde@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/women/65.jpg",
+    }),
+    User.create({
+      username: "Jaleel@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/men/55.jpg",
+    }),
+    User.create({
+      username: "Jarrett@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/men/60.jpg",
+    }),
+    User.create({
+      username: "Asia@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/women/60.jpg",
+    }),
+    User.create({
+      username: "Helene@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/women/70.jpg",
+    }),
+    User.create({
+      username: "Krystina@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/women/40.jpg",
+    }),
+    User.create({
+      username: "Bernard@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/men/30.jpg",
+    }),
+    User.create({
+      username: "Destiney@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/women/72.jpg",
+    }),
+    User.create({
+      username: "Alvah@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/women/73.jpg",
+    }),
+    User.create({
+      username: "Myriam@gmail.com",
+      password: "123",
+      isAdmin: false,
+      userimageURL: "https://randomuser.me/api/portraits/women/43.jpg",
+    }),
+  ]);
 
 }
 

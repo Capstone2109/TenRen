@@ -3,7 +3,6 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-const Order = require("./Order");
 
 const SALT_ROUNDS = 5;
 
@@ -81,17 +80,5 @@ const hashPassword = async (user) => {
   User.beforeUpdate(hashPassword);
   User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
   
-  const createOrderForNewUser = async (user) => {
-    //in case the password has been changed, we want to encrypt it with bcrypt
-    await Order.findOrCreate({
-      where: {
-        userId: user.id,
-        isCart: true,
-      },
-    });
-  };
-  
-  User.afterCreate(createOrderForNewUser);
-  User.afterBulkCreate(createOrderForNewUser);
   
   module.exports = User;
