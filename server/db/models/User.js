@@ -67,3 +67,31 @@ User.findByToken = async function (token) {
     }
   };
   
+  /**
+ * hooks
+ */
+const hashPassword = async (user) => {
+    //in case the password has been changed, we want to encrypt it with bcrypt
+    if (user.changed("password")) {
+      user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
+    }
+  };
+  
+  User.beforeCreate(hashPassword);
+  User.beforeUpdate(hashPassword);
+  User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+  
+  const createOrderForNewUser = async (user) => {
+    //in case the password has been changed, we want to encrypt it with bcrypt
+    await Order.findOrCreate({
+      where: {
+        userId: user.id,
+        isCart: true,
+      },
+    });
+  };
+  
+  User.afterCreate(createOrderForNewUser);
+  User.afterBulkCreate(createOrderForNewUser);
+  
+  module.exports = User;
