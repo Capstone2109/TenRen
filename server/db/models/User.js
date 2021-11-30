@@ -24,6 +24,12 @@ const User = db.define("user", {
       type: Sequelize.BOOLEAN,
       default: false,
     },
+    pastMoney: {
+        type: Sequelize.INTEGER,
+    },
+    currentMoney: {
+        type: Sequelize.INTEGER,
+    }
   });
 
 /**

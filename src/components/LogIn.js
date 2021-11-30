@@ -3,7 +3,7 @@ import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 
 const CryptoLogin = () => {
-    const onFinish = (values) => {
+    const onFinish = (values) => { //Got user data
       console.log('Success:', values);
     };
   
