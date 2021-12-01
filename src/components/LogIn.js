@@ -2,12 +2,13 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { connect } from "react-redux";
-import { authenticate } from "src/app/index.js";
+import { authenticate } from "../app/index.js";
 
 
 const CryptoLogin = () => {
     const onFinish = (values) => { //Got user data
       console.log('Success:', values);
+      //handleLoginSubmit(username, password, "User");
     };
   
     const onFinishFailed = (errorInfo) => {
