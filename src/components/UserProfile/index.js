@@ -10,7 +10,7 @@ const UserProfile = () =>{
 
     useEffect(()=>{
 
-        if(games?.past){
+        if(games?.past?.completed === false){
             setComponentToShow(<PastTrading />)
         }else{
             setComponentToShow(<TradeGameIntro />)

@@ -4,6 +4,7 @@ import { changeDummyCryptoWorth, purchaseCrypto, saveUserPastData, sellCrypto, s
 import UserProfileLineChart from "./UserProfileLineChart";
 import CryptoTransaction from "./CryptoTransaction";
 import PercentChangeIcon from "./PercentChangeIcon"
+import { setPastGame } from "../../app/tradegame";
 
 
 export const dollarFormat = new Intl.NumberFormat("en-US", {
@@ -112,6 +113,12 @@ const PastTrading = (props) => {
         animateAsset(dummyOwnedOfThisCrypto?.dollarValue + dollarAvailable, dollarAvailable)
     }
 
+    //Handles action to perform when game is terminated
+    function endGame(){
+        //INCOMPLETE MISSING SAVING HISTORY OF GAME
+        dispatch(setPastGame({...gameSetting, completed: true}))
+    }
+
     //This value is in decimal form (<1 for loss, >1 for gain)
     let percentChange = dummyOwnedOfThisCrypto?.dollarValue / dummyOwnedOfThisCrypto?.previousDollarValue
     let percentChangeString = `${((Math.abs(percentChange - 1)) * 100).toFixed(2)} %`
@@ -156,7 +163,9 @@ const PastTrading = (props) => {
                     <div className="transaction-section">
                         {day < Number(gameSetting?.duration) ?
                             <button className="profile-button big" onClick={goToNextDay}>Next Day!</button> :
-                            <button className="profile-button big">End Game</button>}
+                            // <button className="profile-button big" onClick={endGame}>End Game</button>
+                        ""}
+                        <button className="profile-button big" onClick={endGame}>End Game</button>
                     </div>
                 </div>
             </div>

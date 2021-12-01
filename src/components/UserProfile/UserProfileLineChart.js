@@ -44,7 +44,7 @@ const UserProfileLineChart = ({ userProfileData }) => {
       <Row className="chart-header">
         <Col>
           <Title level={5} className="current-price">
-            ${userProfileData?.totalAsset}
+            ${userProfileData?.totalAsset} 10
           </Title>
           <Title level={5} className="price-change">
             {userProfileData?.dollarGainLoss} {userProfileData?.percentChange}
