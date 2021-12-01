@@ -1,6 +1,9 @@
 
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import { connect } from "react-redux";
+import { authenticate } from "src/app/index.js";
+
 
 const CryptoLogin = () => {
     const onFinish = (values) => { //Got user data
@@ -77,7 +80,25 @@ const CryptoLogin = () => {
       </Form>
     );
   };
+
+
+  const mapLogin = (state) => {
+    return {
+      user: state.auth,
+      name: "login",
+      displayName: "Login",
+      error: state.auth.error,
+    };
+  };
+  
+  const mapDispatch = (dispatch) => {
+    return {
+      handleLoginSubmit: (username, password, name) => {
+        dispatch(authenticate(username, password, name));
+      },
+    };
+  };
+  
   
 
-  
-export default CryptoLogin;
+export default connect(mapLogin, mapDispatch)(CryptoLogin);
