@@ -39,8 +39,8 @@ const Navbar = (props) => {
       <div className="logo-container">
         <Avatar src={icon} size="large" />
         <Typography.Title level={2} className="logo">
-          <Link to="/">
-            <a onClick={props.toggleDark}>Robin Noob</a>
+          <Link to="/" onClick={props.toggleDark}>
+            Robin Noob
           </Link>
         </Typography.Title>
         <Button
