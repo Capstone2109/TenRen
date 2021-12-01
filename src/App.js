@@ -8,8 +8,8 @@ import Cryptocurrencies from './components/Cryptocurrencies';
 import News from './components/News';
 import CryptoDetails from './components/CryptoDetails';
 import './App.css';
-import './App2.css';
-import App2 from './App2';
+import './quizApp.css'
+import quizApp from './quizApp';
 
 
 const App = () => {
@@ -37,7 +37,7 @@ const App = () => {
               <Route exact path='/news'>
                 <News />
               </Route>
-              <Route exact path='/quiz' component={App2} />
+              <Route exact path='/quiz' component={quizApp} />
             </Switch>
           </div>
         </Layout>

@@ -172,10 +172,9 @@
 
 }
 
+@media screen and (max-width:900px){
 
-@media screen and (max-width:850px){
-
-     .endText {
+    .endText {
       color: white;
       font-size: 25px;
     }
@@ -203,7 +202,82 @@
   font-weight: 300;
     }
 
-    .top {
+  .top {
       height: 35%;
     }
 }
+
+  .start {
+  width: 450px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 18px;
+}
+
+
+.startInput {
+  width: 50%;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  color: black;
+}
+
+.startInput:focus{
+  outline: none;
+}
+
+.startButton {
+  width: 50%;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+  background-color:mediumblue;
+}
+
+.startButton:hover {
+  background-color: #0071bd;
+}
+
+p {
+  text-align: center;
+  justify-content: center;
+}
+
+@media screen and (max-width:414px){
+  p {
+    text-align: center;
+    justify-content: center;
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+@media screen and (max-width:375px){
+  p {
+    text-align: center;
+    justify-content: center;
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+
+

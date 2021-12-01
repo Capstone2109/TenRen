@@ -1,10 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
-import Trivia from './components/Trivia';
-import Timer from './components/Timer';
-import { data } from './data/data';
+import Trivia from './quizComponents/Trivia';
+import Timer from './quizComponents/Timer';
+import Start from './quizComponents/Start';
+import { data } from './quizQuestions/data';
 import './App.css';
 
+
 function App() {
+  const [username, setUsername] = useState(null);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [stop, setStop] = useState(false);
   const [earned, setEarned] = useState('$ 0');
@@ -34,8 +37,10 @@ function App() {
   }, [moneyPyramid, questionNumber])
   return (
     <div className="app2">
-      <div className="main2">
-        {stop ? (
+      {username ? (
+        <>
+        <div className="main2">
+        {questionNumber > 15 || stop ? (
            <h1 className="endText">You earned: {earned}</h1>
         ) : (
           <>
@@ -65,6 +70,8 @@ function App() {
           ))}
         </ul>
       </div>
+        </>
+      ) : <Start setUsername={setUsername}/>}
     </div>
   );
 }

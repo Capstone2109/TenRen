@@ -74,7 +74,7 @@ a:hover{
   align-items: center;
 }
 
-@media screen and (max-width:1300px){
+/* @media screen and (max-width:1300px){
   .main{
       margin-left: 50px;
   }
@@ -90,7 +90,7 @@ a:hover{
   .main{
       margin-left: 100px;
   }
-}
+} */
 
 @media screen and (max-width:800px){
   .app{
@@ -136,6 +136,7 @@ a:hover{
 .coin-detail-container{
   margin: 30px;
 }
+
 
 .coin-heading-container{
   display: flex;

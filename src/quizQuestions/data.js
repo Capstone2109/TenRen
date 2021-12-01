@@ -12,7 +12,7 @@ export const data = [
         correct: false,
       },
       {
-        text: "C) Quater",
+        text: "C) Quarter",
         correct: false,
       },
       {

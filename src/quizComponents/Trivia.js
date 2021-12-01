@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import useSound from 'use-sound';
-import  correct from '../assets/correct.wav';
-import  wrong from '../assets/wrong.wav';
+import  correct from '../quizSoundEffects/correct.wav';
+import  wrong from '../quizSoundEffects/wrong.wav';
 
 function Trivia({
   data,
@@ -17,8 +17,7 @@ function Trivia({
   const [wrongAnswer] = useSound(wrong);
 
 
-
-  useEffect(() => {
+   useEffect(() => {
       setQuestion(data[questionNumber - 1])
   }, [data, questionNumber]);
 
