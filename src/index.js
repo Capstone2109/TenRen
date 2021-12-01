@@ -9,9 +9,7 @@ import "antd/dist/antd.css";
 ReactDOM.render(
   <Router>
     <Provider store={store}>
-      <div className="dark">
-        <App />
-      </div>
+      <App />
     </Provider>
   </Router>,
   document.getElementById("root")
