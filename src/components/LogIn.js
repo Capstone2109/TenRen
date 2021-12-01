@@ -146,7 +146,7 @@ class CryptoLogin extends React.Component {
     return (
       <div>
         <h1>Sign In</h1>
-        <h4>Sign in and start Earning!</h4>
+        <h4>Sign in and  Earning!</h4>
         {this.state.msgBool ? this.message() : null}
         <form onSubmit={handleSubmit} name={name}>
           <label>

@@ -24,12 +24,12 @@ const User = db.define("user", {
       type: Sequelize.BOOLEAN,
       default: false,
     },
-    pastMoney: {
-        type: Sequelize.INTEGER,
-    },
-    currentMoney: {
-        type: Sequelize.INTEGER,
-    }
+    // pastMoney: {
+    //     type: Sequelize.INTEGER,
+    // },
+    // currentMoney: {
+    //     type: Sequelize.INTEGER,
+    // }
   });
 
 /**
@@ -49,6 +49,7 @@ User.prototype.correctPassword = function (candidatePwd) {
  */
 User.authenticate = async function ({ username, password }) {
     const user = await this.findOne({ where: { username } });
+    
     if (!user || !(await user.correctPassword(password))) {
       const error = Error("Incorrect username/password");
       error.status = 401;

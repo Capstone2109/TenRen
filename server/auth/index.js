@@ -3,6 +3,7 @@ const { User } = require("../db");
 
 router.post("/login", async (req, res, next) => {
   try {
+    console.log("Body:",req.body)
     const token = await User.authenticate(req.body);
     console.log(token);
     res.send({ token: await User.authenticate(req.body) });
