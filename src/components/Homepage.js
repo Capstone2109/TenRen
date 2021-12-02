@@ -6,7 +6,7 @@ import { useGetCryptosQuery } from "../services/cryptoApi";
 import Cryptocurrencies from "./Cryptocurrencies";
 import News from "./News";
 import UserProfileLineChart from "./UserProfile/UserProfileLineChart";
-import utility from "./utility";
+import utility from "./utility/utility";
 
 const { Title } = Typography;
 
@@ -16,7 +16,7 @@ const Homepage = () => {
 
   if (isFetching) return "Loading...";
 
-  const 
+  const dummyData = utility;
 
   return (
     <>

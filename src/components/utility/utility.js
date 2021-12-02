@@ -17,43 +17,45 @@ const portfolio = (state) => {
 };
 
 const sumAsset = (history) => {
- return history.reduce((acc, curr) => acc + curr.asset, 0);
-}
-
+  return history.reduce((acc, curr) => acc + curr.asset, 0);
+};
 
 const totalAsset = (history) => ({
-	totalAsset: () => {
-		const finalPortfolio = history[history.length - 1].transactions();
-		const totalAsset = finalPortfolio ? sumAsset(finalPortfolio) : 0;
-		return totalAsset;
-	}
+  totalAsset: () => {
+    const finalPortfolio = history[history.length - 1].transactions();
+    const totalAsset = finalPortfolio ? sumAsset(finalPortfolio) : 0;
+    return totalAsset;
+  },
 });
 
 const totalDollarGainOrLoss = (history) => ({
-	totalDollarGainOrLoss: () => {
-		const finalPortfolioAsset = sumAsset(history[history.length - 1].transactions());
-		const startingPortfolioAsset = sumAsset(history[0].transactions());
-		const difference = finalPortfolioAsset - startingPortfolioAsset;
-		return parseFloat(difference.toFixed(2));
-	}
+  totalDollarGainOrLoss: () => {
+    const finalPortfolioAsset = sumAsset(
+      history[history.length - 1].transactions()
+    );
+    const startingPortfolioAsset = sumAsset(history[0].transactions());
+    const difference = finalPortfolioAsset - startingPortfolioAsset;
+    return parseFloat(difference.toFixed(2));
+  },
 });
 
 const totalPercentChange = (history) => ({
-	totalPercentChange: () => {
-  const startingPortfolioAsset = sumAsset(history[0].transactions());
-		const finalPortfolioAsset = sumAsset(history[history.length - 1].transactions());
-		const difference = finalPortfolioAsset - startingPortfolioAsset;
-  const percentChange =
-    (difference / startingPortfolioAsset) * 100;
-	return parseFloat(percentChange.toFixed(2));
-	}
+  totalPercentChange: () => {
+    const startingPortfolioAsset = sumAsset(history[0].transactions());
+    const finalPortfolioAsset = sumAsset(
+      history[history.length - 1].transactions()
+    );
+    const difference = finalPortfolioAsset - startingPortfolioAsset;
+    const percentChange = (difference / startingPortfolioAsset) * 100;
+    return parseFloat(percentChange.toFixed(2));
+  },
 });
 
 const getHistory = (history) => ({
-	history: () => {
-		return history;
-	}
-})
+  history: () => {
+    return history;
+  },
+});
 
 const portfolio1 = [
   {
@@ -90,10 +92,17 @@ const portfolioTwo = portfolio(portfolio2);
 
 history.push(portfolioOne, portfolioTwo);
 
-
-const obj = Object.assign({}, getHistory(history), totalAsset(history), totalDollarGainOrLoss(history), totalPercentChange(history));
+const obj = Object.assign(
+  {},
+  getHistory(history),
+  totalAsset(history),
+  totalDollarGainOrLoss(history),
+  totalPercentChange(history)
+);
 
 console.log(obj.history());
-console.log(obj.totalAsset(history))
-console.log(obj.totalDollarGainOrLoss(history));
-console.log(obj.totalPercentChange(history));
+console.log(obj.totalAsset());
+console.log(obj.totalDollarGainOrLoss());
+console.log(obj.totalPercentChange());
+
+export default obj;
