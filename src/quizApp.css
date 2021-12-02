@@ -3,7 +3,7 @@
   display: flex;
   color: white;
   background-color: #020230;
-  padding: 0px !important;
+
 }
 
 .main2 {
@@ -266,15 +266,7 @@
   }
 }
 
- @media screen and (max-width:375px){
-  li {
-    text-align: center;
-    justify-content: center;
-    font-size: 15px;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-}
+
 
 
 
