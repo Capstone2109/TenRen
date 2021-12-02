@@ -31,7 +31,7 @@ a:hover{
   flex: 0.8;
   width: 100%;
 }
-.routes {
+.routes{
   padding: 0px;
 }
 .nav-container{
@@ -75,19 +75,19 @@ a:hover{
 
 @media screen and (max-width:1300px){
   .main{
-      margin-left: 50px;
+      margin-left: 0px;
   }
 }
 
 @media screen and (max-width:1170px){
   .main{
-      margin-left: 50px;
+      margin-left: 0px;
   }
 }
 
 @media screen and (max-width:1000px){
   .main{
-      margin-left: 100px;
+      margin-left: 0px;
   }
 }
 
@@ -95,6 +95,9 @@ a:hover{
   .app{
       flex-direction: column;
       overflow: hidden;
+  }
+  .routes{
+    padding: 0px;
   }
 
   .navbar{
@@ -271,6 +274,10 @@ padding: 0px 20px;
   .stats-container h2{
       margin-top: 0px;
   }
+
+  /* .routes {
+    padding: 0px;
+  } */
 }
 
 @media screen and (max-width: 500px){
