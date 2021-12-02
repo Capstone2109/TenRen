@@ -9,6 +9,7 @@ import News from './components/News';
 import CryptoDetails from './components/CryptoDetails';
 import CryptoLogin from './components/LogIn';
 import './App.css';
+import GetNews from './components/MakeApiCalls';
 
 const App = () => {
   return (
@@ -37,6 +38,9 @@ const App = () => {
               </Route>
               <Route exact path='/login'>
                 <CryptoLogin />
+              </Route>
+              <Route exact path='/getnews'>
+                <GetNews />
               </Route>
             </Switch>
           </div>
