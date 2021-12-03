@@ -24,12 +24,23 @@ const User = db.define("user", {
       type: Sequelize.BOOLEAN,
       default: false,
     },
-    // pastMoney: {
-    //     type: Sequelize.INTEGER,
-    // },
-    // currentMoney: {
-    //     type: Sequelize.INTEGER,
-    // }
+    pastMoney: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    currentMoney: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    myCoins: { //Array of coins owned!
+      type: Sequelize.STRING,
+      get: function() {
+         return JSON.parse(this.getDataValue('myCoins'));
+      },
+      set: function(val) {
+         return this.setDataValue('myCoins', JSON.stringify(val));
+      }
+   }
   });
 
 /**

@@ -2,6 +2,7 @@
 const db = require("./db");
 const User = require("./models/User");
 const News = require('./models/News')
+const coinData = require("./models/coinData")
 const { Sequelize } = require("sequelize");
 
 
@@ -12,5 +13,6 @@ const { Sequelize } = require("sequelize");
 module.exports = {
   db,
   User,
-  News
+  News,
+  coinData,
 };
