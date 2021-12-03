@@ -2,8 +2,7 @@
   height: 100vh;
   display: flex;
   color: white;
-  background-color: #020230;
-
+  background: url("https://i.ytimg.com/vi/yQbJRGs0fy8/maxresdefault.jpg") center;
 }
 
 .main2 {
@@ -174,6 +173,53 @@
 
 }
 
+.start {
+  width: 450px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 19px;
+}
+
+
+.startInput {
+  width: 50%;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  color: black;
+}
+
+.startInput:focus{
+  outline: none;
+}
+
+.startButton {
+  width: 50%;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+  background-color:mediumblue;
+}
+
+.startButton:hover {
+  background-color: #0071bd;
+}
+
 @media screen and (max-width:900px){
 
   .endText {
@@ -209,52 +255,6 @@
     }
 }
 
-  .start {
-  width: 450px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  font-size: 18px;
-}
-
-
-.startInput {
-  width: 50%;
-  height: 25px;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 18px;
-  color: black;
-}
-
-.startInput:focus{
-  outline: none;
-}
-
-.startButton {
-  width: 50%;
-  height: 35px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 500;
-  margin-top: 10px;
-  background-color:mediumblue;
-}
-
-.startButton:hover {
-  background-color: #0071bd;
-}
 
  @media screen and (max-width:414px){
   li {
@@ -264,6 +264,12 @@
     margin-left: 5px;
     margin-right: 5px;
   }
+}
+
+@media screen and (max-width:414px){
+ li {
+   font-size: 13px;
+ }
 }
 
 
