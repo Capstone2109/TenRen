@@ -1,4 +1,3 @@
-"use strict";
 const { db, User, News } = require("../server/db/index");
 const getNewsFromApi = require("../server/db/rapidApi/currentNews");
 /**
@@ -86,24 +85,15 @@ async function seed() {
   ]);
 
 
+  
   const apiData = await getNewsFromApi();
 
-  console.log(apiData)
   await News.create({
     category: "AllNews",
     data: JSON.stringify(apiData),
     testField: "Test"
   });
 
-  const db_news = await News.findOne({
-    where: {
-      realTime: true,
-    },
-  });
-
-  const allNewsDB = JSON.parse(db_news.dataValues.data);
-
-  console.log(allNewsDB);
 }
 
 /*

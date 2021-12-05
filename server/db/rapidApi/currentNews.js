@@ -1,4 +1,6 @@
 const axios = require('axios')
+const { News } = require("../index");
+
 const categories = ["bitcoin","ethereum"]
 
 const options = {
@@ -49,4 +51,31 @@ async function getNewsFromApi(){
       }
 }
 
-module.exports = getNewsFromApi
+async function refreshLiveNews(){
+  console.log("loading real time news from api...")
+  try {
+    const newsData = getNewsFromApi()
+
+    await News.destroy({where: {realTime: true}})
+    await News.create({
+      category: "AllNews",
+      data: JSON.stringify(newsData),
+    });
+    console.log("Real Time News Refreshed.")
+  } catch (error) {
+    console.log(error)
+  }
+  
+}
+
+async function getHoursPastSinceNewsUpdate(){
+
+  try {
+    const lastUpdatedTime = await News.findOne({where: { realTime: true}, attributes: ['updatedAt']})
+    //Returns the amount of HOURS that have past since the last time REAL TIME news was updated
+    return Math.abs(Date.now() - new Date(lastUpdatedTime.dataValues?.updatedAt).getTime()) / 3600000
+  } catch (error) {
+    console.log(error)
+  }
+}
+module.exports = {getNewsFromApi,refreshLiveNews,getHoursPastSinceNewsUpdate}

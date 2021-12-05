@@ -39,7 +39,7 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "JWT=shh nodemon server",
-    "server:win": "npm run build --watch && set JWT=shh && nodemon server",
+    "server:windows": "npm run build && set JWT=shh && nodemon server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
