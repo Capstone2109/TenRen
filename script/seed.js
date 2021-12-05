@@ -1,5 +1,8 @@
-const { db, User, News } = require("../server/db/index");
+const { db, User , Crypto, CryptoHistory } = require("../server/db/index");
 const getNewsFromApi = require("../server/db/rapidApi/currentNews");
+const {staticCryptoList} = require("../server/db/models/Crypto");
+const { getDailyCoinHistory } = require("../server/db/rapidApi/getCoinFromApi");
+
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -84,15 +87,16 @@ async function seed() {
     }),
   ]);
 
+  //Seed Static Crypto History
+  await Promise.all(staticCryptoList.map(crypto => {
+    return Crypto.create(crypto)
+  }))
 
-  
-  const apiData = await getNewsFromApi();
 
-  await News.create({
-    category: "AllNews",
-    data: JSON.stringify(apiData),
-    testField: "Test"
-  });
+  //Get Seeded Crypto List History
+  await Promise.all(staticCryptoList.map(async crypto => {
+    return CryptoHistory.create( {name: crypto.name, data: JSON.stringify( await getDailyCoinHistory(crypto.coinRankingId,"30d") )})
+  }))
 
 }
 

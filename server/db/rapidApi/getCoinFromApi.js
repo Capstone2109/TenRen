@@ -1,27 +1,23 @@
-import axios from "axios";
-
-let options = {
-  method: 'GET',
-  url: 'https://coinranking1.p.rapidapi.com/exchanges',
-  headers: {
-    'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
-    'x-rapidapi-key': 'f6ed2103e1msh1b57104c8a32539p12d792jsna87434a146d0'
-  }
-};
+const axios = require('axios')
 
 
-
-export default async function getCoinApi (){
-    try {
-        let coinInfo = await axios.request(options)
-        return coinInfo;
-    } catch (error) {
-        throw error;
+async function getDailyCoinHistory(coinId,timeFrame='7d'){
+  
+  try {
+    let result = await axios.get(`https://coinranking1.p.rapidapi.com/coin/${coinId}/history/${timeFrame}`, {
+      headers: {
+      'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
+      'x-rapidapi-key': 'f6ed2103e1msh1b57104c8a32539p12d792jsna87434a146d0',
     }
+  })
+
+  let list = result.data?.data?.history.filter((obj,indx) => (indx+1)%24 === 0)
+  return list    
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-// axios.request(options).then(function (response) {
-// 	console.log(response.data);
-// }).catch(function (error) {
-// 	console.error(error);
-// });
+getDailyCoinHistory(1,"30d")
+
+module.exports ={ getDailyCoinHistory }
