@@ -8,7 +8,9 @@ const CryptoHistory = require("./models/CryptoHistory")
 const { Sequelize } = require("sequelize");
 
 
-//associations could go here!
+//User has many coins
+User.hasMany(Crypto, {foreignKey: "userId"})
+
 
 
 

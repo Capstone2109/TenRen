@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "JWT=shh nodemon server",
+    "server": "JWT=shh npm run build && nodemon server",
     "server:windows": "npm run build && set JWT=shh && nodemon server",
     "build": "react-scripts build",
     "test": "react-scripts test",
