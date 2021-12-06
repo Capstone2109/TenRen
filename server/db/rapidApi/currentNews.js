@@ -1,81 +1,123 @@
-const axios = require('axios')
+const axios = require("axios");
 const { News } = require("../index");
 
-const categories = ["bitcoin","ethereum"]
+const categories = [
+  "Bitcoin",
+  "Ethereum",
+  "Binance coin",
+  "Tether USD",
+  "Terra",
+  "Solana",
+  "Cardano",
+  "HEX",
+  "USDC",
+  "XRP",
+  "Polkadot",
+  "Dogecoin",
+];
 
 const options = {
-  method: 'GET',
-  url: 'https://bing-news-search1.p.rapidapi.com/news/search',
+  method: "GET",
+  url: "https://bing-news-search1.p.rapidapi.com/news/search",
   params: {
-      safeSearch: 'Off',
-       textFormat: 'Raw',
-       count: '12',
-       freshness: 'Day',
-      },
+    safeSearch: "Off",
+    textFormat: "Raw",
+    count: "12",
+    freshness: "Month",
+  },
   headers: {
-      'x-bingapis-sdk': 'true',
-      'x-rapidapi-host': 'bing-news-search1.p.rapidapi.com',
-      'x-rapidapi-key': '3c7ef0dfd5msheac71ccb6cc560ep103353jsnb101d0407034'
-    }
+    "x-bingapis-sdk": "true",
+    "x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
+    "x-rapidapi-key": "3c7ef0dfd5msheac71ccb6cc560ep103353jsnb101d0407034",
+  },
 };
 
-async function getNewsFromApi(){
-    try {
-        let info = await Promise.all(
-          categories.map(async (cat) => {
-            let data = await axios.request({ ...options, params: { ...options.params, q: cat } })
-            const obj = {category: cat, data: data.data.value };
-            return obj
-          }
-          )
-        );
-    
-        const fields = (state) => ({
-          name: state.name,
-          url: state.url,
-          contentUrl: state.image?.thumbnail?.contentUrl,
-          description: state.description,
-          provider: state.provider,
-          datePublished: state.datePublished,
-          category: state.category,
-        });
-    
-        info = info.map(objCat => {
-          const data = objCat.data.map(obj => fields(obj));
-          return {category: objCat.category, data}
-        })
-        
-        return info;
-      } catch (error) {
-        console.log(error);
-      }
-}
-
-async function refreshLiveNews(){
-  console.log("loading real time news from api...")
+async function getNewsFromApi() {
   try {
-    const newsData = getNewsFromApi()
-
-    await News.destroy({where: {realTime: true}})
-    await News.create({
-      category: "AllNews",
-      data: JSON.stringify(newsData),
+    let queue = categories.map((cat) => {
+      return { name: cat, data: undefined };
     });
-    console.log("Real Time News Refreshed.")
+
+    let info = []
+    
+    const processQueue = async function () {
+      while (queue[0]) {
+        try {
+          let data = await axios.request({
+            ...options,
+            params: { ...options.params, q: queue[0].name },
+          });
+          queue.shift();
+          info.push({category: queue[0].name, data: data.data.value});
+        } catch (error) {
+          await new Promise((resolve) => setTimeout(resolve, 1000)) //wait for 1s
+        }
+      }
+    };
+
+    console.log("Processing Queue");
+    await processQueue();
+    console.log("Processing Finished!");
+
+    const fields = (state) => ({
+      name: state.name,
+      url: state.url,
+      contentUrl: state.image?.thumbnail?.contentUrl,
+      description: state.description,
+      provider: state.provider,
+      datePublished: state.datePublished,
+      category: state.category,
+    });
+
+    info = info.map((objCat) => {
+      const data = objCat.data.map((obj) => fields(obj));
+      return { category: objCat.category, data };
+    });
+
+    console.log("Finalized Info",info[2].data[2].provider);
+
+    return info;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-  
 }
 
-async function getHoursPastSinceNewsUpdate(){
-
+async function refreshLiveNews() {
+  console.log("loading real time news from api...");
   try {
-    const lastUpdatedTime = await News.findOne({where: { realTime: true}, attributes: ['updatedAt']})
-    //Returns the amount of HOURS that have past since the last time REAL TIME news was updated
-    return Math.abs(Date.now() - new Date(lastUpdatedTime.dataValues?.updatedAt).getTime()) / 3600000
+    const newsData = await getNewsFromApi();
+    //console.log("news data", JSON.stringify(newsData))
+
+    //await News.destroy({ where: { realTime: true } });
+    await News.create({
+      category: "1 Week",
+      data: JSON.stringify(newsData),
+      realTime: false
+    });
+    //console.log("Real Time News Refreshed.");
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
-module.exports = {getNewsFromApi,refreshLiveNews,getHoursPastSinceNewsUpdate}
+
+async function getHoursPastSinceNewsUpdate() {
+  try {
+    const lastUpdatedTime = await News.findOne({
+      where: { realTime: true },
+      attributes: ["updatedAt"],
+    });
+    //Returns the amount of HOURS that have past since the last time REAL TIME news was updated
+    return (
+      Math.abs(
+        Date.now() - new Date(lastUpdatedTime.dataValues?.updatedAt).getTime()
+      ) / 3600000
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+module.exports = {
+  getNewsFromApi,
+  refreshLiveNews,
+  getHoursPastSinceNewsUpdate,
+};

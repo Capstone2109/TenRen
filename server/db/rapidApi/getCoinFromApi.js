@@ -11,13 +11,12 @@ async function getDailyCoinHistory(coinId,timeFrame='7d'){
     }
   })
 
-  let list = result.data?.data?.history.filter((obj,indx) => (indx+1)%24 === 0)
+  let list = result.data?.data?.history.filter((obj,index) => (index+1)%24 === 0)
   return list    
   } catch (error) {
     console.log(error)
   }
 }
 
-getDailyCoinHistory(1,"30d")
 
 module.exports ={ getDailyCoinHistory }
