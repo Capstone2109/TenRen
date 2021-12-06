@@ -3,9 +3,6 @@ const db = require("../db");
 
 const News = db.define('news',{
     
-    category: {
-        type: Sequelize.STRING
-    },
     data: {
         type: Sequelize.JSON
     },

@@ -21,10 +21,11 @@ const init = async () => {
 }
 
 
-function handleDBupdates() {
+async function handleDBupdates() {
   console.log("checking if anything needs to be updated in DB...")
-  if(getHoursPastSinceNewsUpdate() >= 24){
-    refreshLiveNews()
+  if(await getHoursPastSinceNewsUpdate() >= 24){
+    console.log("Updating news...")
+    await refreshLiveNews()
   }
 
   setTimeout( ()=>{

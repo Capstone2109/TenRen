@@ -23,7 +23,7 @@ const options = {
     safeSearch: "Off",
     textFormat: "Raw",
     count: "12",
-    freshness: "Month",
+    freshness: "Day",
   },
   headers: {
     "x-bingapis-sdk": "true",
@@ -74,7 +74,7 @@ async function getNewsFromApi() {
       return { category: objCat.category, data };
     });
 
-    console.log("Finalized Info",info[2].data[2].provider);
+    //console.log("Finalized Info",info[2].data[2].provider);
 
     return info;
   } catch (error) {
@@ -90,11 +90,10 @@ async function refreshLiveNews() {
 
     //await News.destroy({ where: { realTime: true } });
     await News.create({
-      category: "1 Week",
       data: JSON.stringify(newsData),
-      realTime: false
+      realTime: true
     });
-    //console.log("Real Time News Refreshed.");
+    console.log("Real Time News Refreshed.");
   } catch (error) {
     console.log(error);
   }
@@ -106,10 +105,15 @@ async function getHoursPastSinceNewsUpdate() {
       where: { realTime: true },
       attributes: ["updatedAt"],
     });
+    
+    if(!lastUpdatedTime){
+      console.log("did not find a update time")
+      return 99
+    }
     //Returns the amount of HOURS that have past since the last time REAL TIME news was updated
     return (
       Math.abs(
-        Date.now() - new Date(lastUpdatedTime.dataValues?.updatedAt).getTime()
+        Date.now() - (new Date(lastUpdatedTime.dataValues?.updatedAt).getTime() || 0)
       ) / 3600000
     );
   } catch (error) {
