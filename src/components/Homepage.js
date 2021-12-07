@@ -1,24 +1,26 @@
-import React from 'react';
-import millify from 'millify';
-import { Typography, Row, Col, Statistic } from 'antd';
-import { Link } from 'react-router-dom';
-import { useGetCryptosQuery } from '../services/cryptoApi';
-import Cryptocurrencies from './Cryptocurrencies';
-import News from './News';
-
+import React from "react";
+import millify from "millify";
+import { Typography, Row, Col, Statistic } from "antd";
+import { Link } from "react-router-dom";
+import { useGetCryptosQuery } from "../services/cryptoApi";
+import Cryptocurrencies from "./Cryptocurrencies";
+import News from "./News";
+import UserProfileLineChart from "./UserProfile/UserProfileLineChart";
+import utility from "./utility/utility";
 
 const { Title } = Typography;
-
 
 const Homepage = () => {
   const { data, isFetching } = useGetCryptosQuery(10);
   const globalStats = data?.data?.stats;
 
+  if (isFetching) return "Loading...";
 
-  if(isFetching) return 'Loading...';
+  const dummyData = utility;
 
   return (
     <>
+      <UserProfileLineChart userProfileData={dummyData} />
       <Title level={2} className='heading' style={{ padding: '20px'}}>Global Crypto Stats</Title>
       <Row style={{ padding: '20px'}}>
         <Col span={12}><Statistic title='Total Cryptocurrencies' value={globalStats.total} /></Col>
@@ -38,7 +40,7 @@ const Homepage = () => {
       </div>
       <News simplified />
     </>
-  )
-}
+  );
+};
 
-export default Homepage
+export default Homepage;

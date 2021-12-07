@@ -1,3 +1,6 @@
+@import "./styles/Trade/trade.scss";
+@import "./styles/Dark/dark.scss";
+
 .green-color {
   color: green; }
 
@@ -165,185 +168,6 @@ hr {
 .dark p {
   color: white !important; }
 
-.green-color {
-  color: green; }
-
-.red-color {
-  color: red; }
-
-hr {
-  width: 80%;
-  margin: 0 auto; }
-
-#available-cash-small {
-  width: 100%;
-  margin: 5px 25%;
-  font-weight: bold; }
-
-#total-asset {
-  transition: 1s; }
-
-.dollar-increase {
-  transition: 1s;
-  font-size: 30px;
-  color: green;
-  position: inherit;
-  transform: translateY(10px); }
-
-.dollar-decrease {
-  transition: 1s;
-  color: red; }
-
-.profile-trade {
-  width: 70%;
-  align-items: center; }
-
-.profile-trade-buttons {
-  display: flex;
-  width: 100%;
-  margin: 0 auto;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 20px 0; }
-
-.profile-button {
-  border: none;
-  padding: 5px;
-  margin: 5px;
-  margin-bottom: 10px;
-  background-color: #001529;
-  color: white;
-  font-size: large;
-  width: 40%; }
-
-.profile-button.big {
-  width: 80%;
-  right: 50%;
-  margin: 20px 10%; }
-
-.profile-button:hover {
-  cursor: pointer;
-  background-color: #1890ff; }
-
-.profile-button:active {
-  transform: translateY(3px); }
-
-.profile-input {
-  margin-bottom: 10px;
-  width: 80%; }
-
-/* Purchase Crypto Component */
-.trading-visuals {
-  display: grid;
-  width: 80vw;
-  grid-template-columns: 80% 20%; }
-
-.graph-section {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0 auto; }
-
-.tools {
-  width: 100%;
-  height: 100%;
-  transition: 1s; }
-
-.transaction-section {
-  border: 2px solid #001529;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 30px;
-  align-content: center; }
-
-.chart-header {
-  width: 100%; }
-
-.userprofile-graph {
-  width: 100%; }
-
-.transaction-types {
-  width: 100%; }
-
-.transaction-types > button {
-  width: 33%;
-  height: 40px;
-  border: 0px solid transparent;
-  color: black; }
-
-.transaction-types > button:hover {
-  cursor: pointer;
-  background-color: #7ec1ff; }
-
-.transaction-types > button.selected {
-  background-color: #1890ff;
-  color: white;
-  font-weight: bold; }
-
-.transaction-list {
-  border: 2px solid #001529;
-  margin: 5px;
-  overflow-y: scroll;
-  max-height: 300px; }
-
-.transaction-list > div {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid gray;
-  padding: 0 10px;
-  margin-bottom: 10px; }
-
-.transaction-list .timestamp {
-  margin-bottom: 15px;
-  text-align: right; }
-
-.option-screen {
-  border: 2px solid #001529;
-  margin: 0 auto;
-  display: flex;
-  width: 50vw;
-  flex-wrap: wrap;
-  justify-content: center; }
-
-.option-screen h2 {
-  width: 100%; }
-
-.option-screen .option-div {
-  width: 30%;
-  justify-content: center;
-  text-align: center;
-  margin-bottom: 2%; }
-
-.option-screen .option-div select {
-  width: 55%;
-  height: 35px;
-  margin: 10px auto; }
-
-.option-screen .option-div select option {
-  font-weight: bold; }
-
-.dark .ant-typography {
-  color: white !important; }
-
-.dark .routes {
-  background-color: #2b2626;
-  color: white !important; }
-
-.dark .ant-typography {
-  color: white !important; }
-
-.dark .ant-statistic > * {
-  color: white !important; }
-
-.dark .ant-card-head-title {
-  color: white !important; }
-
-.dark .ant-card {
-  background-color: #2b2626 !important; }
-
-.dark p {
-  color: white !important; }
-
 :root {
   --text-primary: #000;
   --bgPrimary: #fff;
@@ -370,34 +194,37 @@ a:hover {
 
 .main {
   flex: 0.8;
-  width: 100%; }
-
-.routes {
-  padding: 0px; }
-
-.nav-container {
+  width: 100%;
+}
+.routes{
+  padding: 0px;
+}
+.nav-container{
   position: fixed;
   left: 0;
   margin: 10px;
   height: 100vh;
   margin: 0px;
-  background-color: #001529;
-  z-index: 1; }
+  background-color: rgb(0, 21, 41);
+  z-index: 1;
+}
 
 .logo-container {
   background-color: #001529;
   display: flex;
   padding: 20px;
   align-items: center;
-  width: 100%; }
+  width: 100%;
+}
+.logo{
+  margin:0 0 0 15px;
+}
+.logo a{
+ color: white;
+}
 
-.logo {
-  margin: 0 0 0 15px; }
 
-.logo a {
-  color: white; }
-
-.menu-control-container {
+.menu-control-container{
   display: none !important;
   position: absolute !important;
   right: 10px !important;
@@ -406,10 +233,11 @@ a:hover {
   background-color: var(--bgSecondary) !important;
   border: none !important; }
 
-.coin-detail-container {
-  margin: 30px; }
+.coin-detail-container{
+  margin: 30px;
+}
 
-.coin-heading-container {
+.coin-heading-container{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -506,18 +334,20 @@ a:hover {
 .coin-link a {
   color: var(--pink);
   font-weight: 700;
-  font-size: 1rem; }
+  font-size: 1rem;
+}
 
-.coin-link:hover, .coin-stats:hover {
-  background-color: var(--bgSecondary); }
+.coin-link:hover, .coin-stats:hover{
+  background-color: var(--bgSecondary);
+}
 
-.select-news {
-  width: 180px; }
-
-.news-card {
-  min-height: 300px !important; }
-
-.news-image-container {
+.select-news{
+  width: 180px;
+}
+.news-card{
+  min-height: 300px !important;
+}
+.news-image-container{
   display: flex !important;
   justify-content: space-between !important; }
 
@@ -595,81 +425,120 @@ a:hover {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  align-items: center; }
+  align-items: center;
+}
 
 /* media queries */
+
 /*---------------------------------------------*/
-@media screen and (max-width: 1300px) {
-  .main {
-    /* margin-left: 50px; */
-    margin-left: 0px; }
+
+@media screen and (max-width:1300px){
+  .main{
+      /* margin-left: 50px; */
+      margin-left: 0px;
+  }
   /* .nav-container{
     width: 30vh;
-  } */ }
+  } */
+}
 
-@media screen and (max-width: 1170px) {
-  .main {
-    /* margin-left: 50px; */
-    margin-left: 0px; }
+@media screen and (max-width:1170px){
+  .main{
+     /* margin-left: 50px; */
+      margin-left: 0px;
+  }
   .nav-container {
-    width: 25vh; } }
+    width: 25vh;
+  }
+}
 
-@media screen and (max-width: 1000px) {
-  .main {
-    /* margin-left: 100px; */
-    margin-left: 0px; }
-  .stats-container {
-    flex-direction: column; }
-  .coin-desc-link {
-    flex-direction: column; }
-  .stats-container h2 {
-    margin-top: 0px; }
-  .coin-detail-container {
-    margin: 30px; }
-  .nav-container {
+@media screen and (max-width:1000px){
+  .main{
+      /* margin-left: 100px; */
+      margin-left: 0px;
+  }
+  .stats-container{
+    flex-direction: column;
+  }
+  .coin-desc-link{
+    flex-direction: column;
+  }
+  .stats-container h2{
+    margin-top: 0px;
+  }
+  .coin-detail-container{
+    margin: 30px;
+
+  }
+
+  .nav-container{
     position: fixed;
     left: 0;
     margin: 10px;
     width: 25vh;
     height: 100vh;
     margin: 0px;
-    background-color: #001529; }
-  .crypto-card {
-    min-width: 150px; } }
+    background-color: rgb(0, 21, 41);
+  }
 
-@media screen and (max-width: 900px) {
-  .app {
-    flex-direction: column;
-    overflow: hidden; }
-  .routes {
-    padding: 0px; }
-  .navbar {
-    flex: 1; }
-  .main {
-    flex: 1;
-    margin-top: 90px;
-    margin-left: 0px;
-    margin-right: 10px; }
-  .nav-container {
-    height: 8vh;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    background-color: var(--bgSecondary); }
-  .menu-control-container {
-    display: block !important; }
-  .ant-menu {
-    position: absolute;
-    right: 0px; }
-  .home-title {
-    font-size: 1.4rem !important; }
-  .show-more {
-    font-size: 1.3rem !important; } }
+  .crypto-card{
+    min-width: 150px;
+  }
+}
 
-@media screen and (max-width: 500px) {
-  .coin-links {
-    padding: 0px; }
-  .coin-detail-container {
-    margin: 0; }
-  .heading {
-    margin-top: 20px; } }
+@media screen and (max-width:900px){
+  .app{
+      flex-direction: column;
+      overflow: hidden;
+  }
+  .routes{
+    padding: 0px;
+  }
+
+  .navbar{
+      flex: 1;
+  }
+
+  .main{
+      flex: 1;
+      margin-top: 90px;
+      margin-left: 0px;
+      margin-right: 10px;
+  }
+
+  .nav-container{
+      height: 8vh;
+      position:fixed;
+      width: 100%;
+      z-index: 100;
+      background-color: var(--bgSecondary);
+  }
+
+  .menu-control-container{
+      display: block !important;
+  }
+
+  .ant-menu{
+      position: absolute;
+      right: 0px;
+  }
+  .home-title{
+      font-size: 1.4rem !important;
+  }
+  .show-more{
+      font-size: 1.3rem !important;
+  }
+}
+
+
+@media screen and (max-width: 500px){
+  .coin-links{
+      padding: 0px;
+  }
+  .coin-detail-container{
+      margin: 0;
+  }
+  .heading{
+    margin-top: 20px;
+}
+}
