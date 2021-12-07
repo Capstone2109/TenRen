@@ -37,8 +37,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "server": "JWT=shh nodemon server && npm run start",
+    "start": "node-sass -w src -o src && npm run build && JWT=shh nodemon server",
     "server:windows": "npm run build && set JWT=shh && nodemon server",
     "build": "react-scripts build",
     "test": "react-scripts test",
