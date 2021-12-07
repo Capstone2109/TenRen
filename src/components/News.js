@@ -15,6 +15,11 @@ const News = ({ simplified }) => {
   const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12 })
 
   if (!cryptoNews?.value) return 'Loading...';
+
+  
+  if(cryptoNews.value){
+    console.log("News Data:",cryptoNews.value)
+  }
   return (
     <Row gutter={[24, 24]}>
     {!simplified && (
@@ -57,3 +62,4 @@ const News = ({ simplified }) => {
 }
 
 export default News
+

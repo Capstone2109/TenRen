@@ -6,6 +6,7 @@ import { useGetCryptosQuery } from "../services/cryptoApi";
 import Cryptocurrencies from "./Cryptocurrencies";
 import News from "./News";
 import UserProfileLineChart from "./UserProfile/UserProfileLineChart";
+import utility from "./utility/utility";
 
 const { Title } = Typography;
 
@@ -15,87 +16,11 @@ const Homepage = () => {
 
   if (isFetching) return "Loading...";
 
-  const dummyData = {
-    get dollarGainLoss() {
-      if (this.totalAsset === 0) return "";
-      const gainOrLoss =
-        this.history[this.history.length - 1].asset - this.history[0].asset;
-      return gainOrLoss > 0
-        ? `+$${gainOrLoss.toFixed(2)}`
-        : `${gainOrLoss.toFixed(2)}`;
-    },
-    get percentChange() {
-      if (this.history[this.history.length - 1].asset === this.history[0].asset)
-        return "(0%)";
-      const percent =
-        ((this.history[this.history.length - 1].asset - this.history[0].asset) /
-          this.history[0].asset) *
-        100;
-
-      return percent > 0
-        ? `(+${percent.toFixed(2)}%)`
-        : `(${percent.toFixed(2)}%)`;
-    },
-    get totalAsset() {
-      const total = this?.history[this.history.length - 1]["asset"];
-      return this.history ? total : "";
-    },
-    history: [
-      {
-        get timestamp() {
-          return this.portfolio[0].timestamp;
-        },
-        get asset() {
-          return this.portfolio.reduce((acc, curr) => {
-            return acc + curr.asset;
-          }, 0);
-        },
-        portfolio: [
-          {
-            name: "Bitcoin",
-            asset: 300,
-            percentChange: 1.0235, // 300 * 1.0235 = 307.235
-            timestamp: 1637190000000,
-          },
-          {
-            name: "Cash",
-            asset: 200,
-            percentChange: 1,
-            timestamp: 1637190000000,
-          },
-        ],
-      },
-      {
-        get timestamp() {
-          return this.portfolio[0].timestamp;
-        },
-        get asset() {
-          return this.portfolio.reduce((acc, curr) => {
-            return acc + curr.asset;
-          }, 0);
-        },
-        portfolio: [
-          {
-            name: "Bitcoin",
-            asset: 207.05, // 300 * 1.0235 = 307.05 - 100 because user sold $100 worth of btc today
-            percentChange: 0.9765,
-            timestamp: 1637258400000,
-          },
-          {
-            name: "Cash",
-            asset: 300, // 200 + 100
-            percentChange: 1,
-            timestamp: 1637258400000,
-          },
-        ],
-      },
-    ],
-  };
+  const dummyData = utility;
 
   return (
     <>
       <UserProfileLineChart userProfileData={dummyData} />
-
       <Title level={2} className="heading">
         Global Crypto Stats
       </Title>
