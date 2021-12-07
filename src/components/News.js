@@ -21,7 +21,7 @@ const News = ({ simplified }) => {
     console.log("News Data:",cryptoNews.value)
   }
   return (
-    <Row gutter={[24, 24]}>
+    <Row gutter={[24, 24]} style={{ padding: '20px'}}>
     {!simplified && (
       <Col span={24}>
         <Select

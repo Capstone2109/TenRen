@@ -10,6 +10,7 @@ import CryptoDetails from "./components/CryptoDetails";
 import CryptoLogin from "./components/LogIn";
 import GetNews from "./components/MakeApiCalls";
 import UserProfile from "./components/UserProfile";
+import quizApp from "./quizApp";
 import "./App.css";
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
               <Route exact path="/news">
                 <News />
               </Route>
+              <Route exact path="/quiz" component={quizApp} />
               <Route exact path="/profile">
                 <UserProfile />
               </Route>

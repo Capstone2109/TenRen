@@ -6,7 +6,6 @@ import CryptoTransaction from "./CryptoTransaction";
 import PercentChangeIcon from "./PercentChangeIcon"
 import { setPastGame } from "../../app/tradegame";
 
-
 export const dollarFormat = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: 'USD'
@@ -17,7 +16,6 @@ const PastTrading = (props) => {
     const dispatch = useDispatch();
     //State for the Day
     const [day, setDay] = useState(1);
-
 
     //get game settings
     let gameSetting = useSelector(state => state.tradeGames?.past)
@@ -140,9 +138,7 @@ const PastTrading = (props) => {
 
     }
     return (
-
         <div className="profile-trade">
-
             <div>
                 <h1>Day: {day}</h1>
                 <h3>Crypto: {dummyOwnedOfThisCrypto?.name}</h3>
