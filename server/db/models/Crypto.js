@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require("../db");
 
+//List of Crypto that we will be using, and their ID on the coinranking api
+//The ID is needed to specify which coin we want data for, cannot simply be done with name alone
 const staticCryptoList = [ 
     {name: 'Bitcoin', coinRankingId: 1},
     {name: 'Ethereum' , coinRankingId: 2 },

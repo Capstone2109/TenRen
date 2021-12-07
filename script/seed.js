@@ -88,14 +88,17 @@ async function seed() {
   ]);
 
 
+  //Refresh the lives
   await refreshLiveNews()
-  // //Seed Static Crypto History
-  // await Promise.all(staticCryptoList.map(crypto => {
-  //   return Crypto.create(crypto)
-  // }))
 
 
-  // //Get Seeded Crypto List History
+  //Seed Static Crypto History ***ADD CRYPTOS TO CRYPTO TABLE,
+   await Promise.all(staticCryptoList.map(crypto => {
+    return Crypto.create(crypto)
+    }))
+
+
+  // //Get Seeded Crypto List History ****THIS IS COMMENTED OUT TO NOT REPLACE OLD DATA, BUT MAYBE NEEDED FOR FUTURE USE
   // await Promise.all(staticCryptoList.map(async crypto => {
   //   return CryptoHistory.create( {name: crypto.name, data: JSON.stringify( await getDailyCoinHistory(crypto.coinRankingId,"30d") )})
   // }))
