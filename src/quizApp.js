@@ -3,7 +3,6 @@ import Trivia from './quizComponents/Trivia';
 import Timer from './quizComponents/Timer';
 import Start from './quizComponents/Start';
 import { data } from './quizQuestions/data';
-import './App.css';
 
 
 function App() {
@@ -11,7 +10,6 @@ function App() {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [stop, setStop] = useState(false);
   const [earned, setEarned] = useState('$ 0');
-
   const moneyPyramid = useMemo(() =>
     [
       { id: 1, amount: "$100" },

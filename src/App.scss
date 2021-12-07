@@ -1,38 +1,47 @@
 @import "./styles/Trade/trade.scss";
 @import "./styles/Dark/dark.scss";
+@import "./styles/quizApp/quizApp.scss";
 
 .green-color {
-  color: green; }
+  color: green;
+}
 
 .red-color {
-  color: red; }
+  color: red;
+}
 
 hr {
   width: 80%;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 #available-cash-small {
   width: 100%;
   margin: 5px 25%;
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 #total-asset {
-  transition: 1s; }
+  transition: 1s;
+}
 
 .dollar-increase {
   transition: 1s;
   font-size: 30px;
   color: green;
   position: inherit;
-  transform: translateY(10px); }
+  transform: translateY(10px);
+}
 
 .dollar-decrease {
   transition: 1s;
-  color: red; }
+  color: red;
+}
 
 .profile-trade {
   width: 70%;
-  align-items: center; }
+  align-items: center;
+}
 
 .profile-trade-buttons {
   display: flex;
@@ -40,7 +49,8 @@ hr {
   margin: 0 auto;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 20px 0; }
+  padding: 20px 0;
+}
 
 .profile-button {
   border: none;
@@ -50,80 +60,98 @@ hr {
   background-color: #001529;
   color: white;
   font-size: large;
-  width: 40%; }
-  .profile-button.big {
-    width: 80%;
-    right: 50%;
-    margin: 20px 10%; }
-  .profile-button:hover {
-    cursor: pointer;
-    background-color: #1890ff; }
-  .profile-button:active {
-    transform: translateY(3px); }
+  width: 40%;
+}
+.profile-button.big {
+  width: 80%;
+  right: 50%;
+  margin: 20px 10%;
+}
+.profile-button:hover {
+  cursor: pointer;
+  background-color: #1890ff;
+}
+.profile-button:active {
+  transform: translateY(3px);
+}
 
 .profile-input {
   margin-bottom: 10px;
-  width: 80%; }
+  width: 80%;
+}
 
 /* Purchase Crypto Component */
 .trading-visuals {
   display: grid;
   width: 80vw;
-  grid-template-columns: 80% 20%; }
+  grid-template-columns: 80% 20%;
+}
 
 .graph-section {
   width: 100%;
   height: 100%;
   padding: 0;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .tools {
   width: 100%;
   height: 100%;
-  transition: 1s; }
+  transition: 1s;
+}
 
 .transaction-section {
   border: 2px solid #001529;
   width: 100%;
   margin: 0 auto;
   margin-top: 30px;
-  align-content: center; }
+  align-content: center;
+}
 
 .chart-header {
-  width: 100%; }
+  width: 100%;
+}
 
 .userprofile-graph {
-  width: 100%; }
+  width: 100%;
+}
 
 .transaction-types {
-  width: 100%; }
-  .transaction-types > button {
-    width: 33%;
-    height: 40px;
-    border: 0px solid transparent;
-    color: black; }
-    .transaction-types > button:hover {
-      cursor: pointer;
-      background-color: #7ec1ff; }
-    .transaction-types > button.selected {
-      background-color: #1890ff;
-      color: white;
-      font-weight: bold; }
+  width: 100%;
+}
+.transaction-types > button {
+  width: 33%;
+  height: 40px;
+  border: 0px solid transparent;
+  color: black;
+}
+.transaction-types > button:hover {
+  cursor: pointer;
+  background-color: #7ec1ff;
+}
+.transaction-types > button.selected {
+  background-color: #1890ff;
+  color: white;
+  font-weight: bold;
+}
 
 .transaction-list {
   border: 2px solid #001529;
   margin: 5px;
   overflow-y: scroll;
-  max-height: 300px; }
-  .transaction-list > div {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid gray;
-    padding: 0 10px;
-    margin-bottom: 10px; }
-  .transaction-list .timestamp {
-    margin-bottom: 15px;
-    text-align: right; }
+  max-height: 300px;
+}
+.transaction-list > div {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid gray;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.transaction-list .timestamp {
+  margin-bottom: 15px;
+  text-align: right;
+}
 
 .option-screen {
   border: 2px solid #001529;
@@ -131,42 +159,54 @@ hr {
   display: flex;
   width: 50vw;
   flex-wrap: wrap;
-  justify-content: center; }
-  .option-screen h2 {
-    width: 100%; }
-  .option-screen .option-div {
-    width: 30%;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 2%; }
-    .option-screen .option-div select {
-      width: 55%;
-      height: 35px;
-      margin: 10px auto; }
-      .option-screen .option-div select option {
-        font-weight: bold; }
+  justify-content: center;
+}
+.option-screen h2 {
+  width: 100%;
+}
+.option-screen .option-div {
+  width: 30%;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2%;
+}
+.option-screen .option-div select {
+  width: 55%;
+  height: 35px;
+  margin: 10px auto;
+}
+.option-screen .option-div select option {
+  font-weight: bold;
+}
 
 .dark .ant-typography {
-  color: white !important; }
+  color: white !important;
+}
 
 .dark .routes {
   background-color: #2b2626;
-  color: white !important; }
+  color: white !important;
+}
 
 .dark .ant-typography {
-  color: white !important; }
+  color: white !important;
+}
 
 .dark .ant-statistic > * {
-  color: white !important; }
+  color: white !important;
+}
 
 .dark .ant-card-head-title {
-  color: white !important; }
+  color: white !important;
+}
 
 .dark .ant-card {
-  background-color: #2b2626 !important; }
+  background-color: #2b2626 !important;
+}
 
 .dark p {
-  color: white !important; }
+  color: white !important;
+}
 
 :root {
   --text-primary: #000;
@@ -174,32 +214,37 @@ hr {
   --bgSecondary: #f9f9f9;
   --pink: #0071bd;
   --light-blue: #e6f7ff;
-  --border: #d9d9d9; }
+  --border: #d9d9d9;
+}
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 a:hover {
-  color: var(--pink) !important; }
+  color: var(--pink) !important;
+}
 
 .app {
   display: flex;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 .navbar {
   flex: 0.2;
-  background-color: #001529; }
+  background-color: #001529;
+}
 
 .main {
   flex: 0.8;
   width: 100%;
 }
-.routes{
+.routes {
   padding: 0px;
 }
-.nav-container{
+.nav-container {
   position: fixed;
   left: 0;
   margin: 10px;
@@ -216,28 +261,28 @@ a:hover {
   align-items: center;
   width: 100%;
 }
-.logo{
-  margin:0 0 0 15px;
+.logo {
+  margin: 0 0 0 15px;
 }
-.logo a{
- color: white;
+.logo a {
+  color: white;
 }
 
-
-.menu-control-container{
+.menu-control-container {
   display: none !important;
   position: absolute !important;
   right: 10px !important;
   top: 25px !important;
   font-size: 1.2rem !important;
   background-color: var(--bgSecondary) !important;
-  border: none !important; }
+  border: none !important;
+}
 
-.coin-detail-container{
+.coin-detail-container {
   margin: 30px;
 }
 
-.coin-heading-container{
+.coin-heading-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,33 +290,39 @@ a:hover {
   border-bottom: 1px solid var(--border);
   padding-top: 20px;
   padding-bottom: 20px;
-  gap: 10px; }
+  gap: 10px;
+}
 
 .coin-heading-container .coin-name {
   font-weight: 900;
-  color: var(--pink); }
+  color: var(--pink);
+}
 
 .coin-heading-container p {
   font-size: 1rem;
   opacity: 0.9;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+}
 
 .stats-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 40px; }
+  gap: 40px;
+}
 
 .stats-container h2 {
   font-weight: 700;
   font-size: 1.4rem;
   margin-top: 20px;
-  color: var(--pink); }
+  color: var(--pink);
+}
 
 .coin-details-heading {
   font-weight: 700 !important;
   margin-top: 20px !important;
-  color: var(--pink) !important; }
+  color: var(--pink) !important;
+}
 
 .coin-stats {
   display: flex;
@@ -279,57 +330,70 @@ a:hover {
   border-bottom: 1px solid var(--border);
   font-size: 1rem;
   opacity: 0.9;
-  padding: 20px; }
+  padding: 20px;
+}
 
 .coin-stats-name {
   display: flex;
   gap: 10px;
-  font-size: 1rem; }
+  font-size: 1rem;
+}
 
 .stats {
-  font-weight: 800; }
+  font-weight: 800;
+}
 
 .coin-value-statistics-heading p {
   font-size: 1rem;
-  opacity: 0.9; }
+  opacity: 0.9;
+}
 
 .coin-desc-link {
   display: flex;
   gap: 40px;
   margin-top: 40px;
-  padding-top: 20px; }
+  padding-top: 20px;
+}
 
 .coin-desc-link h2 {
   font-weight: 700;
-  color: var(--pink); }
+  color: var(--pink);
+}
 
 .coin-desc-link p {
   font-size: 1rem;
-  opacity: 0.9; }
+  opacity: 0.9;
+}
 
 .coin-desc-link a {
-  color: var(--pink); }
+  color: var(--pink);
+}
 
 .coin-desc-link h3 {
-  font-weight: 700; }
+  font-weight: 700;
+}
 
 .coin-desc {
-  flex: 0.5; }
+  flex: 0.5;
+}
 
 .coin-links {
   padding: 0px 20px;
-  flex: 0.5; }
+  flex: 0.5;
+}
 
 .coin-link {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border);
-  padding: 20px; }
+  padding: 20px;
+}
 
 .link-name {
   text-transform: capitalize;
-  font-size: 1rem; }
+  font-size: 1rem;
+}
 
 .coin-link a {
   color: var(--pink);
@@ -337,88 +401,108 @@ a:hover {
   font-size: 1rem;
 }
 
-.coin-link:hover, .coin-stats:hover{
+.coin-link:hover,
+.coin-stats:hover {
   background-color: var(--bgSecondary);
 }
 
-.select-news{
+.select-news {
   width: 180px;
 }
-.news-card{
+.news-card {
   min-height: 300px !important;
 }
-.news-image-container{
+.news-image-container {
   display: flex !important;
-  justify-content: space-between !important; }
+  justify-content: space-between !important;
+}
 
 .news-title {
-  width: 70%; }
+  width: 70%;
+}
 
 .news-image-container .img {
   width: 100px;
-  height: 100px; }
+  height: 100px;
+}
 
 .news-card p {
   color: black;
-  margin: 10px 0px !important; }
+  margin: 10px 0px !important;
+}
 
 .provider-container {
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+}
 
 .provider-name {
-  margin-left: 10px; }
+  margin-left: 10px;
+}
 
 .chart-header {
   display: flex;
   justify-content: space-between;
   gap: 50px;
-  color: #0071bd; }
+  color: #0071bd;
+}
 
 .chart-title {
-  color: #0071bd !important; }
+  color: #0071bd !important;
+}
 
 .price-container {
   display: flex !important;
   gap: 20px !important;
   align-items: center !important;
-  flex-wrap: wrap !important; }
+  flex-wrap: wrap !important;
+}
 
 .price-change {
-  font-weight: 900 !important; }
+  font-weight: 900 !important;
+}
 
 .current-price {
   margin-top: 0px !important;
-  font-weight: 900 !important; }
+  font-weight: 900 !important;
+}
 
 .home-heading-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 40px; }
+  margin-top: 40px;
+}
 
 .show-more {
-  margin-top: 0px !important; }
+  margin-top: 0px !important;
+}
 
 .exchange-image {
-  margin: 0px 10px !important; }
+  margin: 0px 10px !important;
+}
 
 .search-crypto {
   margin: 20px auto 30px auto;
-  width: 250px; }
+  width: 250px;
+}
 
 .crypto-card-container {
-  min-height: 65vh !important; }
+  min-height: 65vh !important;
+}
 
 .crypto-card {
-  min-width: 250px; }
+  min-width: 250px;
+}
 
 .crypto-card .crypto-image {
-  width: 35px; }
+  width: 35px;
+}
 
 .select-timeperiod {
   width: 200px !important;
-  margin-top: 20px !important; }
+  margin-top: 20px !important;
+}
 
 .footer {
   background-color: #001529;
@@ -432,46 +516,45 @@ a:hover {
 
 /*---------------------------------------------*/
 
-@media screen and (max-width:1300px){
-  .main{
-      /* margin-left: 50px; */
-      margin-left: 0px;
+@media screen and (max-width: 1300px) {
+  .main {
+    /* margin-left: 50px; */
+    margin-left: 0px;
   }
   /* .nav-container{
     width: 30vh;
   } */
 }
 
-@media screen and (max-width:1170px){
-  .main{
-     /* margin-left: 50px; */
-      margin-left: 0px;
+@media screen and (max-width: 1170px) {
+  .main {
+    /* margin-left: 50px; */
+    margin-left: 0px;
   }
   .nav-container {
     width: 25vh;
   }
 }
 
-@media screen and (max-width:1000px){
-  .main{
-      /* margin-left: 100px; */
-      margin-left: 0px;
+@media screen and (max-width: 1000px) {
+  .main {
+    /* margin-left: 100px; */
+    margin-left: 0px;
   }
-  .stats-container{
+  .stats-container {
     flex-direction: column;
   }
-  .coin-desc-link{
+  .coin-desc-link {
     flex-direction: column;
   }
-  .stats-container h2{
+  .stats-container h2 {
     margin-top: 0px;
   }
-  .coin-detail-container{
+  .coin-detail-container {
     margin: 30px;
-
   }
 
-  .nav-container{
+  .nav-container {
     position: fixed;
     left: 0;
     margin: 10px;
@@ -481,64 +564,63 @@ a:hover {
     background-color: rgb(0, 21, 41);
   }
 
-  .crypto-card{
+  .crypto-card {
     min-width: 150px;
   }
 }
 
-@media screen and (max-width:900px){
-  .app{
-      flex-direction: column;
-      overflow: hidden;
+@media screen and (max-width: 900px) {
+  .app {
+    flex-direction: column;
+    overflow: hidden;
   }
-  .routes{
+  .routes {
     padding: 0px;
   }
 
-  .navbar{
-      flex: 1;
+  .navbar {
+    flex: 1;
   }
 
-  .main{
-      flex: 1;
-      margin-top: 90px;
-      margin-left: 0px;
-      margin-right: 10px;
+  .main {
+    flex: 1;
+    margin-top: 90px;
+    margin-left: 0px;
+    margin-right: 10px;
   }
 
-  .nav-container{
-      height: 8vh;
-      position:fixed;
-      width: 100%;
-      z-index: 100;
-      background-color: var(--bgSecondary);
+  .nav-container {
+    height: 8vh;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    background-color: var(--bgSecondary);
   }
 
-  .menu-control-container{
-      display: block !important;
+  .menu-control-container {
+    display: block !important;
   }
 
-  .ant-menu{
-      position: absolute;
-      right: 0px;
+  .ant-menu {
+    position: absolute;
+    right: 0px;
   }
-  .home-title{
-      font-size: 1.4rem !important;
+  .home-title {
+    font-size: 1.4rem !important;
   }
-  .show-more{
-      font-size: 1.3rem !important;
+  .show-more {
+    font-size: 1.3rem !important;
   }
 }
 
-
-@media screen and (max-width: 500px){
-  .coin-links{
-      padding: 0px;
+@media screen and (max-width: 500px) {
+  .coin-links {
+    padding: 0px;
   }
-  .coin-detail-container{
-      margin: 0;
+  .coin-detail-container {
+    margin: 0;
   }
-  .heading{
+  .heading {
     margin-top: 20px;
-}
+  }
 }
