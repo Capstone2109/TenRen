@@ -22,12 +22,16 @@ const init = async () => {
 
 
 async function handleDBupdates() {
+
   console.log("checking if anything needs to be updated in DB...")
+
+  //checks if it has been 24 hours since live news has been updated, if so update live news
   if(await getHoursPastSinceNewsUpdate() >= 24){
     console.log("Updating news...")
     await refreshLiveNews()
   }
 
+  //Set timer for 10 minutes, to check if anything needs to be updated
   setTimeout( ()=>{
     handleDBupdates()
   },600000)
