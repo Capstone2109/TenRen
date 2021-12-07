@@ -7,11 +7,15 @@ import Homepage from './components/Homepage';
 import Cryptocurrencies from './components/Cryptocurrencies';
 import News from './components/News';
 import CryptoDetails from './components/CryptoDetails';
+import CryptoLogin from './components/LogIn';
 import './App.css';
+import GetNews from './components/MakeApiCalls';
 
 const App = () => {
+ 
   return (
     <div className='app'>
+          { console.log(window.localStorage.getItem("TOKEN"))}
       <div className='navbar'>
         <Navbar />
       </div>
@@ -33,6 +37,12 @@ const App = () => {
               </Route>
               <Route exact path='/news'>
                 <News />
+              </Route>
+              <Route exact path='/login'>
+                <CryptoLogin />
+              </Route>
+              <Route exact path='/getnews'>
+                <GetNews />
               </Route>
             </Switch>
           </div>
