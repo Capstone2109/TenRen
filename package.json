@@ -19,6 +19,7 @@
     "history": "^4.9.0",
     "html-react-parser": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
+    "node-sass": "^6.0.1",
     "millify": "^4.0.0",
     "moment": "^2.29.1",
     "morgan": "^1.9.1",
