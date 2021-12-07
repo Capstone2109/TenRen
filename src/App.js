@@ -7,9 +7,8 @@ import Homepage from "./components/Homepage";
 import Cryptocurrencies from "./components/Cryptocurrencies";
 import CryptoDetails from "./components/CryptoDetails";
 import News from "./components/News";
-import CryptoLogin from './components/LogIn';
-import GetNews from './components/MakeApiCalls';
-import "./App.css";
+import CryptoLogin from "./components/LogIn";
+import GetNews from "./components/MakeApiCalls";
 
 const App = () => {
   const [dark, toggleDark] = React.useState(false);
@@ -38,10 +37,10 @@ const App = () => {
               <Route exact path="/news">
                 <News />
               </Route>
-              <Route exact path='/login'>
+              <Route exact path="/login">
                 <CryptoLogin />
               </Route>
-              <Route exact path='/getnews'>
+              <Route exact path="/getnews">
                 <GetNews />
               </Route>
             </Switch>
