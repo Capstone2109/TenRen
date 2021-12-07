@@ -9,6 +9,7 @@ import CryptoDetails from "./components/CryptoDetails";
 import News from "./components/News";
 import CryptoLogin from "./components/LogIn";
 import GetNews from "./components/MakeApiCalls";
+import "./App.css";
 
 const App = () => {
   const [dark, toggleDark] = React.useState(false);
