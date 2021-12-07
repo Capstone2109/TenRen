@@ -2,7 +2,7 @@
 const db = require("./db");
 const User = require("./models/User");
 const News = require('./models/News')
-const coinData = require("./models/coinData")
+const buyCoin = require("./models/buyCoin")
 const {Crypto} = require("./models/Crypto")
 const CryptoHistory = require("./models/CryptoHistory")
 const { Sequelize } = require("sequelize");
@@ -18,7 +18,7 @@ module.exports = {
   db,
   User,
   News,
-  coinData,
+  buyCoin,
   Crypto,
   CryptoHistory
 };

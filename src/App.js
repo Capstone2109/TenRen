@@ -12,8 +12,10 @@ import './App.css';
 import GetNews from './components/MakeApiCalls';
 
 const App = () => {
+ 
   return (
     <div className='app'>
+          { console.log(window.localStorage.getItem("TOKEN"))}
       <div className='navbar'>
         <Navbar />
       </div>
