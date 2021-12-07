@@ -26,7 +26,8 @@
   --bgSecondary: #f9f9f9;
   --pink: #0071bd;
   --light-blue: #e6f7ff;
-  --border: #d9d9d9; }
+  --border: #d9d9d9;
+}
 
 * {
   margin: 0;
@@ -171,7 +172,8 @@ a:hover {
   border-bottom: 1px solid var(--border);
   font-size: 1rem;
   opacity: 0.9;
-  padding: 20px; }
+  padding: 20px;
+}
 
 .coin-stats-name {
   display: flex;
@@ -179,7 +181,8 @@ a:hover {
   font-size: 1rem; }
 
 .stats {
-  font-weight: 800; }
+  font-weight: 800;
+}
 
 .coin-value-statistics-heading p {
   font-size: 1rem;
@@ -200,17 +203,21 @@ a:hover {
   opacity: 0.9; }
 
 .coin-desc-link a {
-  color: var(--pink); }
+  color: var(--pink);
+}
 
 .coin-desc-link h3 {
-  font-weight: 700; }
+  font-weight: 700;
+}
 
 .coin-desc {
-  flex: 0.5; }
+  flex: 0.5;
+}
 
 .coin-links {
   padding: 0px 20px;
-  flex: 0.5; }
+  flex: 0.5;
+}
 
 .coin-link {
   display: flex;
@@ -226,105 +233,117 @@ a:hover {
 .coin-link a {
   color: var(--pink);
   font-weight: 700;
-  font-size: 1rem; }
+  font-size: 1rem;
+}
 
 .coin-link:hover,
 .coin-stats:hover {
-  background-color: var(--bgSecondary); }
+  background-color: var(--bgSecondary);
+}
 
 @media screen and (max-width: 1000px) {
   .stats-container {
-    flex-direction: column; }
+    flex-direction: column;
+  }
   .coin-desc-link {
-    flex-direction: column; }
+    flex-direction: column;
+  }
   .stats-container h2 {
-    margin-top: 0px; } }
+    margin-top: 0px;
+  }
+}
 
 @media screen and (max-width: 500px) {
   .coin-links {
-    padding: 0px; }
+    padding: 0px;
+  }
   .coin-detail-container {
-    margin: 0; } }
-
+    margin: 0;
+  }
+}
 @media screen and (max-width: 500px) {
   .heading {
-    margin-top: 20px; } }
+    margin-top: 20px;
+  }
+}
 
 .select-news {
-  width: 180px; }
-
+  width: 180px;
+}
 .news-card {
-  min-height: 300px !important; }
-
+  min-height: 300px !important;
+}
 .news-image-container {
   display: flex !important;
-  justify-content: space-between !important; }
-
+  justify-content: space-between !important;
+}
 .news-title {
-  width: 70%; }
+  width: 70%;
+}
 
 .news-image-container .img {
   width: 100px;
-  height: 100px; }
-
+  height: 100px;
+}
 .news-card p {
   color: black;
-  margin: 10px 0px !important; }
-
+  margin: 10px 0px !important;
+}
 .provider-container {
   display: flex;
-  justify-content: space-between; }
-
+  justify-content: space-between;
+}
 .provider-name {
-  margin-left: 10px; }
+  margin-left: 10px;
+}
 
 .chart-header {
   display: flex;
   justify-content: space-between;
   gap: 50px;
-  color: #0071bd; }
-
+  color: #0071bd;
+}
 .chart-title {
-  color: #0071bd !important; }
-
+  color: #0071bd !important;
+}
 .price-container {
   display: flex !important;
   gap: 20px !important;
   align-items: center !important;
-  flex-wrap: wrap !important; }
-
+  flex-wrap: wrap !important;
+}
 .price-change {
-  font-weight: 900 !important; }
-
+  font-weight: 900 !important;
+}
 .current-price {
   margin-top: 0px !important;
-  font-weight: 900 !important; }
-
+  font-weight: 900 !important;
+}
 .home-heading-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 40px; }
-
+  margin-top: 40px;
+}
 .show-more {
-  margin-top: 0px !important; }
-
+  margin-top: 0px !important;
+}
 .exchange-image {
-  margin: 0px 10px !important; }
-
+  margin: 0px 10px !important;
+}
 .search-crypto {
   margin: 20px auto 30px auto;
-  width: 250px; }
-
+  width: 250px;
+}
 .crypto-card-container {
-  min-height: 65vh !important; }
-
+  min-height: 65vh !important;
+}
 .crypto-card {
-  min-width: 250px; }
-
+  min-width: 250px;
+}
 .crypto-card .crypto-image {
-  width: 35px; }
-
+  width: 35px;
+}
 .select-timeperiod {
   width: 200px !important;
   margin-top: 20px !important; }
@@ -334,4 +353,18 @@ a:hover {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  align-items: center; }
+  align-items: center;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
