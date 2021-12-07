@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
@@ -38,7 +40,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "node-sass -w src -o src && npm run build && JWT=shh nodemon server",
+    "start": "npm run sass && npm run build && JWT=shh && nodemon server",
+    "sass": "node-sass src -o src",
     "server:windows": "npm run build && set JWT=shh && nodemon server",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -62,5 +65,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "node-sass": "^6.0.1"
   }
 }
