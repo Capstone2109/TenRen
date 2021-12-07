@@ -5,10 +5,11 @@ import Navbar from "./components/Navbar";
 import Exchanges from "./components/Exchanges";
 import Homepage from "./components/Homepage";
 import Cryptocurrencies from "./components/Cryptocurrencies";
-import CryptoDetails from "./components/CryptoDetails";
 import News from "./components/News";
+import CryptoDetails from "./components/CryptoDetails";
 import CryptoLogin from "./components/LogIn";
 import GetNews from "./components/MakeApiCalls";
+import UserProfile from "./components/UserProfile";
 import "./App.css";
 
 const App = () => {
@@ -37,6 +38,9 @@ const App = () => {
               </Route>
               <Route exact path="/news">
                 <News />
+              </Route>
+              <Route exact path="/profile">
+                <UserProfile />
               </Route>
               <Route exact path="/login">
                 <CryptoLogin />

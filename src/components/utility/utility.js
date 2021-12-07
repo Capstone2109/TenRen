@@ -100,6 +100,7 @@ const obj = Object.assign(
   totalPercentChange(history)
 );
 
+console.log(obj);
 console.log(obj.history());
 console.log(obj.totalAsset());
 console.log(obj.totalDollarGainOrLoss());

@@ -40,8 +40,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "npm run build && JWT=shh && nodemon server",
-    "sass": "node-sass -w src -o src",
+    "start": "npm run sass && npm run build && JWT=shh && nodemon server",
+    "sass": "node-sass src -o src",
     "server:windows": "npm run build && set JWT=shh && nodemon server",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -67,6 +67,7 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^6.0.1"
+    "node-sass": "^6.0.1",
+    "npm-run-all": "^4.1.5"
   }
 }

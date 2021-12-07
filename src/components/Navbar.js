@@ -1,7 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Menu, Typography, Avatar } from 'antd';
-import { Link } from 'react-router-dom';
-import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined, LoginOutlined, LogoutOutlined  } from '@ant-design/icons';
+import React, { useState, useEffect } from "react";
+import { Button, Menu, Typography, Avatar } from "antd";
+import { Link } from "react-router-dom";
+import {
+  HomeOutlined,
+  MoneyCollectOutlined,
+  BulbOutlined,
+  FundOutlined,
+  MenuOutlined,
+  UserOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 
 import icon from "../images/crypto.png";
 
@@ -44,23 +53,26 @@ const Navbar = (props) => {
         </Button>
       </div>
       {activeMenu && (
-      <Menu theme="dark">
-        <Menu.Item icon={<HomeOutlined />}>
-          <Link to="/">Home</Link>
-        </Menu.Item>
-        <Menu.Item icon={<FundOutlined />}>
-          <Link to="/cryptocurrencies">Cryptocurrencies</Link>
-        </Menu.Item>
-        <Menu.Item icon={<MoneyCollectOutlined />}>
-          <Link to="/exchanges">Exchanges</Link>
-        </Menu.Item>
-        <Menu.Item icon={<BulbOutlined />}>
-          <Link to="/news">News</Link>
-        </Menu.Item>
-        <Menu.Item icon={<LoginOutlined />}>
-          <Link to="/login">Log In</Link>
-        </Menu.Item>
-      </Menu>
+        <Menu theme="dark">
+          <Menu.Item icon={<HomeOutlined />}>
+            <Link to="/">Home</Link>
+          </Menu.Item>
+          <Menu.Item icon={<FundOutlined />}>
+            <Link to="/cryptocurrencies">Cryptocurrencies</Link>
+          </Menu.Item>
+          <Menu.Item icon={<MoneyCollectOutlined />}>
+            <Link to="/exchanges">Exchanges</Link>
+          </Menu.Item>
+          <Menu.Item icon={<BulbOutlined />}>
+            <Link to="/news">News</Link>
+          </Menu.Item>
+          <Menu.Item icon={<UserOutlined />}>
+            <Link to="/profile">User Profile</Link>
+          </Menu.Item>
+          <Menu.Item icon={<LoginOutlined />}>
+            <Link to="/login">Log In</Link>
+          </Menu.Item>
+        </Menu>
       )}
     </div>
   );
