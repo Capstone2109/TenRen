@@ -10,7 +10,7 @@ import CryptoDetails from "./components/CryptoDetails";
 import CryptoLogin from "./components/LogIn";
 import GetNews from "./components/MakeApiCalls";
 import UserProfile from "./components/UserProfile";
-import quizApp from "./quizApp";
+import qui4zApp from "./quizApp";
 import "./App.css";
 
 const App = () => {
