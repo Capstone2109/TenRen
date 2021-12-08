@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { purchaseCrypto, saveUserPastData, sellCrypto, setDollarOwned } from "../../app/trade";
 import { CloseCircleFilled } from "@ant-design/icons";
-import { dollarFormat } from "./PastTrading";
+import { dollarFormat } from "./UserProfileLineChart";
 import { addNewTransaction } from "../../app/transactions";
+import { setPastDollarAvailable, updatePastCrypto } from "../../app/tradegame";
 
 const BuyAndSell = (props) => {
 
@@ -15,13 +15,13 @@ const BuyAndSell = (props) => {
     let dummyCrypto = useSelector((state) => state.cryptoWorth)
 
     //Get how much money we have left to spend from the state
-    let dollarAvailable = useSelector((state) => state.dollarOwned);
+    let dollarAvailable = useSelector((state) => state.currentGames.past.dollarAvailable);
 
     //Get the list of all the crytos we own from the state
-    let dummyAllOwnedCrypto = useSelector((state) => state.ownedCrypto)
+    let allOwnedCrypto = useSelector((state) => state.currentGames.past.ownedCryptos)
 
     //Filter out the crypto for the one we are currently interacting with
-    let dummyOwnedOfThisCrypto = dummyAllOwnedCrypto.filter(crypto => crypto.name = dummyCrypto.name)[0]
+    let ownedCrypto = allOwnedCrypto.filter(crypto => crypto.name = dummyCrypto.name)[0]
 
     const [cryptoToTrade, setCryptoToTrade] = useState({ name: dummyCrypto.name, dollarValue: 0 })
     const [errorMessage, setErrorMessage] = useState("")
@@ -48,14 +48,14 @@ const BuyAndSell = (props) => {
         
         dispatch(addNewTransaction({type:"Purchased", crypto: cryptoToTrade.name, amount: cryptoToTrade.dollarValue, date: Date.now() }))
         let dollarLeft = dollarAvailable - cryptoToTrade.dollarValue
-        dispatch(setDollarOwned(dollarLeft))
+        dispatch(setPastDollarAvailable(dollarLeft))
 
-        let amount = dummyOwnedOfThisCrypto.amount + (cryptoToTrade.dollarValue / dummyCrypto.pricePer)
+        let amount = ownedCrypto.amount + (cryptoToTrade.dollarValue / dummyCrypto.pricePer)
         let dollarValue = amount * dummyCrypto.pricePer
-        let previousDollarValue = dummyOwnedOfThisCrypto.dollarValue
+        let previousDollarValue = ownedCrypto.dollarValue
 
 
-        dispatch(purchaseCrypto({ ...dummyOwnedOfThisCrypto, amount, dollarValue, previousDollarValue }))
+        dispatch(updatePastCrypto({ ...ownedCrypto, amount, dollarValue, previousDollarValue }))
         setCryptoToTrade({ ...cryptoToTrade, dollarValue: 0 })
 
     }
@@ -63,19 +63,19 @@ const BuyAndSell = (props) => {
     //Processes and sends the new amount of crypto we have now after selling
     function handleSell() {
         if(cryptoToTrade.dollarValue===0)return
-        if (cryptoToTrade.dollarValue > dummyOwnedOfThisCrypto.dollarValue) {
+        if (cryptoToTrade.dollarValue > ownedCrypto.dollarValue) {
             setErrorMessage("Not Enough Money In This Stock!")
             return
         }
         dispatch(addNewTransaction({type:"Sold", crypto: cryptoToTrade.name, amount: cryptoToTrade.dollarValue, date: Date.now() }))
         let dollarLeft = dollarAvailable + cryptoToTrade.dollarValue
-        dispatch(setDollarOwned(dollarLeft))
+        dispatch(setPastDollarAvailable(dollarLeft))
 
-        let amount = dummyOwnedOfThisCrypto.amount - (cryptoToTrade.dollarValue / dummyCrypto.pricePer)
+        let amount = ownedCrypto.amount - (cryptoToTrade.dollarValue / dummyCrypto.pricePer)
         let dollarValue = amount * dummyCrypto.pricePer
-        let previousDollarValue = dummyOwnedOfThisCrypto.dollarValue
+        let previousDollarValue = ownedCrypto.dollarValue
 
-        dispatch(sellCrypto({ ...dummyOwnedOfThisCrypto, amount, dollarValue, previousDollarValue }))
+        dispatch(updatePastCrypto({ ...ownedCrypto, amount, dollarValue, previousDollarValue }))
         setCryptoToTrade({ ...cryptoToTrade, dollarValue: 0 })
     }
 
