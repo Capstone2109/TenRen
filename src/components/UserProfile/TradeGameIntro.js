@@ -83,6 +83,8 @@ const TradeGameIntro = () => {
   }
 
   return (
+    <div className='game-intro-container'>
+    <div className='game-intro'>
     <div className="option-screen">
       <h2>Select Trading Mode</h2>
 
@@ -116,6 +118,8 @@ const TradeGameIntro = () => {
       <button className="profile-button" onClick={handleBegin}>
         Begin
       </button>
+    </div>
+    </div>
     </div>
   );
 };
