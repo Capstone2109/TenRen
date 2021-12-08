@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { authenticate } from "../app/index";
 
 
-import { Form, Input, Button, Checkbox } from 'antd';
-
 class CryptoLogin extends React.Component {
   constructor() {
     super();
@@ -42,12 +40,13 @@ class CryptoLogin extends React.Component {
     const { handleSubmit } = this;
     const { name, displayName, error } = this.props;
     return (
-      <div>
-      <h1>Sign In</h1>
-      <h4>Sign in and Start Earning!</h4>
+      <div className='login-main-container'>
+      <div className='login-main'>
+      <div className='login'>
+      <h1>Welcome to Robin Noob</h1>
       {this.state.msgBool ? this.message() : null}
       <form onSubmit={handleSubmit} name={name}>
-        <label>
+        <label><h4>Username</h4>
           <input
             name="username"
             type="text"
@@ -56,7 +55,7 @@ class CryptoLogin extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <label>
+        <label><h4>Password</h4>
           <input
             name="password"
             type="password"
@@ -65,8 +64,10 @@ class CryptoLogin extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <input type="submit" value="Login" />
+        <input className='button-login' type="submit" value="Login" />
       </form>
+    </div>
+    </div>
     </div>
     );
   }
@@ -90,80 +91,3 @@ const mapDispatch = (dispatch) => {
 
 export default connect(mapLogin, mapDispatch)(CryptoLogin);
 
-// const Demo = () => {
-//   const onFinish = (values) => {
-//     console.log('Success:', values);
-//   };
-
-//   const onFinishFailed = (errorInfo) => {
-//     console.log('Failed:', errorInfo);
-//   };
-
-//   return (
-//     <Form
-//       name="basic"
-//       labelCol={{
-//         span: 8,
-//       }}
-//       wrapperCol={{
-//         span: 16,
-//       }}
-//       initialValues={{
-//         remember: true,
-//       }}
-//       onFinish={onFinish}
-//       onFinishFailed={onFinishFailed}
-//       autoComplete="off"
-//     >
-//       <Form.Item
-//         label="Username"
-//         name="username"
-//         rules={[
-//           {
-//             required: true,
-//             message: 'Please input your username!',
-//           },
-//         ]}
-//       >
-//         <Input />
-//       </Form.Item>
-
-//       <Form.Item
-//         label="Password"
-//         name="password"
-//         rules={[
-//           {
-//             required: true,
-//             message: 'Please input your password!',
-//           },
-//         ]}
-//       >
-//         <Input.Password />
-//       </Form.Item>
-
-//       <Form.Item
-//         name="remember"
-//         valuePropName="checked"
-//         wrapperCol={{
-//           offset: 8,
-//           span: 16,
-//         }}
-//       >
-//         <Checkbox>Remember me</Checkbox>
-//       </Form.Item>
-
-//       <Form.Item
-//         wrapperCol={{
-//           offset: 8,
-//           span: 16,
-//         }}
-//       >
-//         <Button type="primary" htmlType="submit">
-//           Submit
-//         </Button>
-//       </Form.Item>
-//     </Form>
-//   );
-// };
-
-// ReactDOM.render(<Demo />, mountNode);
