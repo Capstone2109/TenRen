@@ -10,7 +10,7 @@ import CryptoLogin from "./components/LogIn";
 import GetNews from "./components/MakeApiCalls";
 import UserProfile from "./components/UserProfile";
 import quizApp from "./quizApp";
-import "./App.css";
+import "./App.scss";
 
 const App = () => {
   const [dark, toggleDark] = React.useState(false);

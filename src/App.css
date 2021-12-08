@@ -48,15 +48,18 @@ hr {
   color: white;
   font-size: large;
   width: 40%; }
-  .profile-button.big {
-    width: 80%;
-    right: 50%;
-    margin: 20px 10%; }
-  .profile-button:hover {
-    cursor: pointer;
-    background-color: #1890ff; }
-  .profile-button:active {
-    transform: translateY(3px); }
+
+.profile-button.big {
+  width: 80%;
+  right: 50%;
+  margin: 20px 10%; }
+
+.profile-button:hover {
+  cursor: pointer;
+  background-color: #1890ff; }
+
+.profile-button:active {
+  transform: translateY(3px); }
 
 .profile-input {
   margin-bottom: 10px;
@@ -94,33 +97,38 @@ hr {
 
 .transaction-types {
   width: 100%; }
-  .transaction-types > button {
-    width: 33%;
-    height: 40px;
-    border: 0px solid transparent;
-    color: black; }
-    .transaction-types > button:hover {
-      cursor: pointer;
-      background-color: #7ec1ff; }
-    .transaction-types > button.selected {
-      background-color: #1890ff;
-      color: white;
-      font-weight: bold; }
+
+.transaction-types > button {
+  width: 33%;
+  height: 40px;
+  border: 0px solid transparent;
+  color: black; }
+
+.transaction-types > button:hover {
+  cursor: pointer;
+  background-color: #7ec1ff; }
+
+.transaction-types > button.selected {
+  background-color: #1890ff;
+  color: white;
+  font-weight: bold; }
 
 .transaction-list {
   border: 2px solid #001529;
   margin: 5px;
   overflow-y: scroll;
   max-height: 300px; }
-  .transaction-list > div {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid gray;
-    padding: 0 10px;
-    margin-bottom: 10px; }
-  .transaction-list .timestamp {
-    margin-bottom: 15px;
-    text-align: right; }
+
+.transaction-list > div {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid gray;
+  padding: 0 10px;
+  margin-bottom: 10px; }
+
+.transaction-list .timestamp {
+  margin-bottom: 15px;
+  text-align: right; }
 
 .option-screen {
   border: 2px solid #001529;
@@ -129,26 +137,29 @@ hr {
   width: 50vw;
   flex-wrap: wrap;
   justify-content: center; }
-  .option-screen h2 {
-    width: 100%; }
-  .option-screen .option-div {
-    width: 30%;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 2%; }
-    .option-screen .option-div select {
-      width: 55%;
-      height: 35px;
-      margin: 10px auto; }
-      .option-screen .option-div select option {
-        font-weight: bold; }
+
+.option-screen h2 {
+  width: 100%; }
+
+.option-screen .option-div {
+  width: 30%;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2%; }
+
+.option-screen .option-div select {
+  width: 55%;
+  height: 35px;
+  margin: 10px auto; }
+
+.option-screen .option-div select option {
+  font-weight: bold; }
 
 .dark .ant-typography {
   color: white !important; }
 
 .dark .routes {
-  background-color: #2b2626;
-  color: white !important; }
+  background-color: #2b2626 !important; }
 
 .dark .ant-typography {
   color: white !important; }
@@ -391,6 +402,7 @@ hr {
   li {
     font-size: 12px; } }
 
+<<<<<<< HEAD
 .green-color {
   color: green; }
 
@@ -633,6 +645,8 @@ input[type=text], input[type=password] {
 .dark p {
   color: white !important; }
 
+=======
+>>>>>>> main
 :root {
   --text-primary: #000;
   --bgPrimary: #fff;
