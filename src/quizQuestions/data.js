@@ -180,7 +180,7 @@ export const data = [
     question: "The world’s second-most valued cryptocurrency platform, that allows developers to deploy all sorts of decentralized applications, without interference of third parties.",
     answers: [
       {
-        text: "A) Etherium",
+        text: "A) Ethereum",
         correct: true,
       },
       {

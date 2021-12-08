@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../app/index";
 
+
 class CryptoLogin extends React.Component {
   constructor() {
     super();
@@ -39,32 +40,35 @@ class CryptoLogin extends React.Component {
     const { handleSubmit } = this;
     const { name, displayName, error } = this.props;
     return (
-      <div>
-        <h1>Sign In</h1>
-        <h4>Sign in and Start Earning!</h4>
-        {this.state.msgBool ? this.message() : null}
-        <form onSubmit={handleSubmit} name={name}>
-          <label>
-            <input
-              name="username"
-              type="text"
-              placeholder="Username"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            <input
-              name="password"
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Login" />
-        </form>
-      </div>
+      <div className='login-main-container'>
+      <div className='login-main'>
+      <div className='login'>
+      <h1>Welcome to Robin Noob</h1>
+      {this.state.msgBool ? this.message() : null}
+      <form onSubmit={handleSubmit} name={name}>
+        <label><h4>Username</h4>
+          <input
+            name="username"
+            type="text"
+            placeholder="Username"
+            value={this.state.username}
+            onChange={this.handleChange}
+          />
+        </label>
+        <label><h4>Password</h4>
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+        </label>
+        <input className='button-login' type="submit" value="Login" />
+      </form>
+    </div>
+    </div>
+    </div>
     );
   }
 }
@@ -86,3 +90,4 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapLogin, mapDispatch)(CryptoLogin);
+

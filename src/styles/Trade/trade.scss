@@ -1,26 +1,27 @@
-
-.green-color{
+.green-color {
   color: green;
 }
-.red-color{
+
+.red-color {
   color: red;
 }
-hr{
+
+hr {
   width: 80%;
   margin: 0 auto;
 }
 
-#available-cash-small{
+#available-cash-small {
   width: 100%;
   margin: 5px 25%;
   font-weight: bold;
 }
 
-#total-asset{
+#total-asset {
   transition: 1s;
 }
 
-.dollar-increase{
+.dollar-increase {
   transition: 1s;
   font-size: 30px;
   color: green;
@@ -28,160 +29,166 @@ hr{
   transform: translateY(10px);
 }
 
-.dollar-decrease{
+.dollar-decrease {
   transition: 1s;
   color: red;
 }
 
-.profile-trade{
-    width: 70%;
-    align-items: center;
+.profile-trade {
+  width: 70%;
+  align-items: center;
 }
 
-.profile-trade-buttons{
-    display: flex;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 20px 0;
-  }
-
-.profile-button{
-    border: none;
-    padding: 5px;
-    margin: 5px;
-    margin-bottom: 10px;
-    background-color: rgb(0,21,41);
-    color: white;
-    font-size: large;
-    width: 40%;
-
-    &.big{
-      width: 80%;
-      right: 50%;
-      margin: 20px 10%;
-    }
-    &:hover{
-        cursor: pointer;
-        background-color: rgb(24,144,255);
-    }
-    &:active{
-      transform: translateY(3px);
-    }
-    
+.profile-trade-buttons {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 0;
 }
 
-.profile-input{
-    margin-bottom: 10px;
-    width: 80%;
+.profile-button {
+  border: 2px solid yellow;
+  padding: 5px;
+  margin: 5px;
+  margin-bottom: 10px;
+  background-color: #001529;
+  color: white;
+  font-size: large;
+  width: 40%;
+}
+.profile-button.big {
+  width: 80%;
+  right: 50%;
+  margin: 20px 10%;
+}
+.profile-button:hover {
+  cursor: pointer;
+  background-color: #1890ff;
+}
+.profile-button:active {
+  transform: translateY(3px);
+}
+
+.profile-input {
+  margin-bottom: 10px;
+  width: 80%;
 }
 
 /* Purchase Crypto Component */
-.trading-visuals{
+.trading-visuals {
   display: grid;
   width: 80vw;
   grid-template-columns: 80% 20%;
 }
-.graph-section{
+
+.graph-section {
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0 auto;
 }
-.tools{
+
+.tools {
   width: 100%;
   height: 100%;
   transition: 1s;
 }
-.transaction-section{
-  border: 2px solid rgb(0,21,41);
+
+.transaction-section {
+  border: 2px solid #001529;
   width: 100%;
   margin: 0 auto;
   margin-top: 30px;
   align-content: center;
 }
 
-.chart-header{
+.chart-header {
   width: 100%;
 }
 
-.userprofile-graph{
+.userprofile-graph {
   width: 100%;
 }
 
-$secondary-color: rgb(24,144,255);
-.transaction-types{
-
+.transaction-types {
   width: 100%;
-  &>button{
-    width: 33%;
-    height: 40px;
-    border: 0px solid transparent;
-    color: black;
-    &:hover{
-      cursor: pointer;
-      background-color: lighten($secondary-color, 20%);
-    }
-
-    &.selected{
-      background-color: $secondary-color;
-      color: white;
-      font-weight: bold;
-    }
-  }
+}
+.transaction-types > button {
+  width: 33%;
+  height: 40px;
+  border: 0px solid transparent;
+  color: black;
+}
+.transaction-types > button:hover {
+  cursor: pointer;
+  background-color: #7ec1ff;
+}
+.transaction-types > button.selected {
+  background-color: #1890ff;
+  color: white;
+  font-weight: bold;
 }
 
-.transaction-list{
-  border: 2px solid rgb(0,21,41);
+.transaction-list {
+  border: 2px solid #001529;
   margin: 5px;
   overflow-y: scroll;
   max-height: 300px;
-  &>div{
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid gray;
-    padding: 0 10px;
-    margin-bottom: 10px;
-  }
-
-  .timestamp{
-    margin-bottom: 15px;
-    text-align: right;
-  }
+}
+.transaction-list > div {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid gray;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.transaction-list .timestamp {
+  margin-bottom: 15px;
+  text-align: right;
 }
 
-
-.option-screen{
-
-  border: 2px solid rgb(0,21,41);
+.option-screen {
+  border: 5px solid yellow;
   margin: 0 auto;
   display: flex;
   width: 50vw;
   flex-wrap: wrap;
   justify-content: center;
+  background: blue;
+  padding: 20px;
+}
+.game-intro {
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #020230),
+    url('https://socialmarketingfella.com/wp-content/uploads/2018/03/crypto.jpg') center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  h2{
-    width: 100%;
-  }
+.game-intro-container {
+  height: 100vh;
+  display: flex;
+}
 
-  .option-div{
-    width: 30%;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 2%;
-    select{
-      width: 55%;
-      height: 35px;
-      margin: 10px auto;
-
-      option{
-        font-weight: bold;
-      }
-   
-
-    }
-  }
-
- 
+.option-screen h2 {
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+.option-screen .option-div {
+  width: 30%;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2%;
+}
+.option-screen .option-div select {
+  width: 55%;
+  height: 35px;
+  margin: 10px auto;
+}
+.option-screen .option-div select option {
+  font-weight: bold;
 }
