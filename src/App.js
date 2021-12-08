@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import { Layout, Typography, Space } from "antd";
 import Navbar from "./components/Navbar";
-import Exchanges from "./components/Exchanges";
 import Homepage from "./components/Homepage";
 import Cryptocurrencies from "./components/Cryptocurrencies";
 import News from "./components/News";
@@ -10,8 +9,8 @@ import CryptoDetails from "./components/CryptoDetails";
 import CryptoLogin from "./components/LogIn";
 import GetNews from "./components/MakeApiCalls";
 import UserProfile from "./components/UserProfile";
-import qui4zApp from "./quizApp";
-import "./App.css";
+import quizApp from "./quizApp";
+import "./App.scss";
 
 const App = () => {
   const [dark, toggleDark] = React.useState(false);
@@ -27,9 +26,6 @@ const App = () => {
             <Switch>
               <Route exact path="/">
                 <Homepage />
-              </Route>
-              <Route exact path="/exchanges">
-                <Exchanges />
               </Route>
               <Route exact path="/cryptocurrencies">
                 <Cryptocurrencies />

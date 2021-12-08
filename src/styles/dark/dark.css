@@ -1,21 +1,21 @@
 .dark .ant-typography {
-  color: white !important; }
+  color: red !important; }
 
 .dark .routes {
   background-color: #2b2626;
-  color: white !important; }
+  color: red !important; }
 
 .dark .ant-typography {
-  color: white !important; }
+  color: red !important; }
 
 .dark .ant-statistic > * {
-  color: white !important; }
+  color: red !important; }
 
 .dark .ant-card-head-title {
-  color: white !important; }
+  color: red !important; }
 
 .dark .ant-card {
-  background-color: #2b2626 !important; }
+  background-color: red !important; }
 
 .dark p {
-  color: white !important; }
+  color: red !important; }
