@@ -1,24 +1,24 @@
 $dark: rgb(43, 38, 38);
+$color: white;
 
 .dark {
   .ant-typography {
-    color: white !important;
+    color: $color !important;
   }
   .routes {
-    background-color: $dark;
-    color: white !important;
+    background-color: $dark !important;
   }
 
   .ant-typography {
-    color: white !important;
+    color: $color !important;
   }
 
   .ant-statistic > * {
-    color: white !important;
+    color: $color !important;
   }
 
   .ant-card-head-title {
-    color: white !important;
+    color: $color !important;
   }
 
   .ant-card {
@@ -26,6 +26,6 @@ $dark: rgb(43, 38, 38);
   }
 
   p {
-    color: white !important;
+    color: $color !important;
   }
 }

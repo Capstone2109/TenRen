@@ -71,7 +71,7 @@ const UserProfileLineChart = ({ userProfileData }) => {
 
 
   return (
-    <div className="userprofile-graph">
+    <div className="userprofile-graph" style={{padding: '20px'}}>
       <Row className="chart-header">
         <Col>
           <Title level={5} className="current-price">
