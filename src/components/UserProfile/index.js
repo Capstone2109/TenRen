@@ -5,18 +5,20 @@ import TradeGameIntro from "./TradeGameIntro";
 
 const UserProfile = () =>{
 
-    const games = useSelector(state => state.tradeGames)
+    const pastGame = useSelector(state => state.currentGames.past)
+    //const liveGame = useSelector(state => state.currentGames.live)
     const [componentToShow,setComponentToShow] = useState(<TradeGameIntro />)
 
+    
     useEffect(()=>{
-
-        if(games?.past?.completed === false){
+        console.log("Past Game is",pastGame)
+        if(pastGame?.completed === false){
             setComponentToShow(<PastTrading />)
         }else{
             setComponentToShow(<TradeGameIntro />)
         }
 
-    },[games])
+    },[pastGame])
 
     return(
         <div>

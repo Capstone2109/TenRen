@@ -6,7 +6,7 @@ import { useGetCryptosQuery } from "../services/cryptoApi";
 import Cryptocurrencies from "./Cryptocurrencies";
 import News from "./News";
 import UserProfileLineChart from "./UserProfile/UserProfileLineChart";
-import utility from "./utility/utility";
+import PortfolioHistory from "./utility/PortfolioHistory";
 
 const { Title } = Typography;
 
@@ -16,7 +16,39 @@ const Homepage = () => {
 
   if (isFetching) return "Loading...";
 
-  const dummyData = utility;
+  const portfolio1 = [
+  {
+    name: "Cash",
+    asset: 200,
+    percentChange: 1,
+    timestamp: 1637190000000,
+  },
+  {
+    name: "Bitcoin",
+    asset: 300,
+    percentChange: 1.0235, // 300 * 1.0235 = 307.235
+    timestamp: 1637190000000,
+  },
+];
+
+const portfolio2 = [
+  {
+    name: "Cash",
+    asset: 300, // 200 + 100
+    percentChange: 1,
+    timestamp: 1637258400000,
+  },
+  {
+    name: "Bitcoin",
+    asset: 207.05, // 300 * 1.0235 = 307.05 - 100 because user sold $100 worth of btc today
+    percentChange: 0.9765,
+    timestamp: 1637258400000,
+  },
+];
+
+  const dummyData = new PortfolioHistory();
+  dummyData.addPortfolio(portfolio1)
+  dummyData.addPortfolio(portfolio2)
 
   return (
     <>
