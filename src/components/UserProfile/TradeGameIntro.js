@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch } from "react-redux"
 import { purchaseCrypto, saveUserPastData, setDollarOwned } from "../../app/trade";
-import { setPastGame } from "../../app/tradegame"; 
+import { setPastGame } from "../../app/tradegame";
 
 const TradeGameIntro = () => {
     const dispatch = useDispatch();
@@ -60,6 +60,8 @@ const TradeGameIntro = () => {
     }
 
     return (
+        <div className='game-intro-container'>
+        <div className='game-intro'>
         <div className="option-screen">
             <h2>Select Trading Mode</h2>
 
@@ -88,6 +90,8 @@ const TradeGameIntro = () => {
                 </select>
             </div>
             <button className="profile-button" onClick={handleBegin}>Begin</button>
+        </div>
+        </div>
         </div>
     )
 }

@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../app/index";
 
+
+import { Form, Input, Button, Checkbox } from 'antd';
+
 class CryptoLogin extends React.Component {
   constructor() {
     super();
@@ -40,31 +43,31 @@ class CryptoLogin extends React.Component {
     const { name, displayName, error } = this.props;
     return (
       <div>
-        <h1>Sign In</h1>
-        <h4>Sign in and Start Earning!</h4>
-        {this.state.msgBool ? this.message() : null}
-        <form onSubmit={handleSubmit} name={name}>
-          <label>
-            <input
-              name="username"
-              type="text"
-              placeholder="Username"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            <input
-              name="password"
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Login" />
-        </form>
-      </div>
+      <h1>Sign In</h1>
+      <h4>Sign in and Start Earning!</h4>
+      {this.state.msgBool ? this.message() : null}
+      <form onSubmit={handleSubmit} name={name}>
+        <label>
+          <input
+            name="username"
+            type="text"
+            placeholder="Username"
+            value={this.state.username}
+            onChange={this.handleChange}
+          />
+        </label>
+        <label>
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+        </label>
+        <input type="submit" value="Login" />
+      </form>
+    </div>
     );
   }
 }
@@ -86,3 +89,81 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapLogin, mapDispatch)(CryptoLogin);
+
+// const Demo = () => {
+//   const onFinish = (values) => {
+//     console.log('Success:', values);
+//   };
+
+//   const onFinishFailed = (errorInfo) => {
+//     console.log('Failed:', errorInfo);
+//   };
+
+//   return (
+//     <Form
+//       name="basic"
+//       labelCol={{
+//         span: 8,
+//       }}
+//       wrapperCol={{
+//         span: 16,
+//       }}
+//       initialValues={{
+//         remember: true,
+//       }}
+//       onFinish={onFinish}
+//       onFinishFailed={onFinishFailed}
+//       autoComplete="off"
+//     >
+//       <Form.Item
+//         label="Username"
+//         name="username"
+//         rules={[
+//           {
+//             required: true,
+//             message: 'Please input your username!',
+//           },
+//         ]}
+//       >
+//         <Input />
+//       </Form.Item>
+
+//       <Form.Item
+//         label="Password"
+//         name="password"
+//         rules={[
+//           {
+//             required: true,
+//             message: 'Please input your password!',
+//           },
+//         ]}
+//       >
+//         <Input.Password />
+//       </Form.Item>
+
+//       <Form.Item
+//         name="remember"
+//         valuePropName="checked"
+//         wrapperCol={{
+//           offset: 8,
+//           span: 16,
+//         }}
+//       >
+//         <Checkbox>Remember me</Checkbox>
+//       </Form.Item>
+
+//       <Form.Item
+//         wrapperCol={{
+//           offset: 8,
+//           span: 16,
+//         }}
+//       >
+//         <Button type="primary" htmlType="submit">
+//           Submit
+//         </Button>
+//       </Form.Item>
+//     </Form>
+//   );
+// };
+
+// ReactDOM.render(<Demo />, mountNode);
