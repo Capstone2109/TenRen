@@ -55,7 +55,7 @@ const Navbar = (props) => {
       {activeMenu && (
         <Menu theme="dark">
           <Menu.Item icon={<HomeOutlined />}>
-            <Link to="/">Home</Link>
+            <Link to="/">UserProfile</Link>
           </Menu.Item>
           <Menu.Item icon={<FundOutlined />}>
             <Link to="/cryptocurrencies">Cryptocurrencies</Link>
@@ -67,7 +67,7 @@ const Navbar = (props) => {
             <Link to="/quiz">CryptoQuiz</Link>
           </Menu.Item>
           <Menu.Item icon={<UserOutlined />}>
-            <Link to="/profile">User Profile</Link>
+            <Link to="/profile">Trading Simulation</Link>
           </Menu.Item>
           <Menu.Item icon={<LoginOutlined />}>
             <Link to="/login">Log In</Link>
