@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { savePastGame} from "../../app/tradegame";
+import { savePastGame } from "../../app/tradegame";
 import PortfolioHistory from "../utility/PortfolioHistory";
 
-const TradeGameIntro = () => {
+const TradeGameIntro = ({handleMode}) => {
   const dispatch = useDispatch();
 
   function handleBegin() {
@@ -27,12 +27,12 @@ const TradeGameIntro = () => {
     ];
 
     const defaultStartingCrypto = {
-        name: coin,
-        amount: 0,
-        dollarValue: 0,
-        previousDollarValue: 0,
-        mode,
-      }
+      name: coin,
+      amount: 0,
+      dollarValue: 0,
+      previousDollarValue: 0,
+      mode,
+    };
 
     const newGame = {
       mode,
@@ -43,13 +43,12 @@ const TradeGameIntro = () => {
       ownedCryptos: [defaultStartingCrypto],
       history: new PortfolioHistory(),
     };
-    newGame.history.addPortfolio(defaultStartingPortfolio)
-
+    newGame.history.addPortfolio(defaultStartingPortfolio);
 
     //Save a new History To State for this coin
-    
+
     //console.log("New Game History",newGame.history)
-    
+
     // dispatch(saveUserPastData({
     //     history: [
     //          {
@@ -79,47 +78,48 @@ const TradeGameIntro = () => {
     //         ]
     // }))
 
+    handleMode(mode);
     dispatch(savePastGame(newGame));
   }
 
   return (
-    <div className='game-intro-container'>
-    <div className='game-intro'>
-    <div className="option-screen">
-      <h2>Select Trading Mode</h2>
+    <div className="game-intro-container">
+      <div className="game-intro">
+        <div className="option-screen">
+          <h2>Select Trading Mode</h2>
 
-      <div className="option-div">
-        <h2>Crypto:</h2>
-        <select id="trading-crypto">
-          <option value="Test Coin">Test Coin</option>
-        </select>
-      </div>
+          <div className="option-div">
+            <h2>Crypto:</h2>
+            <select id="trading-crypto">
+              <option value="Test Coin">Test Coin</option>
+            </select>
+          </div>
 
-      <div className="option-div">
-        <h2>Mode:</h2>
-        <select id="trading-mode">
-          <option value="PAST"> Past Time Simulation</option>
-          <option value="LIVE" disabled>
-            {" "}
-            Real Time Trading
-          </option>
-        </select>
-      </div>
+          <div className="option-div">
+            <h2>Mode:</h2>
+            <select id="trading-mode">
+              <option value=""> Select Option...</option>
+              <option value={true}> Past Time Simulation</option>
+              <option value={false}>
+                Real Time Trading
+              </option>
+            </select>
+          </div>
 
-      <div className="option-div">
-        <h2>Duration:</h2>
-        <select id="trading-duration">
-          <option value={7}>1 Week</option>
-          <option value={14}>2 Week</option>
-          <option value={21}>3 Week</option>
-          <option value={30}>1 Month</option>
-        </select>
+          <div className="option-div">
+            <h2>Duration:</h2>
+            <select id="trading-duration">
+              <option value={7}>1 Week</option>
+              <option value={14}>2 Week</option>
+              <option value={21}>3 Week</option>
+              <option value={30}>1 Month</option>
+            </select>
+          </div>
+          <button className="profile-button" onClick={handleBegin}>
+            Begin
+          </button>
+        </div>
       </div>
-      <button className="profile-button" onClick={handleBegin}>
-        Begin
-      </button>
-    </div>
-    </div>
     </div>
   );
 };

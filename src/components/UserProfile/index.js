@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import PastTrading from "./PastTrading";
 import TradeGameIntro from "./TradeGameIntro";
 
-const UserProfile = () => {
+const UserProfile = ({handleMode}) => {
   const pastGame = useSelector((state) => state.currentGames.past);
   //const liveGame = useSelector(state => state.currentGames.live)
   const [componentToShow, setComponentToShow] = useState(<TradeGameIntro />);
@@ -13,7 +13,7 @@ const UserProfile = () => {
     if (pastGame?.completed === false) {
       setComponentToShow(<PastTrading />);
     } else {
-      setComponentToShow(<TradeGameIntro />);
+      setComponentToShow(<TradeGameIntro handleMode={handleMode} />);
     }
   }, [pastGame]);
 
