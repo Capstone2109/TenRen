@@ -190,9 +190,9 @@ a:hover {
   width: 70%;
 }
 
-.news-image-container .img {
-  width: 100px;
-  height: 100px;
+.news-image-container img {
+  width: auto !important;
+  height: 75px !important;
 }
 
 .news-card p {
@@ -203,6 +203,8 @@ a:hover {
 .provider-container {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 4rem;
 }
 
 .provider-name {
