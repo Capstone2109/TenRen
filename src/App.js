@@ -23,7 +23,6 @@ class App extends React.Component {
 
   handleMode = (childData) => {
     this.setState({ mode: childData });
-    console.log(this.state.mode);
   };
 
   render() {
