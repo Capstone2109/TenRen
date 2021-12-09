@@ -16,7 +16,7 @@ import icon from "../images/crypto.png";
 
 const Navbar = (props) => {
   const [activeMenu, setActiveMenu] = useState(true);
-  const [screenSize, setScreenSize] = useState(undefined);
+  const [screenSize, setScreenSize] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -29,9 +29,7 @@ const Navbar = (props) => {
   }, []);
 
   useEffect(() => {
-    if (screenSize <= 800) {
-      setActiveMenu(false);
-    } else {
+    if (screenSize <= 768) {
       setActiveMenu(true);
     }
   }, [screenSize]);
