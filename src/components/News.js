@@ -3,7 +3,6 @@ import { Select, Typography, Row, Col, Avatar, Card } from "antd";
 import moment from "moment";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
 import { useGetCryptosQuery } from "../services/cryptoApi";
-import news from "../../server/db/models/News";
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -15,12 +14,6 @@ const News = ({ simplified }) => {
   const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
   const { data } = useGetCryptosQuery(100);
   // const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12 });
-  const allNews = news.findAll({
-    where: {
-      realTime: true,
-    },
-  });
-  console.log(allNews);
 
   // if (!cryptoNews?.value) return "Loading...";
 
