@@ -4,12 +4,14 @@ import UserProfileLineChart from "./UserProfileLineChart";
 import CryptoTransaction from "./CryptoTransaction";
 import PercentChangeIcon from "./PercentChangeIcon";
 import {
+  fetchSingleCryptosWorth,
   getCryptoWorth,
   savePastGame,
   updatePastCrypto,
   updatePastGameDay,
 } from "../../app/tradegame";
 import { dollarFormat } from "./UserProfileLineChart";
+import axios from "axios";
 
 const PastTrading = (props) => {
   const dispatch = useDispatch();
@@ -34,16 +36,16 @@ const PastTrading = (props) => {
     (state) => state.currentGames.past.ownedCryptos
   );
 
-  console.log("All owned crypto", allOwnedCrypto)
+  //console.log("All owned crypto", allOwnedCrypto)
 
   //Filter out the crypto for the one we are currently interacting with
   let ownedCrypto = allOwnedCrypto.filter(crypto => {
-    console.log("Comparing", crypto, "to", currentCrypto)
+    //console.log("Comparing", crypto, "to", currentCrypto)
     if(crypto.name === currentCrypto.name) return true
     return false
   })[0] || {name: currentCrypto.name, amount: 0, dollarValue: 0, previousDollarValue: 0};
 
-  console.log("Owned Crypto is", ownedCrypto)
+  //console.log("Owned Crypto is", ownedCrypto)
 
   //Get the userinfo for graph in state
   let gameHistory = useSelector((state) => state.currentGames.past.history);
@@ -74,13 +76,24 @@ const PastTrading = (props) => {
     //let valueChange = Math.random() * 50 * (Math.random() < 0.5 ? 1 : -1);
     //let pricePer = Math.max(1, 60 + valueChange).toFixed(2);
     //dispatch(changeDummyCryptoWorth({ ...dummyCrypto, pricePer }));
-     dispatch(getCryptoWorth(currentCrypto.name, day + 1))
+     
+    let currentlyOwnedCryptos = await Promise.all(allOwnedCrypto.map(async (crypto) => {
+      
+       const nextDayCryptoPrice = await fetchSingleCryptosWorth(crypto.name, day + 1)
+       const newCryptoValue = {...crypto, dollarValue: crypto.amount * nextDayCryptoPrice.price, previousDollarValue: crypto.dollarValue}
+      return newCryptoValue
+      }))
 
-    let dollarValue = ownedCrypto.amount * currentCrypto.price;
-    let previousDollarValue = ownedCrypto.dollarValue;
-    dispatch(
-      updatePastCrypto({ ...ownedCrypto, dollarValue, previousDollarValue })
-    );
+    dispatch(updatePastCrypto(currentlyOwnedCryptos))
+
+
+    // let dollarValue = ownedCrypto.amount * currentCrypto.price;
+    // let previousDollarValue = ownedCrypto.dollarValue;
+    // dispatch(
+    //   updatePastCrypto({ ...ownedCrypto, dollarValue, previousDollarValue })
+    // );
+    
+    dispatch(getCryptoWorth(currentCrypto.name, day + 1))
     dispatch(updatePastGameDay(day + 1));
     //colorAnimateAssest((dollarValue > previousDollarValue))
   }
@@ -96,25 +109,36 @@ const PastTrading = (props) => {
 
   //Save Data To Graph
   function saveDataToGraph() {
-    //let newUserInfo = JSON.parse(JSON.stringify(dummyUserInfo))
 
-    let percentChange =
-      (ownedCrypto?.dollarValue / ownedCrypto?.previousDollarValue) || 1;
+    let newPortfolio = allOwnedCrypto.map( crypto => {
+      
+      return {name: crypto.name, asset: crypto.dollarValue, percentChange: 1, timestamp: Date.now()}
+    })
 
-    let newPortfolio = [
-      {
-        name: ownedCrypto.name,
-        asset: ownedCrypto.dollarValue,
-        percentChange,
-        timestamp: Date.now(),
-      },
-      {
-        name: "Cash",
-        asset: dollarAvailable,
-        percentChange: 1,
-        timestamp: Date.now(),
-      },
-    ];
+    newPortfolio.push(  {
+          name: "Cash",
+          asset: dollarAvailable,
+          percentChange: 1,
+          timestamp: Date.now(),
+        })
+
+    // let percentChange =
+    //   (ownedCrypto?.dollarValue / ownedCrypto?.previousDollarValue) || 1;
+
+    // let newPortfolio = [
+    //   {
+    //     name: ownedCrypto.name,
+    //     asset: ownedCrypto.dollarValue,
+    //     percentChange,
+    //     timestamp: Date.now(),
+    //   },
+    //   {
+    //     name: "Cash",
+    //     asset: dollarAvailable,
+    //     percentChange: 1,
+    //     timestamp: Date.now(),
+    //   },
+    // ];
 
     gameHistory.addPortfolio(newPortfolio);
 
@@ -130,11 +154,9 @@ const PastTrading = (props) => {
   }
 
   //This value is in decimal form (<1 for loss, >1 for gain)
-  let percentChange = gameHistory.latestDailyPercentChange(ownedCrypto?.name) || 1;
-  //console.log("Percent change is",percentChange)
-  let percentChangeString = `${(Math.abs(percentChange - 1) * 100).toFixed(
-    2
-  )} %`;
+  
+  let percentChange = gameHistory.latestDailyPercentChange(ownedCrypto?.name);
+  console.log("Percent change is",percentChange)
   //let percentChangeString = `${percentChange} %`
   // function animateAsset(newAmount, currentAmount = 0) {
   //     let element = document.getElementById("total-asset")
@@ -159,10 +181,9 @@ const PastTrading = (props) => {
         <h3>Crypto: {ownedCrypto?.name}</h3>
         <h3>
           Invested: {dollarFormat.format(ownedCrypto?.dollarValue)}
-          {!isNaN(percentChange) && percentChange !== Infinity ? (
+          {percentChange ? (
             <PercentChangeIcon
               percentChange={percentChange}
-              percentChangeString={percentChangeString}
             />
           ) : (
             ""

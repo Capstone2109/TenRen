@@ -11,7 +11,7 @@ const SET_CRYPTO_WORTH = 'SET_CRYPTO_WORTH'
 
 const setPastGame = (game) => ({type: SET_PAST_GAME, game})
 const setPastGameDay = (day) => ({ type: SET_PAST_GAME_DAY, day})
-const setPastCrypto = (crypto) => ({ type: SET_PAST_CRYPTO, crypto })
+const setPastCrypto = (cryptoList) => ({ type: SET_PAST_CRYPTO, cryptoList })
 const setPastDollar = (dollar) => ({ type: SET_PAST_DOLLAR, dollar})
 const setCryptoWorth = (crypto) => ({ type: SET_CRYPTO_WORTH, crypto})
 
@@ -55,11 +55,11 @@ export const savePastGame = (game) => async dispatch => {
     }
 }
 
-export const updatePastCrypto = (crypto) => dispatch => {
+export const updatePastCrypto = (cryptoList) => dispatch => {
 
     try {
         //Make Axios calls to DB to save info here
-        dispatch(setPastCrypto(crypto))
+        dispatch(setPastCrypto(cryptoList))
 
     } catch (error) {
         console.error(error)
@@ -83,6 +83,18 @@ export const updatePastGameDay = (day) => dispatch =>{
     } catch (error) {
         console.error(error)
     }
+}
+
+export const fetchSingleCryptosWorth = async (cryptoName,day) =>{
+
+    try {
+        let {data: cryptoPriceList} = await axios.get(`/api/cryptoHistory/${cryptoName}`)
+        let crypto =  cryptoPriceList[day-1]
+        return {...crypto, name: cryptoName}
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 
 export const getCryptoWorth = (cryptoName,day) => async dispatch =>{
@@ -129,11 +141,13 @@ export default function currentGames(games={past:null,live:null}, action){
         case SET_PAST_DOLLAR:
             return {...games, past: {...games.past, dollarAvailable: action.dollar}}
         case SET_PAST_CRYPTO:
-            console.log("setting crypto", action.crypto)
-            let allCrypto = [...games.past.ownedCryptos.filter(crypto => crypto.name !== action.crypto.name)];
-            console.log("allCrypto filtered is", allCrypto)
-            console.log("new crypto list is",[...allCrypto, action.crypto])
-            return {...games, past: {...games.past, ownedCryptos: [...allCrypto, action.crypto]}}
+            // console.log("setting crypto", action.crypto)
+            // let allCrypto = [...games.past.ownedCryptos.filter(crypto => crypto.name !== action.crypto.name)];
+            // console.log("allCrypto filtered is", allCrypto)
+            // console.log("new crypto list is",[...allCrypto, action.crypto])
+            // return {...games, past: {...games.past, ownedCryptos: [...allCrypto, action.crypto]}}
+            console.log("setting past crypto list as",action.cryptoList)
+            return {...games, past: {...games.past, ownedCryptos: action.cryptoList}}
         default:
             return games;
     }

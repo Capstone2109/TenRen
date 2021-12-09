@@ -40,13 +40,15 @@ class PortfolioHistory {
 
   latestDailyPercentChange(cryptoName){
   
-    const secondToLastPortfolioAsset = this.history[this.history.length - 2]?.assetsList.filter(item => item.name === cryptoName)[0]?.asset || 1;
+    const secondToLastPortfolioAsset = this.history[this.history.length - 2]?.assetsList.filter(item => item.name === cryptoName)[0]?.asset;
     
-    const finalPortfolioAsset = this.history[this.history.length - 1]?.assetsList.filter(item => item.name === cryptoName)[0]?.asset || 0;
+    const finalPortfolioAsset = this.history[this.history.length - 1]?.assetsList.filter(item => item.name === cryptoName)[0]?.asset
 
-    const percentChange = (finalPortfolioAsset / secondToLastPortfolioAsset);
-    return parseFloat(percentChange.toFixed(2));
-  
+    console.log("second and final are", secondToLastPortfolioAsset, finalPortfolioAsset)
+
+    if(secondToLastPortfolioAsset && finalPortfolioAsset){
+      return (finalPortfolioAsset / secondToLastPortfolioAsset)
+    }
   };
 
   addPortfolio(arr){
