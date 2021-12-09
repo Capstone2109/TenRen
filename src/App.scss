@@ -293,14 +293,14 @@ a:hover {
 
   .main {
     flex: 1;
-    margin-top: 90px;
+    margin-top: 95.5px;
     margin-left: 0px;
     margin-right: 10px;
   }
 
   .nav-container {
-    height: 8vh;
     position: fixed;
+    height: 4vh;
     width: 100%;
     z-index: 100;
     background-color: var(--bgSecondary);
