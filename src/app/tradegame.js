@@ -18,7 +18,6 @@ const setCryptoWorth = (crypto) => ({ type: SET_CRYPTO_WORTH, crypto})
 
 export const loadPastGame = () => async dispatch => {
     try {
-        console.log("Loading past game...")
         const token = window.localStorage.getItem(TOKEN)
         let {data: game}  = await axios.get(`api/users/pastGame`,{
             headers: {
@@ -31,12 +30,9 @@ export const loadPastGame = () => async dispatch => {
           
           portfolios.forEach( portfolio => gameStructure.history.addPortfolio(portfolio))
           
-          //gameStructure.history.addPortfolio()
-          //console.log("past game is", game)
-          //console.log("game structure is",gameStructure)
         dispatch(setPastGame(gameStructure))
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -51,14 +47,13 @@ export const savePastGame = (game) => async dispatch => {
           })
         dispatch(setPastGame(game))
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
 export const updatePastCrypto = (cryptoList) => dispatch => {
 
     try {
-        //Make Axios calls to DB to save info here
         dispatch(setPastCrypto(cryptoList))
 
     } catch (error) {
@@ -78,7 +73,6 @@ export const setPastDollarAvailable = (dollar) => dispatch =>{
 
 export const updatePastGameDay = (day) => dispatch =>{
     try {
-        
         dispatch(setPastGameDay(day))
     } catch (error) {
         console.error(error)
@@ -92,7 +86,7 @@ export const fetchSingleCryptosWorth = async (cryptoName,day) =>{
         let crypto =  cryptoPriceList[day-1]
         return {...crypto, name: cryptoName}
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
     
 }
@@ -101,18 +95,7 @@ export const getCryptoWorth = (cryptoName,day) => async dispatch =>{
 
     try {
         let {data: cryptoPriceList} = await axios.get(`/api/cryptoHistory/${cryptoName}`)
-        //console.log("Crypto from server", cryptoPriceList)
-        //let parsedCrypto = JSON.parse(crypto)
-        // //cryptoPriceList = JSON.parse(cryptoPriceList)
-        // console.log("Type of cryptoPriceList is", typeof cryptoPriceList)
-        // console.log("CryptoPriceList is", cryptoPriceList)
-        // console.log("Day is", day)
         let crypto =  cryptoPriceList[day-1]
-        //console.log("Crypto is", crypto)
-        
-
-        //console.log("Setting crypto as",{...crypto, name: cryptoName})
-
         dispatch(setCryptoWorth({...crypto, name: cryptoName}))
     } catch (error) {
         console.error(error)
@@ -136,17 +119,10 @@ export default function currentGames(games={past:null,live:null}, action){
         case SET_PAST_GAME:
             return {...games, past: action.game}
         case SET_PAST_GAME_DAY:
-            console.log("Day is being updated to", action.day)
             return {...games, past: {...games.past, day: action.day}}
         case SET_PAST_DOLLAR:
             return {...games, past: {...games.past, dollarAvailable: action.dollar}}
         case SET_PAST_CRYPTO:
-            // console.log("setting crypto", action.crypto)
-            // let allCrypto = [...games.past.ownedCryptos.filter(crypto => crypto.name !== action.crypto.name)];
-            // console.log("allCrypto filtered is", allCrypto)
-            // console.log("new crypto list is",[...allCrypto, action.crypto])
-            // return {...games, past: {...games.past, ownedCryptos: [...allCrypto, action.crypto]}}
-            console.log("setting past crypto list as",action.cryptoList)
             return {...games, past: {...games.past, ownedCryptos: action.cryptoList}}
         default:
             return games;

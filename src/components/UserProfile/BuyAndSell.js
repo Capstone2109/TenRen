@@ -55,29 +55,11 @@ const BuyAndSell = () => {
         console.log("Before Buy| cryptos owned", allOwnedCrypto)
         let allOtherCryptos = allOwnedCrypto.filter(crypto => crypto.name !== ownedCrypto.name)
 
-        // let currentlyOwnedCryptos = allOwnedCrypto.map((crypto) => {
-            
-        //     let amount = ownedCrypto.amount + (cryptoToTrade.dollarValue / currentCrypto.price)
-        //     let dollarValue = amount * currentCrypto.price
-        //     let previousDollarValue = ownedCrypto.dollarValue
-
-        //     const newCryptoValue = {...crypto, amount, dollarValue, previousDollarValue}
-        //     return newCryptoValue
-        //    })
-
         let amount = ownedCrypto.amount + (cryptoToTrade.dollarValue / currentCrypto.price)
         let dollarValue = amount * currentCrypto.price
         let previousDollarValue = ownedCrypto.dollarValue
            
-        //console.log("Buy| new cryptos owned", currentlyOwnedCryptos)
-         dispatch(updatePastCrypto([...allOtherCryptos, { ...ownedCrypto, amount, dollarValue, previousDollarValue }]))
-
-        // let amount = ownedCrypto.amount + (cryptoToTrade.dollarValue / currentCrypto.price)
-        // let dollarValue = amount * currentCrypto.price
-        // let previousDollarValue = ownedCrypto.dollarValue
-
-        // dispatch(updatePastCrypto({ ...ownedCrypto, amount, dollarValue, previousDollarValue }))
-
+        dispatch(updatePastCrypto([...allOtherCryptos, { ...ownedCrypto, amount, dollarValue, previousDollarValue }]))
         setCryptoToTrade({ ...cryptoToTrade, dollarValue: 0 })
 
     }
@@ -94,30 +76,11 @@ const BuyAndSell = () => {
         dispatch(setPastDollarAvailable(dollarLeft))
 
         let allOtherCryptos = allOwnedCrypto.filter(crypto => crypto.name !== ownedCrypto.name)
-        // let currentlyOwnedCryptos = allOwnedCrypto.map((crypto) => {
-            
-        //     let amount = ownedCrypto.amount - (cryptoToTrade.dollarValue / currentCrypto.price)
-        //     let dollarValue = amount * currentCrypto.price
-        //     let previousDollarValue = ownedCrypto.dollarValue
-
-        //     const newCryptoValue = {...crypto, amount, dollarValue, previousDollarValue}
-        //    return newCryptoValue
-        //    })
-        
         let amount = ownedCrypto.amount - (cryptoToTrade.dollarValue / currentCrypto.price)
         let dollarValue = amount * currentCrypto.price
         let previousDollarValue = ownedCrypto.dollarValue
-        //    console.log("Sell| new cryptos owned", currentlyOwnedCryptos)
-
-         dispatch(updatePastCrypto([...allOtherCryptos,{ ...ownedCrypto, amount, dollarValue, previousDollarValue }]))
-
-        // let amount = ownedCrypto.amount - (cryptoToTrade.dollarValue / currentCrypto.price)
-        // let dollarValue = amount * currentCrypto.price
-        // let previousDollarValue = ownedCrypto.dollarValue
-
-        // dispatch(updatePastCrypto({ ...ownedCrypto, amount, dollarValue, previousDollarValue }))
-
-
+       
+        dispatch(updatePastCrypto([...allOtherCryptos,{ ...ownedCrypto, amount, dollarValue, previousDollarValue }]))
         setCryptoToTrade({ ...cryptoToTrade, dollarValue: 0 })
     }
 

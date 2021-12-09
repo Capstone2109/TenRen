@@ -12,12 +12,6 @@ const TradeGameIntro = () => {
     let duration = document.getElementById("trading-duration").value;
 
     const defaultStartingPortfolio = [
-      // {
-      //   name: 'Binance Coin',
-      //   asset: 0,
-      //   percentChange: 1,
-      //   timestamp: Date.now(),
-      // },
       {
         name: "Cash",
         asset: 1000,
@@ -25,14 +19,6 @@ const TradeGameIntro = () => {
         timestamp: Date.now(),
       },
     ];
-
-    // const defaultStartingCrypto = {
-    //     name: 'Binance Coin',
-    //     amount: 0,
-    //     dollarValue: 0,
-    //     previousDollarValue: 0,
-    //     mode,
-    //   }
 
     const newGame = {
       mode,
@@ -53,14 +39,6 @@ const TradeGameIntro = () => {
     <div className='game-intro'>
     <div className="option-screen">
       <h2>Select Trading Mode</h2>
-
-      {/* <div className="option-div">
-        <h2>Crypto:</h2>
-        <select id="trading-crypto">
-          <option value="Test Coin">Test Coin</option>
-          <option value="Test Coin">Test Coin</option>
-        </select>
-      </div> */}
 
       <div className="option-div">
         <h2>Mode:</h2>
