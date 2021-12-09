@@ -13,10 +13,10 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:name', async (req, res, next) => {
     try {
-        const crypto = await CryptoHistory.findByPk(req.params.id);
-        res.json(crypto);
+        const crypto = await CryptoHistory.findOne({where: {name: req.params.name}});
+        res.send(crypto.data);
     } catch (error) {
         next(error);
     }

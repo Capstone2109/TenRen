@@ -7,17 +7,17 @@ const TradeGameIntro = () => {
   const dispatch = useDispatch();
 
   function handleBegin() {
-    let coin = document.getElementById("trading-crypto").value;
+    //let coin = document.getElementById("trading-crypto").value;
     let mode = document.getElementById("trading-mode").value;
     let duration = document.getElementById("trading-duration").value;
 
     const defaultStartingPortfolio = [
-      {
-        name: coin,
-        asset: 0,
-        percentChange: 1,
-        timestamp: Date.now(),
-      },
+      // {
+      //   name: 'Binance Coin',
+      //   asset: 0,
+      //   percentChange: 1,
+      //   timestamp: Date.now(),
+      // },
       {
         name: "Cash",
         asset: 1000,
@@ -26,13 +26,13 @@ const TradeGameIntro = () => {
       },
     ];
 
-    const defaultStartingCrypto = {
-        name: coin,
-        amount: 0,
-        dollarValue: 0,
-        previousDollarValue: 0,
-        mode,
-      }
+    // const defaultStartingCrypto = {
+    //     name: 'Binance Coin',
+    //     amount: 0,
+    //     dollarValue: 0,
+    //     previousDollarValue: 0,
+    //     mode,
+    //   }
 
     const newGame = {
       mode,
@@ -40,44 +40,10 @@ const TradeGameIntro = () => {
       duration,
       completed: false,
       dollarAvailable: 1000,
-      ownedCryptos: [defaultStartingCrypto],
+      ownedCryptos: [],//[defaultStartingCrypto],
       history: new PortfolioHistory(),
     };
     newGame.history.addPortfolio(defaultStartingPortfolio)
-
-
-    //Save a new History To State for this coin
-    
-    //console.log("New Game History",newGame.history)
-    
-    // dispatch(saveUserPastData({
-    //     history: [
-    //          {
-    //             get timestamp() {
-    //                 return this.portfolio[0].timestamp;
-    //               },
-    //               get asset() {
-    //                 return this.portfolio.reduce((acc, curr) => {
-    //                   return acc + curr.asset;
-    //                 }, 0);
-    //               },
-    //              portfolio:[
-    //                         {
-    //                             name: coin,
-    //                             asset: 0,
-    //                             percentChange: 1,
-    //                             timestamp: Date.now()
-    //                         },
-    //                         {
-    //                             name: "Cash",
-    //                             asset: 1000,
-    //                             percentChange: 1,
-    //                             timestamp: Date.now()
-    //                         }
-    //                     ]
-    //             }
-    //         ]
-    // }))
 
     dispatch(savePastGame(newGame));
   }
@@ -88,12 +54,13 @@ const TradeGameIntro = () => {
     <div className="option-screen">
       <h2>Select Trading Mode</h2>
 
-      <div className="option-div">
+      {/* <div className="option-div">
         <h2>Crypto:</h2>
         <select id="trading-crypto">
           <option value="Test Coin">Test Coin</option>
+          <option value="Test Coin">Test Coin</option>
         </select>
-      </div>
+      </div> */}
 
       <div className="option-div">
         <h2>Mode:</h2>

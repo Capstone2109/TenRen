@@ -14,7 +14,8 @@ const init = async () => {
     }
     // start listening (and create a 'server' object representing our server)
     app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
-    handleDBupdates()
+    console.log("\u001b[1;31m Live News update is disabled (server/index.js Line 18) \u001b[0m")
+    //handleDBupdates()
   } catch (ex) {
     console.log(ex)
   }

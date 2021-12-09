@@ -9,7 +9,7 @@ const UserProfile = () => {
   const [componentToShow, setComponentToShow] = useState(<TradeGameIntro />);
 
   useEffect(() => {
-    console.log("Past Game is", pastGame);
+    //console.log("Past Game is", pastGame);
     if (pastGame?.completed === false) {
       setComponentToShow(<PastTrading />);
     } else {

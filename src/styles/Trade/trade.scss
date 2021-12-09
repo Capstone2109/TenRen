@@ -192,3 +192,18 @@ hr {
 .option-screen .option-div select option {
   font-weight: bold;
 }
+
+.crypto-select{
+
+  width: 100%;
+  padding: 20px;
+
+  select{
+    width: 100%;
+    height: 45px;
+    text-align-last: center;
+    font-weight: bold;
+  }
+}
+
+/* Select Crypto*/

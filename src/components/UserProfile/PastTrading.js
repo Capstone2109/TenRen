@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeDummyCryptoWorth } from "../../app/trade";
 import UserProfileLineChart from "./UserProfileLineChart";
 import CryptoTransaction from "./CryptoTransaction";
 import PercentChangeIcon from "./PercentChangeIcon";
 import {
+  getCryptoWorth,
   savePastGame,
   updatePastCrypto,
   updatePastGameDay,
@@ -20,10 +20,10 @@ const PastTrading = (props) => {
 
   let day = useSelector((state) => state.currentGames.past.day);
 
-  console.log("Day is", day);
+  //console.log("Day is", day);
   //get crypto worth from state
-  let dummyCrypto = useSelector((state) => state.cryptoWorth);
-
+  let currentCrypto = useSelector((state) => state.cryptoWorth);
+  //console.log("Current Crypto is", currentCrypto)
   //Get how much money we have left to spend from the state
   let dollarAvailable = useSelector(
     (state) => state.currentGames.past.dollarAvailable
@@ -34,10 +34,16 @@ const PastTrading = (props) => {
     (state) => state.currentGames.past.ownedCryptos
   );
 
+  console.log("All owned crypto", allOwnedCrypto)
+
   //Filter out the crypto for the one we are currently interacting with
-  let ownedCrypto = allOwnedCrypto.filter(
-    (crypto) => (crypto.name = dummyCrypto.name)
-  )[0];
+  let ownedCrypto = allOwnedCrypto.filter(crypto => {
+    console.log("Comparing", crypto, "to", currentCrypto)
+    if(crypto.name === currentCrypto.name) return true
+    return false
+  })[0] || {name: currentCrypto.name, amount: 0, dollarValue: 0, previousDollarValue: 0};
+
+  console.log("Owned Crypto is", ownedCrypto)
 
   //Get the userinfo for graph in state
   let gameHistory = useSelector((state) => state.currentGames.past.history);
@@ -49,6 +55,10 @@ const PastTrading = (props) => {
   //     animateAsset(dollarAvailable || 0)
   // }, [])
 
+  // useEffect(()=>{
+
+  // },[currentCrypto])
+
   useEffect(() => {
     if (ownedCrypto) {
       saveDataToGraph();
@@ -56,16 +66,17 @@ const PastTrading = (props) => {
   }, [day]);
 
   //Moves on to Next Day
-  function goToNextDay() {
+  async function goToNextDay() {
     if (!ownedCrypto.dollarValue) {
       window.alert("Please Make An Investment To Proceed");
       return;
     }
-    let valueChange = Math.random() * 50 * (Math.random() < 0.5 ? 1 : -1);
-    let pricePer = Math.max(1, 60 + valueChange).toFixed(2);
-    dispatch(changeDummyCryptoWorth({ ...dummyCrypto, pricePer }));
+    //let valueChange = Math.random() * 50 * (Math.random() < 0.5 ? 1 : -1);
+    //let pricePer = Math.max(1, 60 + valueChange).toFixed(2);
+    //dispatch(changeDummyCryptoWorth({ ...dummyCrypto, pricePer }));
+     dispatch(getCryptoWorth(currentCrypto.name, day + 1))
 
-    let dollarValue = ownedCrypto.amount * pricePer;
+    let dollarValue = ownedCrypto.amount * currentCrypto.price;
     let previousDollarValue = ownedCrypto.dollarValue;
     dispatch(
       updatePastCrypto({ ...ownedCrypto, dollarValue, previousDollarValue })
@@ -88,7 +99,7 @@ const PastTrading = (props) => {
     //let newUserInfo = JSON.parse(JSON.stringify(dummyUserInfo))
 
     let percentChange =
-      ownedCrypto?.dollarValue / ownedCrypto?.previousDollarValue;
+      (ownedCrypto?.dollarValue / ownedCrypto?.previousDollarValue) || 1;
 
     let newPortfolio = [
       {
@@ -107,6 +118,7 @@ const PastTrading = (props) => {
 
     gameHistory.addPortfolio(newPortfolio);
 
+    dispatch(savePastGame(game));
     //dispatch(saveUserPastData(newUserInfo))
     // animateAsset(ownedCrypto?.dollarValue + dollarAvailable, dollarAvailable)
   }
@@ -118,7 +130,7 @@ const PastTrading = (props) => {
   }
 
   //This value is in decimal form (<1 for loss, >1 for gain)
-  let percentChange = gameHistory.latestDailyPercentChange(ownedCrypto.name);
+  let percentChange = gameHistory.latestDailyPercentChange(ownedCrypto?.name) || 1;
   //console.log("Percent change is",percentChange)
   let percentChangeString = `${(Math.abs(percentChange - 1) * 100).toFixed(
     2
@@ -156,7 +168,7 @@ const PastTrading = (props) => {
             ""
           )}
         </h3>
-        <h3>Price of Crypto: {dollarFormat.format(dummyCrypto.pricePer)}</h3>
+        <h3>Price of Crypto: {dollarFormat.format(currentCrypto.price)}</h3>
       </div>
       <h3>Dollar Available: {dollarFormat.format(dollarAvailable)}</h3>
       {/* <h2>Assest: {<span id="total-asset">{0}</span>}</h2> */}

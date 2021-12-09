@@ -1,12 +1,12 @@
 class PortfolioHistory {
 
-  constructor(arr=[]) {
-      this.history = arr;
+  constructor() {
+      this.history = [];
   }
 
-  setHistory(arr) {
-    this.history = arr
-  }
+  // setHistory(arr) {
+  //   this.history = arr
+  // }
 
   sumAccumulativeAsset(){
     return this.history.reduce((acc, curr) => acc + curr.totalAssetValue(), 0);
@@ -40,7 +40,7 @@ class PortfolioHistory {
 
   latestDailyPercentChange(cryptoName){
   
-    const secondToLastPortfolioAsset = this.history[this.history.length - 2]?.assetsList.filter(item => item.name === cryptoName)[0]?.asset || 0;
+    const secondToLastPortfolioAsset = this.history[this.history.length - 2]?.assetsList.filter(item => item.name === cryptoName)[0]?.asset || 1;
     
     const finalPortfolioAsset = this.history[this.history.length - 1]?.assetsList.filter(item => item.name === cryptoName)[0]?.asset || 0;
 
