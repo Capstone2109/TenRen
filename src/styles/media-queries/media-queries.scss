@@ -96,28 +96,3 @@
     font-size: 1.3rem !important;
   }
 }
-
-@media screen and (max-width: 768px) {
-  .main {
-    margin-top: 95.5px;
-  }
-
-  .nav-container {
-    height: 95px;
-  }
-  
-  .menu-control-container {
-    display: block !important;
-  }
-
-  .ant-menu {
-    position: absolute;
-    right: 0px;
-  }
-  // .home-title {
-  //   font-size: 1.4rem !important;
-  // }
-  // .show-more {
-  //   font-size: 1.3rem !important;
-  // }
-}
