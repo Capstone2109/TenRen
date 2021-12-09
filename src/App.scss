@@ -296,6 +296,7 @@ a:hover {
     margin-top: 95.5px;
     margin-left: 0px;
     margin-right: 10px;
+    padding-left: 0px;
   }
 
   .nav-container {
@@ -321,3 +322,19 @@ a:hover {
     font-size: 1.3rem !important;
   }
 }
+
+// @media screen and (max-width: 900px) {
+//   .app {
+//     flex-direction: column;
+//   }
+//   .menu-control-container {
+//     display: block !important;
+//   }
+
+//   .home-title {
+//     font-size: 1.4rem !important;
+//   }
+//   .show-more {
+//     font-size: 1.3rem !important;
+//   }
+// }

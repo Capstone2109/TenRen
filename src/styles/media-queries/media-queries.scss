@@ -60,39 +60,3 @@
     min-width: 150px;
   }
 }
-
-@media screen and (max-width: 900px) {
-  .app {
-    flex-direction: column;
-  }
-
-  .navbar {
-    flex: 1;
-  }
-
-  .main {
-    flex: 1;
-    margin-top: 384px;
-    margin-right: 10px;
-    padding-left: 0px;
-  }
-
-  .nav-container {
-    height: 8vh;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    background-color: var(--bgSecondary);
-  }
-
-  .menu-control-container {
-    display: block !important;
-  }
-
-  .home-title {
-    font-size: 1.4rem !important;
-  }
-  .show-more {
-    font-size: 1.3rem !important;
-  }
-}
