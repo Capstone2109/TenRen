@@ -4,36 +4,41 @@ import UserProfileLineChart from "./UserProfileLineChart";
 import CryptoTransaction from "./CryptoTransaction";
 import PercentChangeIcon from "./PercentChangeIcon";
 import {
+  fetchLiveSingleCryptosWorth,
   fetchSingleCryptosWorth,
   getCryptoWorth,
+  getLiveCryptoWorth,
+  saveLiveGame,
   savePastGame,
+  updateLiveCrypto,
   updatePastCrypto,
   updatePastGameDay,
 } from "../../app/tradegame";
 import { dollarFormat } from "./UserProfileLineChart";
-import axios from "axios";
 
-const PastTrading = (props) => {
+
+const PastTrading = ({liveMode}) => {
+  //console.log("Trading game liveMode is",liveMode)
   const dispatch = useDispatch();
   //State for the Day
 
   //get game settings
-  let game = useSelector((state) => state.currentGames.past);
+  let game = useSelector((state) => liveMode ? state.currentGames.live : state.currentGames.past)
 
-  let day = useSelector((state) => state.currentGames.past.day);
+  let day = game.day//useSelector((state) => state.currentGames.past.day);
 
   //get crypto worth from state
   let currentCrypto = useSelector((state) => state.cryptoWorth);
 
   //Get how much money we have left to spend from the state
-  let dollarAvailable = useSelector(
-    (state) => state.currentGames.past.dollarAvailable
-  );
+  let dollarAvailable = game.dollarAvailable//useSelector(
+  //   (state) => state.currentGames.past.dollarAvailable
+  // );
 
   //Get the list of all the crytos we own from the state
-  let allOwnedCrypto = useSelector(
-    (state) => state.currentGames.past.ownedCryptos
-  );
+  let allOwnedCrypto = game.ownedCryptos//useSelector(
+  //   (state) => state.currentGames.past.ownedCryptos
+  // );
 
   //Filter out the crypto for the one we are currently interacting with
   let ownedCrypto = allOwnedCrypto.filter(crypto => {
@@ -42,14 +47,22 @@ const PastTrading = (props) => {
   })[0] || {name: currentCrypto.name, amount: 0, dollarValue: 0, previousDollarValue: 0};
 
   //Get the userinfo for graph in state
-  let gameHistory = useSelector((state) => state.currentGames.past.history);
+  let gameHistory = game.history//useSelector((state) => state.currentGames.past.history);
 
   useEffect(() => {
-    if (ownedCrypto) {
+    if (!liveMode && ownedCrypto) {
       saveDataToGraph();
     }
   }, [day]);
 
+  useEffect(()=>{
+    if(liveMode && ownedCrypto){
+      saveDataToGraph();
+    }
+      
+  },[allOwnedCrypto])
+
+ 
   //Moves on to Next Day
   async function goToNextDay() {
     if (!ownedCrypto.dollarValue) {
@@ -85,13 +98,34 @@ const PastTrading = (props) => {
         })
     gameHistory.addPortfolio(newPortfolio);
 
-    dispatch(savePastGame(game));
+    liveMode ? dispatch(saveLiveGame(game)) : dispatch(savePastGame(game));
+
+  }
+
+  async function refreshGraph(){
+
+    let currentlyOwnedCryptos = await Promise.all(allOwnedCrypto.map(async (crypto) => {
+          
+      const newCryptoPrice = await fetchLiveSingleCryptosWorth(crypto.name)
+      const newCryptoValue = {...crypto, dollarValue: crypto.amount * newCryptoPrice.price, previousDollarValue: crypto.dollarValue}
+      return newCryptoValue
+     }))
+
+   dispatch(updateLiveCrypto(currentlyOwnedCryptos))
+
+   const element = document.getElementById("crypto-select-option")
+
+   if(element){
+    //console.log("getting crypto value for",element.value,"on element",element)
+    dispatch(getLiveCryptoWorth(element.value))
+   }
 
   }
 
   //Handles action to perform when game is terminated
   function endGame() {
 
+    liveMode ? dispatch(saveLiveGame({ ...game, completed: true })):
     dispatch(savePastGame({ ...game, completed: true }));
   }
   
@@ -100,7 +134,8 @@ const PastTrading = (props) => {
   return (
     <div className="profile-trade addPadding">
       <div>
-        <h1>Day: {day}</h1>
+        {!liveMode ? <h1>Day: {day}</h1>:""}
+        
         <h3>Crypto: {ownedCrypto?.name}</h3>
         <h3>
           Invested: {dollarFormat.format(ownedCrypto?.dollarValue)}
@@ -121,13 +156,16 @@ const PastTrading = (props) => {
           <UserProfileLineChart userProfileData={gameHistory} />
         </div>
         <div className="tools">
-          <CryptoTransaction />
+          <CryptoTransaction liveMode={liveMode} />
           <div className="transaction-section">
-            {day < Number(game?.duration) ? (
+            {!liveMode && day < Number(game?.duration) ? (
               <button className="profile-button big" onClick={goToNextDay}>
                 Next Day!
               </button>
             ) : ("")}
+            {liveMode ? <button className="profile-button big" onClick={refreshGraph}>
+                Refresh!
+              </button>:""}
             <button className="profile-button big" onClick={endGame}>
               End Game
             </button>

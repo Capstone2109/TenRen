@@ -94,9 +94,9 @@ async function seed() {
 
 
   //Seed Static Crypto  ***ADD CRYPTOS TO CRYPTO TABLE,
-  //  await Promise.all(staticCryptoList.map(crypto => {
-  //   return Crypto.create(crypto)
-  //   }))
+   await Promise.all(staticCryptoList.map(crypto => {
+    return Crypto.create(crypto)
+    }))
 
 
   //Get Seeded Crypto List History ****THIS IS COMMENTED OUT TO NOT REPLACE OLD DATA, BUT MAYBE NEEDED FOR FUTURE USE

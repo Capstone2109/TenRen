@@ -4,20 +4,37 @@ import PastTrading from "./PastTrading";
 import TradeGameIntro from "./TradeGameIntro";
 
 const UserProfile = () => {
+
+  const [liveMode, setLiveMode] = useState(false)
+  
   const pastGame = useSelector((state) => state.currentGames.past);
-  //const liveGame = useSelector(state => state.currentGames.live)
+  const liveGame = useSelector(state => state.currentGames.live)
   const [componentToShow, setComponentToShow] = useState(<TradeGameIntro />);
 
   useEffect(() => {
-    //console.log("Past Game is", pastGame);
-    if (pastGame?.completed === false) {
-      setComponentToShow(<PastTrading />);
+    if (liveGame?.completed === false && liveMode) {
+      setComponentToShow(<PastTrading liveMode={true}/>);
+    }else if(pastGame?.completed === false && !liveMode){
+      setComponentToShow(<PastTrading liveMode={false}/>);
     } else {
       setComponentToShow(<TradeGameIntro />);
     }
-  }, [pastGame]);
+  }, [pastGame, liveGame, liveMode]);
 
-  return <div>{componentToShow}</div>;
+    const handleModeSwitch =(evt) =>{
+      setLiveMode(evt.target.checked)
+    }
+
+  return <div>
+    <label className="mode-switch">
+
+      
+      <input type="checkbox" onChange={handleModeSwitch}/>
+      <span class="slider round"></span>
+      <h2>Live Mode</h2>
+    </label>
+    {componentToShow}
+    </div>;
 };
 
 export default UserProfile;

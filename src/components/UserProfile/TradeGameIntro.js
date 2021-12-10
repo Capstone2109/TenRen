@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { savePastGame} from "../../app/tradegame";
+import { saveLiveGame, savePastGame} from "../../app/tradegame";
 import PortfolioHistory from "../utility/PortfolioHistory";
 
 const TradeGameIntro = () => {
@@ -31,7 +31,7 @@ const TradeGameIntro = () => {
     };
     newGame.history.addPortfolio(defaultStartingPortfolio)
 
-    dispatch(savePastGame(newGame));
+    mode === "LIVE" ? dispatch(saveLiveGame(newGame)) :dispatch(savePastGame(newGame));
   }
 
   return (
@@ -44,10 +44,7 @@ const TradeGameIntro = () => {
         <h2>Mode:</h2>
         <select id="trading-mode">
           <option value="PAST"> Past Time Simulation</option>
-          <option value="LIVE" disabled>
-            {" "}
-            Real Time Trading
-          </option>
+          <option value="LIVE">Real Time Simulation</option>
         </select>
       </div>
 
