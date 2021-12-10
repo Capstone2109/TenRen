@@ -13,6 +13,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import icon from "../images/crypto.png";
+import { useSelector } from "react-redux";
 
 const Navbar = (props) => {
   const [activeMenu, setActiveMenu] = useState(true);
@@ -36,6 +37,8 @@ const Navbar = (props) => {
     }
   }, [screenSize]);
 
+  
+
   return (
     <div className="nav-container">
       <div className="logo-container">
@@ -53,7 +56,9 @@ const Navbar = (props) => {
         </Button>
       </div>
       {activeMenu && (
+        
         <Menu theme="dark">
+          
           <Menu.Item icon={<HomeOutlined />}>
             <Link to="/">UserProfile</Link>
           </Menu.Item>
@@ -66,6 +71,7 @@ const Navbar = (props) => {
           <Menu.Item icon={<QuestionOutlined />}>
             <Link to="/quiz">CryptoQuiz</Link>
           </Menu.Item>
+          
           <Menu.Item icon={<UserOutlined />}>
             <Link to="/profile">Trading Simulation</Link>
           </Menu.Item>

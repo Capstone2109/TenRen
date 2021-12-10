@@ -3,27 +3,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { CloseCircleFilled } from "@ant-design/icons";
 import { dollarFormat } from "./UserProfileLineChart";
 import { addNewTransaction } from "../../app/transactions";
-import { setPastDollarAvailable, updatePastCrypto } from "../../app/tradegame";
+import { fetchLiveSingleCryptosWorth, fetchSingleCryptosWorth, setLiveDollarAvailable, setPastDollarAvailable, updateLiveCrypto, updatePastCrypto } from "../../app/tradegame";
+import CryptoSelect from "./CryptoSelect";
 
-const BuyAndSell = (props) => {
+/**TODO: When you go to next day, update all your coins. not just the one selected */
+const BuyAndSell = ({liveMode}) => {
 
     const dispatch = useDispatch();
 
-
+     //get game settings
+    let game = useSelector((state) => liveMode ? state.currentGames.live : state.currentGames.past)
 
     //get crypto worth from state
-    let dummyCrypto = useSelector((state) => state.cryptoWorth)
+    let currentCrypto = useSelector((state) => state.cryptoWorth)
 
     //Get how much money we have left to spend from the state
-    let dollarAvailable = useSelector((state) => state.currentGames.past.dollarAvailable);
+    let dollarAvailable = game.dollarAvailable//useSelector((state) => state.currentGames.past.dollarAvailable);
 
     //Get the list of all the crytos we own from the state
-    let allOwnedCrypto = useSelector((state) => state.currentGames.past.ownedCryptos)
+    let allOwnedCrypto = game.ownedCryptos//useSelector((state) => state.currentGames.past.ownedCryptos)
 
     //Filter out the crypto for the one we are currently interacting with
-    let ownedCrypto = allOwnedCrypto.filter(crypto => crypto.name = dummyCrypto.name)[0]
+    let ownedCrypto = allOwnedCrypto.filter(crypto => (crypto.name === currentCrypto.name))[0] || {name: currentCrypto.name, amount: 0, dollarValue: 0, previousDollarValue: 0}
 
-    const [cryptoToTrade, setCryptoToTrade] = useState({ name: dummyCrypto.name, dollarValue: 0 })
+    const [cryptoToTrade, setCryptoToTrade] = useState({ name: currentCrypto.name, dollarValue: 0 })
     const [errorMessage, setErrorMessage] = useState("")
 
     function handleCryptoValue(evt) {
@@ -48,15 +51,19 @@ const BuyAndSell = (props) => {
         
         dispatch(addNewTransaction({type:"Purchased", crypto: cryptoToTrade.name, amount: cryptoToTrade.dollarValue, date: Date.now() }))
         let dollarLeft = dollarAvailable - cryptoToTrade.dollarValue
-        dispatch(setPastDollarAvailable(dollarLeft))
+        liveMode ? dispatch(setLiveDollarAvailable(dollarLeft)) :dispatch(setPastDollarAvailable(dollarLeft))
 
-        let amount = ownedCrypto.amount + (cryptoToTrade.dollarValue / dummyCrypto.pricePer)
-        let dollarValue = amount * dummyCrypto.pricePer
+        let allOtherCryptos = allOwnedCrypto.filter(crypto => crypto.name !== ownedCrypto.name)
+
+        let amount = ownedCrypto.amount + (cryptoToTrade.dollarValue / currentCrypto.price)
+        let dollarValue = amount * currentCrypto.price
         let previousDollarValue = ownedCrypto.dollarValue
+        // dispatch(updateLiveCrypto([...allOtherCryptos, { ...ownedCrypto, amount, dollarValue, previousDollarValue }]))
 
-
-        dispatch(updatePastCrypto({ ...ownedCrypto, amount, dollarValue, previousDollarValue }))
+        liveMode ? updateCryptoValues([...allOtherCryptos, { ...ownedCrypto, amount, dollarValue, previousDollarValue }])
+        :dispatch(updatePastCrypto([...allOtherCryptos, { ...ownedCrypto, amount, dollarValue, previousDollarValue }]))
         setCryptoToTrade({ ...cryptoToTrade, dollarValue: 0 })
+        
 
     }
 
@@ -69,22 +76,41 @@ const BuyAndSell = (props) => {
         }
         dispatch(addNewTransaction({type:"Sold", crypto: cryptoToTrade.name, amount: cryptoToTrade.dollarValue, date: Date.now() }))
         let dollarLeft = dollarAvailable + cryptoToTrade.dollarValue
-        dispatch(setPastDollarAvailable(dollarLeft))
+        liveMode ? dispatch(setLiveDollarAvailable(dollarLeft)) :dispatch(setPastDollarAvailable(dollarLeft))
 
-        let amount = ownedCrypto.amount - (cryptoToTrade.dollarValue / dummyCrypto.pricePer)
-        let dollarValue = amount * dummyCrypto.pricePer
+        let allOtherCryptos = allOwnedCrypto.filter(crypto => crypto.name !== ownedCrypto.name)
+        let amount = ownedCrypto.amount - (cryptoToTrade.dollarValue / currentCrypto.price)
+        let dollarValue = amount * currentCrypto.price
         let previousDollarValue = ownedCrypto.dollarValue
+        //dispatch(updateLiveCrypto([...allOtherCryptos,{ ...ownedCrypto, amount, dollarValue, previousDollarValue }]))
 
-        dispatch(updatePastCrypto({ ...ownedCrypto, amount, dollarValue, previousDollarValue }))
+        liveMode? updateCryptoValues([...allOtherCryptos,{ ...ownedCrypto, amount, dollarValue, previousDollarValue }])
+        :dispatch(updatePastCrypto([...allOtherCryptos,{ ...ownedCrypto, amount, dollarValue, previousDollarValue }]))
+        
         setCryptoToTrade({ ...cryptoToTrade, dollarValue: 0 })
+       
     }
+
+    async function updateCryptoValues(adjustedCryptos){
+
+        let currentlyOwnedCryptos = await Promise.all(adjustedCryptos.map(async (crypto) => {
+          
+          const newCryptoPrice = await fetchLiveSingleCryptosWorth(crypto.name)
+          const newCryptoValue = {...crypto, dollarValue: crypto.amount * newCryptoPrice.price, previousDollarValue: crypto.dollarValue}
+          return newCryptoValue
+         }))
+    
+       dispatch(updateLiveCrypto(currentlyOwnedCryptos))
+    
+      }
 
     return (
         <>
             <div className="profile-trade-buttons">
+                <CryptoSelect liveMode={liveMode}/>
                 {errorMessage ? <CloseCircleFilled style={{ fontSize: '200%' }} /> : ''} <h2>{errorMessage}</h2>
                 
-                <h3>{`${dummyCrypto.name}'s Price: ${dollarFormat.format(dummyCrypto.pricePer)}`}</h3>
+                <h3>{`${currentCrypto.name}'s Price: ${dollarFormat.format(currentCrypto.price)}`}</h3>
                 
                 <input className="profile-input" type="text" name="buyAmount" value={cryptoToTrade?.dollarValue} onChange={handleCryptoValue} />
                 <button className="profile-button" onClick={handleBuy}>Buy</button>

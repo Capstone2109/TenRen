@@ -5,12 +5,12 @@ import Transactions from "./Transactions";
 const SHOW_BUY_SELL = 'SHOW_BUY_SELL';
 const SHOW_TRANSACTIONS = 'SHOW_TRANSACTIONS'
 
-const CryptoTransaction = () => {
+const CryptoTransaction = ({liveMode}) => {
 
     const [componentToShow, setComponentToShow] = useState();
 
     useEffect(() => {
-        setComponentToShow(<BuyAndSell />)
+        setComponentToShow(<BuyAndSell liveMode={liveMode} />)
     }, [])
 
     const handleTabSelect = (evt) => {
@@ -18,13 +18,13 @@ const CryptoTransaction = () => {
         evt.target.classList.add("selected");
         switch (evt.target.name) {
             case SHOW_BUY_SELL:
-                setComponentToShow(<BuyAndSell />)
+                setComponentToShow(<BuyAndSell liveMode={liveMode} />)
                 break;
             case SHOW_TRANSACTIONS:
                 setComponentToShow(<Transactions />)
                 break;
             default:
-                setComponentToShow(<BuyAndSell />)
+                setComponentToShow(<BuyAndSell liveMode={liveMode}/>)
         }
     }
     return (

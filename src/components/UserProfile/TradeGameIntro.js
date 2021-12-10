@@ -1,23 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { savePastGame } from "../../app/tradegame";
+import { saveLiveGame, savePastGame} from "../../app/tradegame";
 import PortfolioHistory from "../utility/PortfolioHistory";
 
 const TradeGameIntro = ({handleMode}) => {
   const dispatch = useDispatch();
 
   function handleBegin() {
-    let coin = document.getElementById("trading-crypto").value;
+    //let coin = document.getElementById("trading-crypto").value;
     let mode = document.getElementById("trading-mode").value;
     let duration = document.getElementById("trading-duration").value;
 
     const defaultStartingPortfolio = [
-      {
-        name: coin,
-        asset: 0,
-        percentChange: 1,
-        timestamp: Date.now(),
-      },
       {
         name: "Cash",
         asset: 1000,
@@ -26,60 +20,18 @@ const TradeGameIntro = ({handleMode}) => {
       },
     ];
 
-    const defaultStartingCrypto = {
-      name: coin,
-      amount: 0,
-      dollarValue: 0,
-      previousDollarValue: 0,
-      mode,
-    };
-
     const newGame = {
       mode,
       day: 1,
       duration,
       completed: false,
       dollarAvailable: 1000,
-      ownedCryptos: [defaultStartingCrypto],
+      ownedCryptos: [],//[defaultStartingCrypto],
       history: new PortfolioHistory(),
     };
-    newGame.history.addPortfolio(defaultStartingPortfolio);
-
-    //Save a new History To State for this coin
-
-    //console.log("New Game History",newGame.history)
-
-    // dispatch(saveUserPastData({
-    //     history: [
-    //          {
-    //             get timestamp() {
-    //                 return this.portfolio[0].timestamp;
-    //               },
-    //               get asset() {
-    //                 return this.portfolio.reduce((acc, curr) => {
-    //                   return acc + curr.asset;
-    //                 }, 0);
-    //               },
-    //              portfolio:[
-    //                         {
-    //                             name: coin,
-    //                             asset: 0,
-    //                             percentChange: 1,
-    //                             timestamp: Date.now()
-    //                         },
-    //                         {
-    //                             name: "Cash",
-    //                             asset: 1000,
-    //                             percentChange: 1,
-    //                             timestamp: Date.now()
-    //                         }
-    //                     ]
-    //             }
-    //         ]
-    // }))
-
+    newGame.history.addPortfolio(defaultStartingPortfolio)
     handleMode(mode);
-    dispatch(savePastGame(newGame));
+    !mode ? dispatch(saveLiveGame(newGame)) :dispatch(savePastGame(newGame));
   }
 
   return (
@@ -89,16 +41,8 @@ const TradeGameIntro = ({handleMode}) => {
           <h2>Select Trading Mode</h2>
 
           <div className="option-div">
-            <h2>Crypto:</h2>
-            <select id="trading-crypto">
-              <option value="Test Coin">Test Coin</option>
-            </select>
-          </div>
-
-          <div className="option-div">
             <h2>Mode:</h2>
             <select id="trading-mode">
-              <option value=""> Select Option...</option>
               <option value={true}> Past Time Simulation</option>
               <option value={false}>
                 Real Time Trading

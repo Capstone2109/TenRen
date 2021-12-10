@@ -1,7 +1,8 @@
 import axios from "axios";
+import { loadLiveGame, loadPastGame } from "./tradegame";
 // import history from "../history";
 
-const TOKEN = "token";
+export const TOKEN = "token";
 
 /**
  * ACTION TYPES
@@ -32,9 +33,10 @@ export const authenticate =
   (username, password, method) => async (dispatch) => {
     try {
       const res = await axios.post(`/auth/${method}`, { username, password });
-      console.log("Token",res.data.token)
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
+      dispatch(loadPastGame())
+      dispatch(loadLiveGame())
     } catch (authError) {
       return dispatch(setAuth({ error: authError }));
     }
