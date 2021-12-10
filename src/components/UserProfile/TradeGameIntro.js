@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { saveLiveGame, savePastGame} from "../../app/tradegame";
 import PortfolioHistory from "../utility/PortfolioHistory";
 
-const TradeGameIntro = () => {
+const TradeGameIntro = ({handleMode}) => {
   const dispatch = useDispatch();
 
   function handleBegin() {
@@ -30,38 +30,40 @@ const TradeGameIntro = () => {
       history: new PortfolioHistory(),
     };
     newGame.history.addPortfolio(defaultStartingPortfolio)
-
-    mode === "LIVE" ? dispatch(saveLiveGame(newGame)) :dispatch(savePastGame(newGame));
+    handleMode(mode);
+    !mode ? dispatch(saveLiveGame(newGame)) :dispatch(savePastGame(newGame));
   }
 
   return (
-    <div className='game-intro-container'>
-    <div className='game-intro'>
-    <div className="option-screen">
-      <h2>Select Trading Mode</h2>
+    <div className="game-intro-container">
+      <div className="game-intro">
+        <div className="option-screen">
+          <h2>Select Trading Mode</h2>
 
-      <div className="option-div">
-        <h2>Mode:</h2>
-        <select id="trading-mode">
-          <option value="PAST"> Past Time Simulation</option>
-          <option value="LIVE">Real Time Simulation</option>
-        </select>
-      </div>
+          <div className="option-div">
+            <h2>Mode:</h2>
+            <select id="trading-mode">
+              <option value={true}> Past Time Simulation</option>
+              <option value={false}>
+                Real Time Trading
+              </option>
+            </select>
+          </div>
 
-      <div className="option-div">
-        <h2>Duration:</h2>
-        <select id="trading-duration">
-          <option value={7}>1 Week</option>
-          <option value={14}>2 Week</option>
-          <option value={21}>3 Week</option>
-          <option value={30}>1 Month</option>
-        </select>
+          <div className="option-div">
+            <h2>Duration:</h2>
+            <select id="trading-duration">
+              <option value={7}>1 Week</option>
+              <option value={14}>2 Week</option>
+              <option value={21}>3 Week</option>
+              <option value={30}>1 Month</option>
+            </select>
+          </div>
+          <button className="profile-button" onClick={handleBegin}>
+            Begin
+          </button>
+        </div>
       </div>
-      <button className="profile-button" onClick={handleBegin}>
-        Begin
-      </button>
-    </div>
-    </div>
     </div>
   );
 };
