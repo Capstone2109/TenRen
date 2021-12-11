@@ -3,6 +3,7 @@ const { News } = require("../index");
 
 //Set the catories of news that need to be fetched
 const categories = [
+  "Cryptocurrency",
   "Bitcoin",
   "Ethereum",
   "Binance coin",
@@ -35,7 +36,6 @@ const options = {
 };
 
 async function getNewsFromApi() {
-
   //Create a que for the categories that need to be searched
   try {
     let queue = categories.map((cat) => {
@@ -43,8 +43,8 @@ async function getNewsFromApi() {
     });
 
     //array to hold all the solutions from the queue
-    let info = []
-    
+    let info = [];
+
     const processQueue = async function () {
       while (queue[0]) {
         try {
@@ -54,16 +54,13 @@ async function getNewsFromApi() {
             params: { ...options.params, q: queue[0].name },
           });
 
+          //push the data for this item to an array
+          info.push({ category: queue[0].name, data: data.data.value });
           //remove this item from the queue
           queue.shift();
-
-          //push the data for this item to an array
-          info.push({category: queue[0].name, data: data.data.value});
         } catch (error) {
-
           //If an error occurs (exceeded api call limit for that second), wait 1 second to continue
-          await new Promise((resolve) => setTimeout(resolve, 1000)) //wait for 1s
-
+          await new Promise((resolve) => setTimeout(resolve, 1000)); //wait for 1s
         }
       }
     };
@@ -77,6 +74,7 @@ async function getNewsFromApi() {
     const fields = (state) => ({
       name: state.name,
       url: state.url,
+      image: state.image,
       contentUrl: state.image?.thumbnail?.contentUrl,
       description: state.description,
       provider: state.provider,
@@ -102,14 +100,14 @@ async function refreshLiveNews() {
   console.log("loading real time news from api...");
   try {
     const newsData = await getNewsFromApi();
-    
+
     //Remove the old news data that is real time from the database
     await News.destroy({ where: { realTime: true } });
 
     //Add the new data set to the  database
     await News.create({
       data: JSON.stringify(newsData),
-      realTime: true
+      realTime: true,
     });
     console.log("Real Time News Refreshed.");
   } catch (error) {
@@ -119,22 +117,22 @@ async function refreshLiveNews() {
 
 async function getHoursPastSinceNewsUpdate() {
   try {
-
     //Find the last updated time in the database for real time news
     const lastUpdatedTime = await News.findOne({
       where: { realTime: true },
       attributes: ["updatedAt"],
     });
-    
+
     //If no news data was found at all, return 99 hours so server will update
-    if(!lastUpdatedTime){
-      console.log("did not find a update time")
-      return 99
+    if (!lastUpdatedTime) {
+      console.log("did not find a update time");
+      return 99;
     }
     //Returns the amount of HOURS that have past since the last time REAL TIME news was updated
     return (
       Math.abs(
-        Date.now() - (new Date(lastUpdatedTime.dataValues?.updatedAt).getTime() || 0)
+        Date.now() -
+          (new Date(lastUpdatedTime.dataValues?.updatedAt).getTime() || 0)
       ) / 3600000
     );
   } catch (error) {
