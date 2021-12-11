@@ -10,7 +10,7 @@ const options = {
     url: "https://coinranking1.p.rapidapi.com",
     headers: {
         'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
-        'x-rapidapi-key': '3c7ef0dfd5msheac71ccb6cc560ep103353jsnb101d0407034'
+        'x-rapidapi-key': '7bed659c00msh43a443c538d73f0p1d7345jsn230e38afb912' //3c7ef0dfd5msheac71ccb6cc560ep103353jsnb101d0407034
       }
   };
 

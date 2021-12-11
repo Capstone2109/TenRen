@@ -90,7 +90,7 @@ async function seed() {
 
 
   //Refresh the lives
-  //await refreshLiveNews()
+  await refreshLiveNews()
 
 
   //Seed Static Crypto  ***ADD CRYPTOS TO CRYPTO TABLE,
