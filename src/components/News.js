@@ -28,7 +28,7 @@ const News = ({ simplified }) => {
       const coinArray = JSON.parse(data[0].data);
       console.log(coinArray);
       const crypto = coinArray.filter((coin) => {
-        return coin.category === "Cryptocurrency";
+        return coin.category === newsCategory;
       });
       setTodayNews(crypto[0].data);
       return crypto.data;
@@ -46,6 +46,7 @@ const News = ({ simplified }) => {
 
   if (cryptoNews.value) {
     console.log("News Data:", cryptoNews.value);
+    console.log("news category:", newsCategory);
   }
 
   return (
