@@ -26,11 +26,7 @@ const News = ({ simplified }) => {
   useEffect(() => {
     getTodayNews().then((data) => {
       const coinArray = JSON.parse(data[0].data);
-      console.log(coinArray);
-      const crypto = coinArray.filter((coin) => {
-        return coin.category === newsCategory;
-      });
-      setTodayNews(crypto[0].data);
+      setTodayNews(coinArray);
       return crypto.data;
     });
   }, todayNews);
@@ -40,13 +36,16 @@ const News = ({ simplified }) => {
   //   count: simplified ? 6 : 12,
   // });
 
-  const cryptoNews = { value: todayNews };
+  const cryptoNews = {
+    value: todayNews?.filter((coin) => {
+    return coin.category === newsCategory;
+  })[0]?.data,
+  };
 
   if (!cryptoNews?.value) return "Loading...";
 
   if (cryptoNews.value) {
     console.log("News Data:", cryptoNews.value);
-    console.log("news category:", newsCategory);
   }
 
   return (
