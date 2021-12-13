@@ -1,9 +1,8 @@
-const { db, User , Crypto, CryptoHistory } = require("../server/db/index");
+const { db, User, Crypto, CryptoHistory } = require("../server/db/index");
 const getNewsFromApi = require("../server/db/rapidApi/currentNews");
-const {staticCryptoList} = require("../server/db/models/Crypto");
+const { staticCryptoList } = require("../server/db/models/Crypto");
 const { getDailyCoinHistory } = require("../server/db/rapidApi/getCoinFromApi");
-const {refreshLiveNews} = require('../server/db/rapidApi/currentNews');
-const { TRUE } = require("node-sass");
+const { refreshLiveNews } = require("../server/db/rapidApi/currentNews");
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -88,22 +87,25 @@ async function seed() {
     }),
   ]);
 
-
   //Refresh the lives
-  await refreshLiveNews()
-
+  await refreshLiveNews();
 
   //Seed Static Crypto  ***ADD CRYPTOS TO CRYPTO TABLE,
-   await Promise.all(staticCryptoList.map(crypto => {
-    return Crypto.create(crypto)
-    }))
-
+  await Promise.all(
+    staticCryptoList.map((crypto) => {
+      return Crypto.create(crypto);
+    })
+  );
 
   //Get Seeded Crypto List History ****THIS IS COMMENTED OUT TO NOT REPLACE OLD DATA, BUT MAYBE NEEDED FOR FUTURE USE
-  await Promise.all(staticCryptoList.map(async crypto => {
-    return CryptoHistory.create( {name: crypto.name, data:  await getDailyCoinHistory(crypto.coinRankingId,"30d") })
-  }))
-
+  await Promise.all(
+    staticCryptoList.map(async (crypto) => {
+      return CryptoHistory.create({
+        name: crypto.name,
+        data: await getDailyCoinHistory(crypto.coinRankingId, "30d"),
+      });
+    })
+  );
 }
 
 /*
