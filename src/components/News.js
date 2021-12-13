@@ -25,9 +25,9 @@ const News = ({ simplified }) => {
   const [todayNews, setTodayNews] = useState([]);
   useEffect(() => {
     getTodayNews().then((data) => {
-      const coinArray = JSON.parse(data[0].data);
+      let coinArray;
+      coinArray = JSON.parse(data?.[0].data);
       setTodayNews(coinArray);
-      return crypto.data;
     });
   }, todayNews);
   const { data } = useGetCryptosQuery(100);
@@ -38,8 +38,8 @@ const News = ({ simplified }) => {
 
   const cryptoNews = {
     value: todayNews?.filter((coin) => {
-    return coin.category === newsCategory;
-  })[0]?.data,
+      return coin.category === newsCategory;
+    })[0]?.data,
   };
 
   if (!cryptoNews?.value) return "Loading...";
