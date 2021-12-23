@@ -5,10 +5,11 @@ Robin Noob is a cryptocurrency trading simulation game that stores realtime and 
 Check out our application -- [RobinNoob](https://robinnoob.herokuapp.com/ "https://robinnoob.herokuapp.com/")
 
 ### Technologies Used
-- [React](https://reactjs.org//) 
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
 - [Sequelize](https://sequelize.org/)
 - [Express](https://expressjs.com/) 
-- [Node.js](https://nodejs.org/en/) 
+- [Node.js](https://nodejs.org/en/)
 
 ### Authors
  - Wilson Voltaire - [https://github.com/WilsonV](https://github.com/WilsonV)
