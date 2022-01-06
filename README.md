@@ -16,13 +16,6 @@ Robin Noob is a cryptocurrency trading simulation game that stores real-time and
 
 - [React,](https://reactjs.org/) [Redux,](https://redux.js.org/) [Sequelize,](https://sequelize.org/) [Express,](https://expressjs.com/) [Node.js,](https://nodejs.org/en/) [Sass,](https://sass-lang.com/) [Charts.js,](https://www.chartjs.org/) [Antj.js](https://ant.design/docs/react/introduce)
 
-### Lessons Learned
-
-- I had to implement a queue data structure to schedule delayed requests to work around the API rate limiting of fetch requests.
-- With CSS, the use of important! is particularly useful if you’re dealing with front-end libraries that have strict styling requirements.
-- Storing data in the form of JSON objects in the database can allow for faster development times if time constraints are an issue.
-- Use of classes and functions can be very helpful for cleaning up data, organizing it, and calculating data more dynamically.
-
 ### Authors
 
 - Wilson Voltaire - [https://github.com/WilsonV](https://github.com/WilsonV)
