@@ -18,7 +18,7 @@ Robin Noob is a cryptocurrency trading simulation game that stores real-time and
 
 ### Authors
 
-- Wilson Voltaire - [https://github.com/WilsonV](https://github.com/WilsonV)
 - Jian Kuang - [https://github.com/jkuang7](https://github.com/jkuang7)
+- Wilson Voltaire - [https://github.com/WilsonV](https://github.com/WilsonV)
 - Ilfir Yakupov - [https://github.com/philsmirnoff](https://github.com/philsmirnoff)
 - Shashi Sasitharan - [https://github.com/Shashi-Sasitharan](https://github.com/Shashi-Sasitharan)
