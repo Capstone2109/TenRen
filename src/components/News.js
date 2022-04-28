@@ -15,6 +15,7 @@ async function getTodayNews() {
   try {
     const { data } = await axios.get("/api/news/today");
     return data;
+
   } catch (error) {
     console.log(error);
   }
@@ -22,25 +23,31 @@ async function getTodayNews() {
 
 const News = ({ simplified }) => {
   const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
+  // // Our ten ren solution that we are using to get todays news that throws the error, because there is no data in '/api/news/today
   const [todayNews, setTodayNews] = useState([]);
-  useEffect(() => {
-    getTodayNews().then((data) => {
-      let coinArray;
-      coinArray = JSON.parse(data?.[0].data);
-      setTodayNews(coinArray);
-    });
-  }, todayNews);
-  const { data } = useGetCryptosQuery(100);
-  // const { data: cryptoNews } = useGetCryptoNewsQuery({
-  //   newsCategory,
-  //   count: simplified ? 6 : 12,
-  // });
+  // useEffect(() => {
+  //   getTodayNews().then((data) => {
+  //     let coinArray;
+  //     coinArray = JSON.parse(data?.[0].data);
 
-  const cryptoNews = {
-    value: todayNews?.filter((coin) => {
-      return coin.category === newsCategory;
-    })[0]?.data,
-  };
+  //     setTodayNews(coinArray);
+  //   });
+  // }, todayNews);
+  const { data } = useGetCryptosQuery(100);
+
+  // have to use this to render news, you can commented once u uncomment ten ren solutions
+  const { data: cryptoNews } = useGetCryptoNewsQuery({
+    newsCategory,
+    count: simplified ? 6 : 12,
+  });
+
+
+  // our ten ren solution for getting todays news for the coin it throws the error if i uncomment it
+  // const cryptoNews = {
+  //   value: todayNews?.filter((coin) => {
+  //     return coin.category === newsCategory;
+  //   })[0]?.data,
+  // };
 
   if (!cryptoNews?.value) return "Loading...";
 

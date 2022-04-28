@@ -31,7 +31,8 @@ const options = {
   headers: {
     "x-bingapis-sdk": "true",
     "x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
-    "x-rapidapi-key": "7bed659c00msh43a443c538d73f0p1d7345jsn230e38afb912", //3c7ef0dfd5msheac71ccb6cc560ep103353jsnb101d0407034
+    "x-rapidapi-key": "9973d4d458msh3093964e4eb1947p12b1b1jsn021aaeb8292e",
+    //3c7ef0dfd5msheac71ccb6cc560ep103353jsnb101d0407034
   },
 };
 

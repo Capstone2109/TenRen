@@ -8,10 +8,13 @@ const { Title } = Typography;
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinPrice = [];
   const coinTimestamp = [];
-
-  for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
+  const len = coinHistory?.data?.history?.length;
+  const yLen = coinHistory?.data?.history?.length;
+  for (let i = len-1; i > 0; i--) {
     coinPrice.push(coinHistory?.data?.history[i].price);
-    coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString());
+  }
+  for (let i = yLen-1; i > 0; i--) {
+    coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp*1000).toLocaleDateString("en-US"));
   }
 
   const data = {
@@ -53,4 +56,3 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 };
 
 export default LineChart;
-
