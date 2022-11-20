@@ -6,7 +6,7 @@ https://robinnoob.herokuapp.com/
 
 ### Introduction
 
-Robin Noob is a cryptocurrency trading simulation game that stores real-time and past-time data of prices of cryptocurrency. Along with cached cryptocurrency news (via Bings News Search API), we are equipping users with the opportunity to learn how to trade without using real world money. Interactive line charts are implemented to visualize user progress as well as keeping track of user asset portfolio.
+Robin Noob is a cryptocurrency trading simulation game that stores real-time and past-time data of cryptocurrency prices. Along with cached cryptocurrency news (via Bings News Search API), we are equipping users with the opportunity to learn how to trade without using real world money. Interactive line charts have been implemented to visualize user progress and keep track of user asset portfolio as they progress through the game.
 
 ### Technologies Used
 
