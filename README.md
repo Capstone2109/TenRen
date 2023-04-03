@@ -4,7 +4,7 @@ Robin Noob is a cryptocurrency trading app that allows users to trade cryptocurr
 
 The game also provides cryptocurrency news based on historical timeline of when users are trading -- allowing users to make informed decisions.
 
-Interactive line charts have been implemented to helper users visualize user progress and keep track of user asset portfolio.
+Interactive line charts have been implemented to help users visualize progress and keep track of user asset portfolio.
 
 Website has been designed with mobile responsiveness in mind.
 
