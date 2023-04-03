@@ -1,9 +1,3 @@
-## Video presentation:
-https://youtu.be/293-emM3l00
-
-## Heroku Deployed Site
-https://robinnoob.herokuapp.com/
-
 ### Introduction
 
 Robin Noob is a cryptocurrency trading app that allows users to trade cryptocurrency based on real-time data. Real money is not required since the game is simulation based.
@@ -16,6 +10,11 @@ Website has been designed with mobile responsiveness in mind
 
 ![Screen Shot 2022-11-20 at 2 31 22 PM](https://user-images.githubusercontent.com/52064138/202922072-93501d93-9176-4610-aa10-fde9c0ef2b7e.png)
 
+## Video presentation:
+https://youtu.be/293-emM3l00
+
+## Heroku Deployed Site
+https://robinnoob.herokuapp.com/
 
 ### Technologies Used
 
