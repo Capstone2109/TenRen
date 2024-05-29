@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const News = db.define('news',{
-    
+
     data: {
         type: Sequelize.JSON
     },
